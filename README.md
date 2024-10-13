@@ -9,6 +9,8 @@ As of [PR #1](https://github.com/catspeed-cc/invidious/pull/1) the dev-http-prox
 
 ```git checkout development``` will switch you to the working branch (the one running on invidious.catspeed.cc).
 
+As long as you have a way to set up po_tokens and automatically update them, this branch will work.
+
 <br />
 
 <div align="center">
