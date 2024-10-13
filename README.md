@@ -7,7 +7,7 @@ At the moment, master banch is still a clone of iv-org/master. All changes curre
 
 As of [PR #1](https://github.com/catspeed-cc/invidious/pull/1) the dev-http-proxy branch has been merged into development branch.
 
-```git checkout development``` will switch you to the working branch (the one running on invidious.catspeed.cc).
+```git checkout development``` will switch you to the working development branch (the one running on invidious.catspeed.cc).
 
 As long as you have a way to set up po_tokens and automatically update them, this branch will work.
 
