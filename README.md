@@ -7,6 +7,8 @@ Currently the master branch is 1 commit ahead of iv-org/master (changes to readm
 
 The branch with fixes is the dev-http-proxy branch. Currently it has the revert d9df90b fix, as well as added http-proxy support.
 
+So far in testing the dev-http-proxy branch is working.
+
 Eventually they will be merged to development and then master.
 
 <br />
