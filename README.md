@@ -3,6 +3,12 @@ Please note the repository has been moved from mooleshacat/invidious to catspeed
 
 You can update your local clone with ```git remote set-url origin https://github.com/catspeed-cc/invidious```
 
+Currently the master branch is 1 commit ahead of iv-org/master
+
+The branch with fixes is the dev-http-proxy branch. Currently it has the revert d9df90b fix, as well as added http-proxy support.
+
+Eventually they will be merged to development and then master.
+
 <br />
 
 <div align="center">
