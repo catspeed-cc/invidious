@@ -1,11 +1,9 @@
-# Notice
-I have pulled development into master, now we have a stable branch. If you choose, you can check out the development branch. Just be warned, it can be unstable.
+# REPOSITORY MOVED
+Please note the repository has been moved from mooleshacat/invidious to catspeed-cc/invidious.
 
-To use development branch you need to ```git checkout development``` after you clone the repository.
+You can update your local clone with ```git remote set-url origin https://github.com/catspeed-cc/invidious```
 
-To browse the development version on github, click the down arrow beside "master" and click on "development" or click here https://github.com/catspeed-cc/invidious/tree/development
-
--------
+<br />
 
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
