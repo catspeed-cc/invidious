@@ -87,7 +87,6 @@ You no longer need to clone development branch, and in fact, I would advise you 
 - revert of d9df90b fixes signin error
 - add http proxy
 - add colorize logs
-- add reconnect to sighelper
 - add redis server (see "Hosting invidious" below)
 - changed player buffer seconds (possibly saves bandwidth)
 
