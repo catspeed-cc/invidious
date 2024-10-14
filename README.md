@@ -86,6 +86,7 @@ You no longer need to clone development branch, and in fact, I would advise you 
 **Patches**
 - revert of d9df90b fixes signin error
 - add http proxy
+- add reconnect to sighelper
 - add redis server (see "Hosting invidious" below)
 
 **User features**
