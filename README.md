@@ -3,13 +3,9 @@ Please note the repository has been moved from mooleshacat/invidious to catspeed
 
 You can update your local clone with ```git remote set-url origin https://github.com/catspeed-cc/invidious```
 
-At the moment, master banch is still a clone of iv-org/master. All changes currently are inside development branch. I will merge development into master in time.
+As of [PR #1](https://github.com/catspeed-cc/invidious/pull/4) dev-http-proxy branch has been merged into master.
 
-As of [PR #1](https://github.com/catspeed-cc/invidious/pull/1) the dev-http-proxy branch has been merged into development branch.
-
-```git checkout development``` will switch you to the working development branch (the one running on invidious.catspeed.cc).
-
-As long as you have a way to set up po_tokens and automatically update them, this branch will work.
+You no longer need to clone development branch, and in fact, I would advise you to ```git checkout master``` for stability.
 
 <br />
 
