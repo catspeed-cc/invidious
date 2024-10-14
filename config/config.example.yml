@@ -31,6 +31,17 @@ db:
 ##
 #database_url: postgres://kemal:kemal@localhost:5432/invidious
 
+#
+# Redis
+#
+# Not sure why, setting redis_url wont connect.
+# Just don't specify either and it should connect as long as its default redis-server install
+# You should see "Oct 13 20:20:11 catspeed invidious[1110061]: Connected to redis" if you are
+# connected to redis.
+#
+#redis_socket:
+#redis_url: 127.0.0.1:6379
+
 ##
 ## Enable automatic table integrity check. This will create
 ## the required tables and columns if anything is missing.
