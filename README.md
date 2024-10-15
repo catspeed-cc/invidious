@@ -78,6 +78,9 @@ To browse the development version on github, click the down arrow beside "master
 
 ## Features
 
+**Patches**
+- token updater patch (mooleshacat)
+
 **User features**
 - Lightweight
 - No ads
