@@ -79,7 +79,7 @@ To browse the development version on github, click the down arrow beside "master
 ## Features
 
 **Patches**
-- token updater patch (mooleshacat)
+- revert d9df90b
 
 **User features**
 - Lightweight
