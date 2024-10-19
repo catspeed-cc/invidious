@@ -80,6 +80,9 @@ To browse the development version on github, click the down arrow beside "master
 
 **Patches**
 - revert d9df90b
+- add redis patch
+- sig helper reconnect patch
+- token updater patch (mooleshacat)
 
 **User features**
 - Lightweight
@@ -115,6 +118,8 @@ To browse the development version on github, click the down arrow beside "master
 
 **Hosting invidious:**
 
+- You will need a default redis install ```apt install -y redis-server```
+- You still need postgresql
 - [Follow the installation instructions](https://docs.invidious.io/installation/)
 
 
