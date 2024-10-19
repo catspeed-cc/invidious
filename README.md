@@ -122,7 +122,7 @@ To browse the development version on github, click the down arrow beside "master
 - You still need postgresql
 - You still need sighelper
 - You still need to figure out how to update the tokens in config file (with bash script or otherwise)
-- Invidious will automatically reload the tokens from the config file
+- Invidious will automatically reload the tokens from the config file every 1 minute
 - [Follow the installation instructions](https://docs.invidious.io/installation/)
 
 
