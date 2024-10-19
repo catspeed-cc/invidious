@@ -1,3 +1,10 @@
+# Notice
+The invidious.catspeed.cc currently uses the development branch. 
+
+To use it you need to ```git checkout development``` after you clone the repository.
+
+-------
+
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
   <h1>Invidious</h1>
