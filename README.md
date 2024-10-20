@@ -84,7 +84,7 @@ To browse the development version on github, click the down arrow beside "master
 ## Features
 
 **Patches**
-- revert d9df90b
+- revert [d9df90b5e3ab6f738907c1bfaf96f0407368d842](https://github.com/catspeed-cc/invidious/commit/d9df90b5e3ab6f738907c1bfaf96f0407368d842)
 - add redis patch
 - add proxy patch
 - sig helper reconnect patch
