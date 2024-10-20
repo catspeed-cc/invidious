@@ -83,7 +83,7 @@ To browse the development version on github, click the down arrow beside "master
 - add redis patch
 - add proxy patch
 - sig helper reconnect patch
-- token updater patch (mooleshacat)
+- token monitor patch (mooleshacat)
 
 **User features**
 - Lightweight
