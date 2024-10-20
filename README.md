@@ -1,5 +1,5 @@
 # Notice
-The invidious.catspeed.cc currently uses the development branch. 
+invidious.catspeed.cc currently uses the development branch. 
 
 To use it you need to ```git checkout development``` after you clone the repository.
 
