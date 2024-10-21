@@ -3,6 +3,10 @@ invidious.catspeed.cc currently uses the development branch.
 
 To use it you need to ```git checkout development``` after you clone the repository.
 
+Please read the README.md file in the development branch.
+
+To browse the development version on github, click the down arrow beside "master" and click on "development" or click here https://github.com/catspeed-cc/invidious/tree/development
+
 -------
 
 <div align="center">
