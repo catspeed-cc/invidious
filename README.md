@@ -96,9 +96,6 @@
 - Notifications for all subscribed channels
 - Audio-only mode (with background play on mobile)
 - Support for Reddit comments
-- Able to turn off catspeed branding (:3c)
-- Able to turn on/off catspeed/invidious donation link
-- Able to set custom donation link
 - [Available in many languages](locales/), thanks to [our translators](#contribute)
 
 **Data import/export**
@@ -183,7 +180,7 @@ This patch is a temporary workaround until inv_sig_helper itself can get the tok
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
 
 
-## branding, custom status link, custom freetube help link & custom donation link notes
+## branding, status link, freetube help link & donation link notes
 
 You can change in the config:
 - enable/disable catspeed branding
@@ -192,7 +189,9 @@ You can change in the config:
 - enable/disable custom donation link
 - custom donation link text & url
 - custom status page link text & url
-- custom freetube help page link text & url 
+- custom freetube help page link text & url
+
+_You need to restart the service for these to take effect._
 
 
 ## upgrading
