@@ -1,13 +1,3 @@
-# REPOSITORY MOVED
-Please note the repository has been moved from mooleshacat/invidious to catspeed-cc/invidious.
-
-You can update your local clone with ```git remote set-url origin https://github.com/catspeed-cc/invidious```
-
-As of [PR #4](https://github.com/catspeed-cc/invidious/pull/4) dev-http-proxy branch has been merged into master.
-
-You no longer need to clone development branch, and in fact, I would advise you to ```git checkout master``` for stability.
-
--------
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
   <h1>Invidious</h1>
