@@ -158,10 +158,12 @@
                             <i class="icon ion-ios-paper"></i>
                             <a href="/privacy" target='_blank'><%= translate(locale, "View privacy policy.") %></a>
                         </span>
+                        <% if CONFIG.custom_statuslink_enabled %>
                         <span>
                             <i class="icon ion-ios-paper"></i>
-                            <a href="https://updown.io/cr5y" target='_blank'>Server Status</a>
+                            <a href="<%= CONFIG.custom_statuslink_link %>" target='_blank'><%= CONFIG.custom_statuslink_text %></a>
                         </span>
+                        <% end %>
                     </div>
 
                     <div class="pure-u-1 pure-u-md-1-3">
