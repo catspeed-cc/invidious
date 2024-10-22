@@ -88,7 +88,9 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - loadavg status (mooleshacat)
 - token monitor patch (mooleshacat)
 - enable/disable catspeed branding (mooleshacat)
-- custom status link (mooleshacat)
+- enable/disable catspeed donate link (mooleshacat)
+- enable/disable invidious donate link (mooleshacat)
+- custom status page link (mooleshacat)
 - custom freetube help link (mooleshacat)
 - custom donation link (mooleshacat)
 
