@@ -188,6 +188,17 @@ This branch has the uptime & loadavg patch from myself (mooleshacat) which if en
 This branch has the branding & donation link patch from myself (mooleshacat). It enables you to use the default catspeed branding (the title with emojis) or plain old "INVIDIOUS". You can enable and disable both the catspeed and invidious donation links (please dont :3c) and set your own custom donation link. All these changes can be made in the configuration file. 
 
 
+## upgrading
+
+So you noticed some recent commits to master, how do you update?
+- Go into the git repo directory
+- Checkout the version you want ```git checkout master```
+- Pull the new changes ```git pull```
+- Make the binary ```make -j<numcores>``` (replace <numcores> with your number of cores minus 1)
+- If the binary exists in a different location, copy the new one over top of it
+- Either re-copy the config.example.yml (reccommended) or carefully look for the new options and add them to your config.yml (not reccommended)
+
+
 ## Documentation
 
 The full documentation can be accessed online at https://docs.invidious.io/
