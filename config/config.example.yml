@@ -277,7 +277,7 @@ tokenmon_enabled: true
 #catspeed_branding_enabled: false
 
 ##
-## Enable/Disable showing the catspeed donation link (please :3c)
+## Enable/Disable showing the catspeed donation link (please think of cat :3c)
 ##
 ## Accepted values: true, false
 ## Default: true
@@ -285,7 +285,7 @@ tokenmon_enabled: true
 #catspeed_donolink_enabled: false
 
 ##
-## Enable/Disable showing the invidious donation link (please :3c)
+## Enable/Disable showing the invidious donation link (please ... invidious :3c)
 ##
 ## Accepted values: true, false
 ## Default: true
