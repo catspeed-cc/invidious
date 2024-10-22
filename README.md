@@ -73,11 +73,14 @@
 ## Features
 
 **Patches**
-- revert of d9df90b fixes signin error
-- add http proxy
-- add colorize logs
-- add redis server (see "Hosting invidious" below)
-- changed player buffer seconds (possibly saves bandwidth)
+- revert [d9df90b5e3ab6f738907c1bfaf96f0407368d842](https://github.com/catspeed-cc/invidious/commit/d9df90b5e3ab6f738907c1bfaf96f0407368d842)
+- add redis patch
+- add proxy patch
+- sig helper reconnect patch
+- uptime status patch (mooleshacat)
+- loadavg status patch (mooleshacat)
+- token monitor patch (mooleshacat)
+- donation link patch (mooleshacat)
 
 **User features**
 - Lightweight
@@ -90,6 +93,8 @@
 - Notifications for all subscribed channels
 - Audio-only mode (with background play on mobile)
 - Support for Reddit comments
+- Able to turn on/off catspeed/invidious donation link
+- Able to set custom donation link
 - [Available in many languages](locales/), thanks to [our translators](#contribute)
 
 **Data import/export**
@@ -172,6 +177,11 @@ This patch is a temporary workaround until inv_sig_helper itself can get the tok
 ## uptime & loadavg status patch notes
 
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
+
+
+## branding and donation links
+
+This branch has the branding & donation link patch from myself (mooleshacat). It enables you to use the default catspeed branding (the title with emojis) or plain old "INVIDIOUS". You can enable and disable both the catspeed and invidious donation links (please dont :3c) and set your own custom donation link. All these changes can be made in the configuration file. 
 
 
 ## Documentation
