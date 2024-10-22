@@ -216,7 +216,7 @@ http_proxy:
 ## Accepted values: true, false
 ## Default: true
 ##
-tokenmon_enabled : true
+tokenmon_enabled: true
 
 # -----------------------------
 #  Logging
@@ -245,6 +245,22 @@ tokenmon_enabled : true
 # -----------------------------
 #  Features
 # -----------------------------
+
+##
+## Enable/Disable showing the uptime on the main page.
+##
+## Accepted values: true, false
+## Default: false
+##
+#uptime_enabled: true
+
+##
+## Enable/Disable showing the load avg on the main page.
+##
+## Accepted values: true, false
+## Default: false
+##
+#loadavg_enabled: true
 
 ##
 ## Enable/Disable the "Popular" tab on the main page.
