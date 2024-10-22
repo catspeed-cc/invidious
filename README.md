@@ -7,7 +7,6 @@ As of [PR #4](https://github.com/catspeed-cc/invidious/pull/4) dev-http-proxy br
 
 You no longer need to clone development branch, and in fact, I would advise you to ```git checkout master``` for stability.
 
-<br />
 -------
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
