@@ -6,7 +6,7 @@ To use development branch you need to ```git checkout development``` after you c
 To browse the development version on github, click the down arrow beside "master" and click on "development" or click here https://github.com/catspeed-cc/invidious/tree/development
 
 <br />
-
+-------
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
   <h1>Invidious</h1>
