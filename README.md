@@ -80,6 +80,7 @@
 - uptime status patch (mooleshacat)
 - loadavg status patch (mooleshacat)
 - token monitor patch (mooleshacat)
+- branding & donation link patch (mooleshacat)
 
 **User features**
 - Lightweight
@@ -92,6 +93,9 @@
 - Notifications for all subscribed channels
 - Audio-only mode (with background play on mobile)
 - Support for Reddit comments
+- Able to turn off catspeed branding (:3c)
+- Able to turn on/off catspeed/invidious donation link
+- Able to set custom donation link
 - [Available in many languages](locales/), thanks to [our translators](#contribute)
 
 **Data import/export**
@@ -173,6 +177,22 @@ This patch is a temporary workaround until inv_sig_helper itself can get the tok
 ## uptime & loadavg status patch notes
 
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
+
+
+## branding, donation links, status page link
+
+This branch has the branding, donation link, and status page link patch from myself (mooleshacat). It enables you to use the default catspeed branding (the title with emojis) or plain old "INVIDIOUS". You can enable and disable both the catspeed and invidious donation links (please dont :3c) and set your own custom donation link. You can also set your own custom status page link. All these changes can be made in the configuration file. 
+
+
+## upgrading
+
+So you noticed some recent commits to master, how do you update?
+- Go into the git repo directory
+- Checkout the version you want ```git checkout master```
+- Pull the new changes ```git pull```
+- Make the binary ```make -j<numcores>``` (replace <numcores> with your number of cores minus 1)
+- If the binary exists in a different location, copy the new one over top of it
+- Either re-copy the config.example.yml (reccommended) or carefully look for the new options and add them to your config.yml (not reccommended)
 
 
 ## Documentation

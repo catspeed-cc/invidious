@@ -104,6 +104,15 @@ class Config
   property tokenmon_enabled : Bool = true
   # Subscribe to channels using PubSubHubbub (requires domain, hmac_key)
   property use_pubsub_feeds : Bool | Int32 = false
+  property catspeed_branding_enabled : Bool = true
+  property catspeed_donolink_enabled : Bool = true
+  property invidious_donolink_enabled : Bool = true
+  property custom_donolink_enabled : Bool = false
+  property custom_donolink_text : String = ""
+  property custom_donolink_link : String = ""
+  property custom_statuslink_enabled : Bool = false
+  property custom_statuslink_text : String = ""
+  property custom_statuslink_link : String = ""
   property popular_enabled : Bool = true
   property uptime_enabled : Bool = false
   property loadavg_enabled : Bool = false
