@@ -80,7 +80,7 @@
 - uptime status patch (mooleshacat)
 - loadavg status patch (mooleshacat)
 - token monitor patch (mooleshacat)
-- donation link patch (mooleshacat)
+- branding & donation link patch (mooleshacat)
 
 **User features**
 - Lightweight
