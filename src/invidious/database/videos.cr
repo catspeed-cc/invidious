@@ -19,7 +19,9 @@ module Invidious::Database::Videos
       WHERE id = $1
     SQL
 
-    PG_DB.exec(request, id)
+    REDIS_DB.del(id)
+    REDIS_DB.del(id + ":time")
+
   end
 
   def delete_expired
@@ -56,6 +58,5 @@ module Invidious::Database::Videos
     else
       return nil
     end
-    
   end
 end

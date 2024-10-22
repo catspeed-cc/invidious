@@ -16,7 +16,6 @@
 
 require "digest/md5"
 require "file_utils"
-require "process"
 
 # Require kemal, kilt, then our own overrides
 require "kemal"
@@ -63,12 +62,14 @@ alias IV = Invidious
 CONFIG   = Config.load
 HMAC_KEY = CONFIG.hmac_key
 
+
 PG_DB    = DB.open CONFIG.database_url
 REDIS_DB = Redis::PooledClient.new(unixsocket: CONFIG.redis_socket || nil, url: CONFIG.redis_url || nil)
 
 if REDIS_DB.ping
   puts "Connected to redis"
 end
+
 ARCHIVE_URL = URI.parse("https://archive.org")
 PUBSUB_URL  = URI.parse("https://pubsubhubbub.appspot.com")
 REDDIT_URL  = URI.parse("https://www.reddit.com")
@@ -125,6 +126,9 @@ Kemal.config.extra_options do |parser|
   parser.on("-l LEVEL", "--log-level=LEVEL", "Log level, one of #{LogLevel.values} (default: #{CONFIG.log_level})") do |log_level|
     CONFIG.log_level = LogLevel.parse(log_level)
   end
+  parser.on("-k", "--colorize", "Colorize logs") do
+    CONFIG.colorize_logs = true
+  end
   parser.on("-v", "--version", "Print version") do
     puts SOFTWARE.to_pretty_json
     exit
@@ -141,7 +145,7 @@ if CONFIG.output.upcase != "STDOUT"
   FileUtils.mkdir_p(File.dirname(CONFIG.output))
 end
 OUTPUT = CONFIG.output.upcase == "STDOUT" ? STDOUT : File.open(CONFIG.output, mode: "a")
-LOGGER = Invidious::LogHandler.new(OUTPUT, CONFIG.log_level)
+LOGGER = Invidious::LogHandler.new(OUTPUT, CONFIG.log_level, CONFIG.colorize_logs)
 
 # Check table integrity
 Invidious::Database.check_integrity(CONFIG)
