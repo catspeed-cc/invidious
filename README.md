@@ -93,6 +93,7 @@
 - Notifications for all subscribed channels
 - Audio-only mode (with background play on mobile)
 - Support for Reddit comments
+- Able to turn off catspeed branding (:3c)
 - Able to turn on/off catspeed/invidious donation link
 - Able to set custom donation link
 - [Available in many languages](locales/), thanks to [our translators](#contribute)
