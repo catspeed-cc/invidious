@@ -84,7 +84,7 @@ I have pulled development into master, now we have a stable branch. If you choos
 - uptime status patch (mooleshacat)
 - loadavg status patch (mooleshacat)
 - token monitor patch (mooleshacat)
-- donation link patch (mooleshacat)
+- branding & donation link patch (mooleshacat)
 
 **User features**
 - Lightweight
