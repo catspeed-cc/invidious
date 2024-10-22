@@ -182,7 +182,14 @@ This branch has the uptime & loadavg patch from myself (mooleshacat) which if en
 
 ## branding, custom status link & custom donation link patch notes
 
-This branch has the branding, donation link, and status page link patch from myself (mooleshacat). It enables you to use the default catspeed branding (the title with emojis) or plain old "INVIDIOUS". You can enable and disable both the catspeed and invidious donation links (please dont :3c) and set your own custom donation link. You can also set your own custom status page link. All these changes can be made in the configuration file. 
+You can change in the config:
+- enable/disable catspeed branding
+- enable/disable catspeed donation link (please think of cat :3c)
+- enable/disable invidious donation link (please ... invidious :3c)
+- enable/disable custom donation link
+- custom donation link text & url
+- custom status page link text & url
+- custom freetube help page link text & url 
 
 
 ## upgrading
