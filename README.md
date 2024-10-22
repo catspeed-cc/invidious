@@ -193,7 +193,8 @@ So you noticed some recent commits to master, how do you update?
 - Pull the new changes ```git pull```
 - Make the binary ```make -j<numcores>``` (replace <numcores> with your number of cores minus 1)
 - If the binary exists in a different location, copy the new one over top of it
-- Either re-copy the config.example.yml (reccommended) or carefully look for the new options and add them to your config.yml (not reccommended)
+- Backup your existing config file
+- Either re-copy the config.example.yml (recommended) or carefully look for the new options and add them to your config.yml (not recommended)
 
 
 ## Documentation
