@@ -1,11 +1,3 @@
-# Notice
-I have pulled development into master, now we have a stable branch. If you choose, you can check out the development branch. Just be warned, it can be unstable.
-
-To use development branch you need to ```git checkout development``` after you clone the repository.
-
-To browse the development version on github, click the down arrow beside "master" and click on "development" or click here https://github.com/catspeed-cc/invidious/tree/development
-
--------
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
   <h1>Invidious</h1>
