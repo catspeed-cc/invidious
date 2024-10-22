@@ -77,10 +77,13 @@
 - add redis patch
 - add proxy patch
 - sig helper reconnect patch
-- uptime status patch (mooleshacat)
-- loadavg status patch (mooleshacat)
+- uptime status (mooleshacat)
+- loadavg status (mooleshacat)
 - token monitor patch (mooleshacat)
-- branding, custom status link & custom donation link patch (mooleshacat)
+- enable/disable catspeed branding (mooleshacat)
+- custom status link (mooleshacat)
+- custom freetube help link (mooleshacat)
+- custom donation link (mooleshacat)
 
 **User features**
 - Lightweight
@@ -149,14 +152,14 @@ Public and private instance owners: if you need help with anything, create an is
 You will need an installation of sig helper. https://github.com/catspeed-cc/inv_sig_helper or https://github.com/iv-org/inv_sig_helper will do fine. I personally set up miltiple sig helpers, one for each process. Sometimes it will crash and you need to make a crontab entry to restart inv_sig_helper and invidious. You will notice the processer usage and memory usage spike now and then. You can control that with service file cpu limits.
 
 
-## redis patch notes
+## redis-server notes
 
 You will need a default installation of redis-server ```apt install -y redis-server```
 
 _You still need postgresql. If you've followed the installation instructions it should still be there. Do not uninstall it._
 
 
-## proxy patch notes
+## proxy notes
 
 There is proxy support in this version. You may use privoxy, or any proxy. If you have proton vpn you can use https://github.com/catspeed-cc/proton-privoxy. The walterl fork https://github.com/walterl/proton-privoxy does not have a line in the config increasing the max connections or an installer script so maybe use mine.
 
@@ -174,14 +177,21 @@ This branch has the token monitor patch from myself (mooleshacat) which if not d
 This patch is a temporary workaround until inv_sig_helper itself can get the tokens for us. unixfox (invidious dev) raised this idea to techmetx11 (inv_sig_helper dev) and they are working on an implementation that will eventually make this patch useless. This is OK, as it is only a patch and that setup would be better performance wise than my current implementations. You can read about it here https://github.com/iv-org/inv_sig_helper/issues/10
 
 
-## uptime & loadavg status patch notes
+## uptime & loadavg status notes
 
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
 
 
-## branding, custom status link & custom donation link patch notes
+## branding, custom status link, custom freetube help link & custom donation link notes
 
-This branch has the branding, donation link, and status page link patch from myself (mooleshacat). It enables you to use the default catspeed branding (the title with emojis) or plain old "INVIDIOUS". You can enable and disable both the catspeed and invidious donation links (please dont :3c) and set your own custom donation link. You can also set your own custom status page link. All these changes can be made in the configuration file. 
+You can change in the config:
+- enable/disable catspeed branding
+- enable/disable catspeed donation link (please think of cat :3c)
+- enable/disable invidious donation link (please ... invidious :3c)
+- enable/disable custom donation link
+- custom donation link text & url
+- custom status page link text & url
+- custom freetube help page link text & url 
 
 
 ## upgrading

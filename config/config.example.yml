@@ -313,6 +313,16 @@ tokenmon_enabled: true
 #custom_statuslink_link: "https://updown.io/cr5y"
 
 ##
+## Enable/Disable showing custom freetube help page link
+##
+## Accepted values: true, false
+## Default: false
+##
+#custom_ftubelink_enabled: true
+#custom_ftubelink_text: "FreeTube Configuration Help"
+#custom_ftubelink_link: "https://catspeed.cc/freetube.php"
+
+##
 ## Enable/Disable showing the uptime on the main page.
 ##
 ## Accepted values: true, false

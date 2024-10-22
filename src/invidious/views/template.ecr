@@ -140,10 +140,12 @@
                             <i class="icon ion-ios-paper"></i>
                             <a href="https://github.com/iv-org/documentation" target='_blank'><%= translate(locale, "footer_documentation") %></a>
                         </span>
+                        <% if CONFIG.custom_ftubelink_enabled %>
                         <span>
                             <i class="icon ion-ios-paper"></i>
-                            <a href="https://catspeed.cc/freetube.php" target='_blank'>FreeTube Configuration Help</a>
+                            <a href="<%= CONFIG.custom_ftubelink_link %>" target='_blank'><%= CONFIG.custom_ftubelink_text %></a>
                         </span>
+                        <% end %>
                     </div>
 
                     <div class="pure-u-1 pure-u-md-1-3">
