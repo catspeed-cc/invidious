@@ -180,9 +180,9 @@ This patch is a temporary workaround until inv_sig_helper itself can get the tok
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
 
 
-## branding and donation links
+## branding, donation links, status page link
 
-This branch has the branding & donation link patch from myself (mooleshacat). It enables you to use the default catspeed branding (the title with emojis) or plain old "INVIDIOUS". You can enable and disable both the catspeed and invidious donation links (please dont :3c) and set your own custom donation link. All these changes can be made in the configuration file. 
+This branch has the branding, donation link, and status page link patch from myself (mooleshacat). It enables you to use the default catspeed branding (the title with emojis) or plain old "INVIDIOUS". You can enable and disable both the catspeed and invidious donation links (please dont :3c) and set your own custom donation link. You can also set your own custom status page link. All these changes can be made in the configuration file. 
 
 
 ## upgrading
