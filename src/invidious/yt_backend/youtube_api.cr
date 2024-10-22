@@ -23,13 +23,15 @@ module YoutubeAPI
 
   private WINDOWS_VERSION = "10.0"
 
+  pot = ""
+  vdata = ""
+
   # Enumerate used to select one of the clients supported by the API
   enum ClientType
     Web
     WebEmbeddedPlayer
     WebMobile
     WebScreenEmbed
-    WebCreator
 
     Android
     AndroidEmbeddedPlayer
@@ -77,14 +79,6 @@ module YoutubeAPI
       name_proto: "1",
       version:    "2.20240814.00.00",
       screen:     "EMBED",
-      os_name:    "Windows",
-      os_version: WINDOWS_VERSION,
-      platform:   "DESKTOP",
-    },
-    ClientType::WebCreator => {
-      name:       "WEB_CREATOR",
-      name_proto: "62",
-      version:    "1.20240918.03.00",
       os_name:    "Windows",
       os_version: WINDOWS_VERSION,
       platform:   "DESKTOP",
@@ -282,6 +276,17 @@ module YoutubeAPI
   # youtube API endpoints.
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
+    # determine po_token and visitor_data
+    if CONFIG.tokenmon_enabled
+      # get the pot/vdata for usage later
+      pot = Invidious::TokenMon.pot.as(String)
+      vdata = Invidious::TokenMon.vdata.as(String)
+    else
+      # Use the configured pot
+      pot = CONFIG.po_token.as(String)
+      vdata = CONFIG.visitor_data.as(String)       
+    end
+
     # Use the default client config if nil is passed
     client_config ||= DEFAULT_CLIENT_CONFIG
 
@@ -300,9 +305,8 @@ module YoutubeAPI
     end
 
     if client_config.screen == "EMBED"
-      # embedUrl https://www.google.com allow loading almost all video that are configured not embeddable
       client_context["thirdParty"] = {
-        "embedUrl" => "https://www.google.com/",
+        "embedUrl" => "https://www.youtube.com/embed/#{video_id}",
       } of String => String | Int64
     end
 
@@ -330,8 +334,8 @@ module YoutubeAPI
       client_context["client"]["platform"] = platform
     end
 
-    if CONFIG.visitor_data.is_a?(String)
-      client_context["client"]["visitorData"] = CONFIG.visitor_data.as(String)
+    if vdata.is_a?(String)
+      client_context["client"]["visitorData"] = vdata
     end
 
     return client_context
@@ -479,6 +483,17 @@ module YoutubeAPI
       end
     end
 
+    # determine po_token and visitor_data
+    if CONFIG.tokenmon_enabled
+      # get the pot/vdata for usage later
+      pot = Invidious::TokenMon.pot.as(String)
+      vdata = Invidious::TokenMon.vdata.as(String)
+    else
+      # Use the configured pot
+      pot = CONFIG.po_token.as(String)
+      vdata = CONFIG.visitor_data.as(String)       
+    end
+
     # JSON Request data, required by the API
     data = {
       "contentCheckOk" => true,
@@ -492,7 +507,7 @@ module YoutubeAPI
         "contentPlaybackContext" => playback_ctx,
       },
       "serviceIntegrityDimensions" => {
-        "poToken" => CONFIG.po_token,
+        "poToken" => pot,
       },
     }
 
@@ -626,8 +641,19 @@ module YoutubeAPI
       headers["User-Agent"] = user_agent
     end
 
-    if CONFIG.visitor_data.is_a?(String)
-      headers["X-Goog-Visitor-Id"] = CONFIG.visitor_data.as(String)
+    # determine po_token and visitor_data
+    if CONFIG.tokenmon_enabled
+      # get the pot/vdata for usage later
+      pot = Invidious::TokenMon.pot.as(String)
+      vdata = Invidious::TokenMon.vdata.as(String)
+    else
+      # Use the configured pot
+      pot = CONFIG.po_token.as(String)
+      vdata = CONFIG.visitor_data.as(String)       
+    end
+
+    if vdata.is_a?(String)
+      headers["X-Goog-Visitor-Id"] = vdata
     end
 
     # Logging

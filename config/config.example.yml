@@ -173,6 +173,17 @@ https_only: false
 ##
 #force_resolve:
 
+##
+## Configuration for using a HTTP proxy
+##
+## If unset, then no HTTP proxy will be used.
+## 
+http_proxy:
+  user:
+  password:
+  host:
+  port:
+
 
 ##
 ## Use Innertube's transcripts API instead of timedtext for closed captions
@@ -198,6 +209,14 @@ https_only: false
 ##
 # po_token: ""
 # visitor_data: ""
+
+##
+## Monitor config for tokens each 1 minute
+##
+## Accepted values: true, false
+## Default: true
+##
+tokenmon_enabled: true
 
 # -----------------------------
 #  Logging
@@ -226,6 +245,22 @@ https_only: false
 # -----------------------------
 #  Features
 # -----------------------------
+
+##
+## Enable/Disable showing the uptime on the main page.
+##
+## Accepted values: true, false
+## Default: false
+##
+#uptime_enabled: true
+
+##
+## Enable/Disable showing the load avg on the main page.
+##
+## Accepted values: true, false
+## Default: false
+##
+#loadavg_enabled: true
 
 ##
 ## Enable/Disable the "Popular" tab on the main page.

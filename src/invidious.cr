@@ -16,6 +16,7 @@
 
 require "digest/md5"
 require "file_utils"
+require "process"
 
 # Require kemal, kilt, then our own overrides
 require "kemal"
@@ -23,6 +24,7 @@ require "kilt"
 require "./ext/kemal_content_for.cr"
 require "./ext/kemal_static_file_handler.cr"
 
+require "http_proxy"
 require "athena-negotiation"
 require "openssl/hmac"
 require "option_parser"
@@ -31,6 +33,7 @@ require "xml"
 require "yaml"
 require "compress/zip"
 require "protodec/utils"
+require "redis"
 
 require "./invidious/database/*"
 require "./invidious/database/migrations/*"
@@ -60,7 +63,12 @@ alias IV = Invidious
 CONFIG   = Config.load
 HMAC_KEY = CONFIG.hmac_key
 
-PG_DB       = DB.open CONFIG.database_url
+PG_DB    = DB.open CONFIG.database_url
+REDIS_DB = Redis::PooledClient.new(unixsocket: CONFIG.redis_socket || nil, url: CONFIG.redis_url || nil)
+
+if REDIS_DB.ping
+  puts "Connected to redis"
+end
 ARCHIVE_URL = URI.parse("https://archive.org")
 PUBSUB_URL  = URI.parse("https://pubsubhubbub.appspot.com")
 REDDIT_URL  = URI.parse("https://www.reddit.com")
@@ -188,6 +196,10 @@ CONNECTION_CHANNEL = ::Channel({Bool, ::Channel(PQ::Notification)}).new(32)
 Invidious::Jobs.register Invidious::Jobs::NotificationJob.new(CONNECTION_CHANNEL, CONFIG.database_url)
 
 Invidious::Jobs.register Invidious::Jobs::ClearExpiredItemsJob.new
+
+if CONFIG.tokenmon_enabled
+  Invidious::Jobs.register Invidious::Jobs::MonitorCfgTokensJob.new()
+end
 
 Invidious::Jobs.register Invidious::Jobs::InstanceListRefreshJob.new
 

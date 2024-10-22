@@ -49,6 +49,11 @@ To browse the development version on github, click the down arrow beside "master
   <a href="#contribute">Contribute</a>
   &nbsp;•&nbsp;
   <a href="https://invidious.io/donate/">Donate</a>
+ <center>
+    <a href="https://catspeed.cc/donate/">Donate to catspeed.cc</a>
+    &nbsp;•&nbsp;
+    <a href="https://pr.tn/ref/04PN5S3WMGBG">Get ProtonVPN</a>
+ </center>
 
   <h5>Chat with us:</h5>
   <a href="https://matrix.to/#/#invidious:matrix.org">
@@ -78,6 +83,15 @@ To browse the development version on github, click the down arrow beside "master
 
 ## Features
 
+**Patches**
+- revert [d9df90b5e3ab6f738907c1bfaf96f0407368d842](https://github.com/catspeed-cc/invidious/commit/d9df90b5e3ab6f738907c1bfaf96f0407368d842)
+- add redis patch
+- add proxy patch
+- sig helper reconnect patch
+- uptime status patch (mooleshacat)
+- loadavg status patch (mooleshacat)
+- token monitor patch (mooleshacat)
+
 **User features**
 - Lightweight
 - No ads
@@ -103,6 +117,10 @@ To browse the development version on github, click the down arrow beside "master
 - Does not use official YouTube APIs
 - No Contributor License Agreement (CLA)
 
+**Support**
+- create a support ticket here https://github.com/catspeed-cc/invidious/issues
+- please do not create tickets elsewhere.
+
 
 ## Quick start
 
@@ -112,7 +130,60 @@ To browse the development version on github, click the down arrow beside "master
 
 **Hosting invidious:**
 
+- You will need a default redis install ```apt install -y redis-server```
+- You still need postgresql
+- You still need sighelper
+- You still need to figure out how to update the tokens in config file (with bash script or otherwise)
+- Invidious will automatically reload the tokens from the config file every 1 minute
 - [Follow the installation instructions](https://docs.invidious.io/installation/)
+
+**Notice to instance owners:**
+
+It appears the working solution currently is to use:
+- sig helper
+- po_token & visitor_data
+- a VPN proxy (privoxy, proton-privoxy, etc.)
+
+I personally use proton VPN, you can get it along with your email here: https://pr.tn/ref/04PN5S3WMGBG - if you want VPN only you can try to get it there or just go to https://protonvpn.com . You can get a working proton-privoxy from https://github.com/catspeed-cc/proton-privoxy .
+
+I use one invidious instance, one sig helper, and one proton-privoxy per core. Each connection to nginx is routed to the least connected backend (currently I have 4) . If you only have 1 core, use 2 processes so you can restart one at a time, minimizing downtime. I hope this is helpful to instance owners having troubles.
+
+Public and private instance owners: if you need help with anything, create an issue ticket here: https://github.com/catspeed-cc/invidious/issues - I do not mind, I will try and help best I can.
+
+
+## inv_sig_helper notes
+
+You will need an installation of sig helper. https://github.com/catspeed-cc/inv_sig_helper or https://github.com/iv-org/inv_sig_helper will do fine. I personally set up miltiple sig helpers, one for each process. Sometimes it will crash and you need to make a crontab entry to restart inv_sig_helper and invidious. You will notice the processer usage and memory usage spike now and then. You can control that with service file cpu limits.
+
+
+## redis patch notes
+
+You will need a default installation of redis-server ```apt install -y redis-server```
+
+_You still need postgresql. If you've followed the installation instructions it should still be there. Do not uninstall it._
+
+
+## proxy patch notes
+
+There is proxy support in this version. You may use privoxy, or any proxy. If you have proton vpn you can use https://github.com/catspeed-cc/proton-privoxy. The walterl fork https://github.com/walterl/proton-privoxy does not have a line in the config increasing the max connections or an installer script so maybe use mine.
+
+Keep in mind especially on ProtonVPN if you restart a container, you will temporarily have 1 extra connection. So if you have 10 connections allowed, I would keep a few extra available in case a container needs restarting. I am not sure how long it takes for the stale connection to fix itself.
+
+Restarting container (or changing servers) more than 1 time per hour can cause problems. Especially if you use 4-6 connections/containers.
+
+I'll just leave this here https://pr.tn/ref/04PN5S3WMGBG
+
+
+## po_token and visitor_data notes
+
+This branch has the token monitor patch from myself (mooleshacat) which if not disabled in config file will check every 1 minute your config file for updated tokens. Now all you have to do is make a bash script that updates the tokens in the config file and a cronjob to execute it at the desired interval. No longer do you have to restart invidious service for the tokens to update.
+
+This patch is a temporary workaround until inv_sig_helper itself can get the tokens for us. unixfox (invidious dev) raised this idea to techmetx11 (inv_sig_helper dev) and they are working on an implementation that will eventually make this patch useless. This is OK, as it is only a patch and that setup would be better performance wise than my current implementations. You can read about it here https://github.com/iv-org/inv_sig_helper/issues/10
+
+
+## uptime & loadavg status patch notes
+
+This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
 
 
 ## Documentation

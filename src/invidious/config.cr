@@ -55,6 +55,15 @@ struct ConfigPreferences
   end
 end
 
+struct HTTPProxyConfig
+  include YAML::Serializable
+
+  property user : String
+  property password : String
+  property host : String
+  property port : Int32
+end
+
 class Config
   include YAML::Serializable
 
@@ -78,6 +87,9 @@ class Config
   # Used for crawling channels: threads should check all videos uploaded by a channel
   property full_refresh : Bool = false
 
+  property redis_url : String?
+  property redis_socket : String?
+
   # Jobs config structure. See jobs.cr and jobs/base_job.cr
   property jobs = Invidious::Jobs::JobsConfig.new
 
@@ -87,9 +99,12 @@ class Config
   property hmac_key : String = ""
   # Domain to be used for links to resources on the site where an absolute URL is required
   property domain : String?
+  property tokenmon_enabled : Bool = true
   # Subscribe to channels using PubSubHubbub (requires domain, hmac_key)
   property use_pubsub_feeds : Bool | Int32 = false
   property popular_enabled : Bool = true
+  property uptime_enabled : Bool = false
+  property loadavg_enabled : Bool = false
   property captcha_enabled : Bool = true
   property login_enabled : Bool = true
   property registration_enabled : Bool = true
@@ -129,6 +144,8 @@ class Config
   property host_binding : String = "0.0.0.0"
   # Pool size for HTTP requests to youtube.com and ytimg.com (each domain has a separate pool of `pool_size`)
   property pool_size : Int32 = 100
+  # HTTP Proxy configuration
+  property http_proxy : HTTPProxyConfig? = nil
 
   # Use Innertube's transcripts API instead of timedtext for closed captions
   property use_innertube_for_captions : Bool = false
