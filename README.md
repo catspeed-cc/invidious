@@ -120,7 +120,7 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - No Contributor License Agreement (CLA)
 
 **Support**
-- create a support ticket here https://github.com/catspeed-cc/invidious/issues
+- create a support ticket here https://gogs.catspeed.com/catspeed-cc/invidious/issues
 - please do not create tickets elsewhere.
 
 
