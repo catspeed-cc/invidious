@@ -1,10 +1,3 @@
-# Notice
-
-You are currently on the development branch. This branch is unstable, and at times, may not compile.
-
-To switch to more stable master branch, ```git checkout master``` and ```git pull```
-
-------
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
   <h1>Invidious</h1>
