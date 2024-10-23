@@ -1,3 +1,10 @@
+# Notice
+
+You are currently on the development branch. This branch is unstable, and at times, may not compile.
+
+To switch to more stable master branch, ```git checkout master``` and ```git pull```
+
+------
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
   <h1>Invidious</h1>
@@ -81,7 +88,9 @@
 - loadavg status (mooleshacat)
 - token monitor patch (mooleshacat)
 - enable/disable catspeed branding (mooleshacat)
-- custom status link (mooleshacat)
+- enable/disable catspeed donate link (mooleshacat)
+- enable/disable invidious donate link (mooleshacat)
+- custom status page link (mooleshacat)
 - custom freetube help link (mooleshacat)
 - custom donation link (mooleshacat)
 
@@ -111,7 +120,7 @@
 - No Contributor License Agreement (CLA)
 
 **Support**
-- create a support ticket here https://github.com/catspeed-cc/invidious/issues
+- create a support ticket here https://gogs.catspeed.com/catspeed-cc/invidious/issues
 - please do not create tickets elsewhere.
 
 
@@ -149,14 +158,14 @@ Public and private instance owners: if you need help with anything, create an is
 You will need an installation of sig helper. https://github.com/catspeed-cc/inv_sig_helper or https://github.com/iv-org/inv_sig_helper will do fine. I personally set up miltiple sig helpers, one for each process. Sometimes it will crash and you need to make a crontab entry to restart inv_sig_helper and invidious. You will notice the processer usage and memory usage spike now and then. You can control that with service file cpu limits.
 
 
-## redis-server notes
+## redis patch notes
 
 You will need a default installation of redis-server ```apt install -y redis-server```
 
 _You still need postgresql. If you've followed the installation instructions it should still be there. Do not uninstall it._
 
 
-## proxy notes
+## proxy patch notes
 
 There is proxy support in this version. You may use privoxy, or any proxy. If you have proton vpn you can use https://github.com/catspeed-cc/proton-privoxy. The walterl fork https://github.com/walterl/proton-privoxy does not have a line in the config increasing the max connections or an installer script so maybe use mine.
 
@@ -167,7 +176,7 @@ Restarting container (or changing servers) more than 1 time per hour can cause p
 I'll just leave this here https://pr.tn/ref/04PN5S3WMGBG
 
 
-## po_token and visitor_data notes
+## tokenmon patch notes (po_token and visitor_data)
 
 This branch has the token monitor patch from myself (mooleshacat) which if not disabled in config file will check every 1 minute your config file for updated tokens. Now all you have to do is make a bash script that updates the tokens in the config file and a cronjob to execute it at the desired interval. No longer do you have to restart invidious service for the tokens to update.
 
