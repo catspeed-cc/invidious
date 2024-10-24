@@ -222,7 +222,7 @@ This branch now has the token updater script. You can install it by:
 
 ## gitea.catspeed.cc
 
-You may have noticed the repository on GitHub is now a mirror of https://gitea.catspeed.cc/catspeed-cc/invidious. The repository is updated every 60 minutes if I am developing and there are changes. There is no need to clone the repository at gitea.catspeed.cc.
+You may have noticed the repository on GitHub is now a mirror of https://gitea.catspeed.cc/catspeed-cc/invidious. The repository is updated every 60 minutes if my virtual machine is on and there are changes. There is no need to clone the repository at gitea.catspeed.cc.
 
 For support, you can not submit any tickets on github as I've closed the issue tickets page. You can however create an account and submit an issue ticket here https://gitea.catspeed.cc/catspeed-cc/invidious/issues
 
