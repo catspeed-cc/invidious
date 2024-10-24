@@ -113,7 +113,7 @@
 - No Contributor License Agreement (CLA)
 
 **Support**
-- create a support ticket here https://gogs.catspeed.com/catspeed-cc/invidious/issues
+- create a support ticket here https://gitea.catspeed.cc/catspeed-cc/invidious/issues
 - please do not create tickets elsewhere.
 
 
@@ -195,13 +195,13 @@ You can change in the config:
 _You need to restart the service for these to take effect._
 
 
-## gogs.catspeed.cc
+## gitea.catspeed.cc
 
-You may have noticed the repository on GitHub is now a mirror of https://gogs.catspeed.cc/catspeed-cc/invidious. The repository is updated every 15 minutes if there are changes. There is no need to clone the repository at gogs.catspeed.cc.
+You may have noticed the repository on GitHub is now a mirror of https://gitea.catspeed.cc/catspeed-cc/invidious. The repository is updated every 60 minutes if I am developing and there are changes. There is no need to clone the repository at gitea.catspeed.cc.
 
-For support, you can not submit any tickets on github as I've closed the issue tickets page. You can however create an account and submit an issue ticket here https://gogs.catspeed.cc/catspeed-cc/invidious/issues
+For support, you can not submit any tickets on github as I've closed the issue tickets page. You can however create an account and submit an issue ticket here https://gitea.catspeed.cc/catspeed-cc/invidious/issues
 
-If you wish to fork you can fork on github, but in order to submit any PR to me you would need to fork the repository on https://gogs.catspeed.cc/catspeed-cc/invidious
+If you wish to fork you can fork on github, but in order to submit any PR to me you would need to fork the repository on https://gitea.catspeed.cc/catspeed-cc/invidious
 
 
 ## upgrading
