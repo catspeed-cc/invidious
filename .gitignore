@@ -12,3 +12,5 @@ update-backup-bin.sh
 /invidious
 /sentry
 /config/config.yml
+/scripts/etc/*
+/scripts/logs/*
