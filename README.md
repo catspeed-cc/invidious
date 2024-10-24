@@ -206,7 +206,7 @@ This patch is a temporary workaround until inv_sig_helper itself can get the tok
 
 ## token updater script notes (po_token and visitor_data)
 
-This branch now has the token updater script. You can install it by:
+This branch now has the token updater script from myself (mooleshacat). You can install it by:
 - ```cd scripts```
 - Install dependencies ```./install-update-tokens-cron-deps.sh``` (git, wget, curl, nvm)
 - Test run ```./update-tokens-cron.sh "/path/to/invidious/config.yml" "" ""```
