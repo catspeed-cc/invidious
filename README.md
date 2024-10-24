@@ -203,6 +203,13 @@ You can change in the config:
 _You need to restart the service for these to take effect._
 
 
+## gogs.catspeed.cc
+
+You may have noticed the repository on GitHub is a mirror of https://gogs.catspeed.cc/catspeed-cc/invidious. The repository is updated every 15 minutes if there are changes. There is no need to clone the repository at gogs.catspeed.cc.
+
+For support, you can not submit any tickets on github as I've closed the issue tickets page. You can however create an account and submit an issue ticket here https://gogs.catspeed.cc/catspeed-cc/invidious/issues
+
+
 ## upgrading
 
 So you noticed some recent commits to master, how do you update?
