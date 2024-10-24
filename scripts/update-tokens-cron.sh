@@ -21,9 +21,8 @@ echo "Generating visitordata & potoken..." | tee -a ${SCRIPT_PATH}/${ITU_LOG_FIL
 echo ""
 
 # THIS IS THE ACTUAL COMMAND, WILL TAKE TIME TO PROCESS
-#rawOutput=$(export http_proxy=127.0.0.1:800${1} ; export http_proxy=127.0.0.1:800${1} ; sudo docker run --rm quay.io/invidious/youtube-trusted-session-generator)
 if [ ! -z "${3}" ] ; then
-  rawOutput=$(export http_proxy=${3} ; export http_proxy=${3} ; ${HOME}/.nvm/versions/node/v20.18.0/bin/node ${SCRIPT_PATH}/etc/youtube-po-token-generator/examples/one-shot.js)
+  rawOutput=$(export http_proxy=${3} ; export https_proxy=${3} ; ${HOME}/.nvm/versions/node/v20.18.0/bin/node ${SCRIPT_PATH}/etc/youtube-po-token-generator/examples/one-shot.js)
 else
   rawOutput=$(${HOME}/.nvm/versions/node/v20.18.0/bin/node ${SCRIPT_PATH}/etc/youtube-po-token-generator/examples/one-shot.js)
 fi
