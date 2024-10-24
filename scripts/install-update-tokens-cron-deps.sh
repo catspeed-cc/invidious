@@ -21,6 +21,8 @@ sleep 5 ;
 mkdir etc
 mkdir logs
 
+# git is already insalled, otherwise they wouldn't even have the repository.
+# just added in case the user took a tar.gz or zip
 apt install -y git wget curl
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
