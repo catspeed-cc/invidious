@@ -215,7 +215,8 @@ This branch now has the token updater script. You can install it by:
 - Set up crontab entries for each config file you wish to update:
   ```
   # If you are using catspeed fork with tokenmon enabled, leave service name blank.
-  # Enter your path to config.yml and proxy information.
+  # Enter your path to config.yml and proxy information. Set desired interval.
+  #
   */5 * * * * /path/to/invidious/scripts/update-tokens-cron.sh "/path/to/invidious/config.yml" "" "http://127.0.0.1:8001"
   ```
 
