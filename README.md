@@ -87,6 +87,7 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - uptime status (mooleshacat)
 - loadavg status (mooleshacat)
 - token monitor patch (mooleshacat)
+- token updater scripts (mooleshacat)
 - enable/disable catspeed branding (mooleshacat)
 - enable/disable catspeed donate link (mooleshacat)
 - enable/disable invidious donate link (mooleshacat)
@@ -176,13 +177,6 @@ Restarting container (or changing servers) more than 1 time per hour can cause p
 I'll just leave this here https://pr.tn/ref/04PN5S3WMGBG
 
 
-## tokenmon patch notes (po_token and visitor_data)
-
-This branch has the token monitor patch from myself (mooleshacat) which if not disabled in config file will check every 1 minute your config file for updated tokens. Now all you have to do is make a bash script that updates the tokens in the config file and a cronjob to execute it at the desired interval. No longer do you have to restart invidious service for the tokens to update.
-
-This patch is a temporary workaround until inv_sig_helper itself can get the tokens for us. unixfox (invidious dev) raised this idea to techmetx11 (inv_sig_helper dev) and they are working on an implementation that will eventually make this patch useless. This is OK, as it is only a patch and that setup would be better performance wise than my current implementations. You can read about it here https://github.com/iv-org/inv_sig_helper/issues/10
-
-
 ## uptime & loadavg status notes
 
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
@@ -200,6 +194,30 @@ You can change in the config:
 - custom freetube help page link text & url
 
 _You need to restart the service for these to take effect._
+
+
+## tokenmon patch notes (po_token and visitor_data)
+
+This branch has the token monitor patch from myself (mooleshacat) which if not disabled in config file will check every 1 minute your config file for updated tokens. Now all you have to do is make a bash script that updates the tokens in the config file and a cronjob to execute it at the desired interval. No longer do you have to restart invidious service for the tokens to update.
+
+This patch is a temporary workaround until inv_sig_helper itself can get the tokens for us. unixfox (invidious dev) raised this idea to techmetx11 (inv_sig_helper dev) and they are working on an implementation that will eventually make this patch useless. This is OK, as it is only a patch and that setup would be better performance wise than my current implementations. You can read about it here https://github.com/iv-org/inv_sig_helper/issues/10
+
+
+## token updater script notes (po_token and visitor_data)
+
+This branch now has the token updater script. You can install it by:
+- ```cd scripts```
+- Install dependencies ```./install-update-tokens-cron-deps.sh``` (git, wget, curl, nvm)
+- Test run ```./update-tokens-cron.sh "/path/to/invidious/config.yml" "" ""```
+- Test run with restart service ```./update-tokens-cron.sh "/path/to/invidious/config.yml" "invidious-service-1" ""```
+- Test run with proxy ```./update-tokens-cron.sh "/path/to/invidious/config.yml" "" "http://127.0.0.1:8001"```
+- Set up crontab entries for each config file you wish to update:
+  ```
+  # If you are using catspeed fork with tokenmon enabled, leave service name blank.
+  # Enter your path to config.yml and proxy information. Set desired interval.
+  #
+  */5 * * * * /path/to/invidious/scripts/update-tokens-cron.sh "/path/to/invidious/config.yml" "" "http://127.0.0.1:8001"
+  ```
 
 
 ## gitea.catspeed.cc
