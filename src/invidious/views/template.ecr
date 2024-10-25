@@ -138,7 +138,7 @@
                         </span>
                         <span>
                             <i class="icon ion-ios-paper"></i>
-                            <a href="https://github.com/iv-org/documentation" target='_blank'><%= translate(locale, "footer_documentation") %></a>
+                            <a href="https://github.com/iv-org/documentation" target='_blank'><%= translate(locale, "footer_documentation") %></a><% if CONFIG.custom_issuelink_enabled %> / <i class="icon ion-ios-paper"></i><a href='<%= CONFIG.custom_issuelink_link %>' target='_blank'><%= CONFIG.custom_issuelink_text %></a><% end %>
                         </span>
                         <% if CONFIG.custom_ftubelink_enabled %>
                         <span>

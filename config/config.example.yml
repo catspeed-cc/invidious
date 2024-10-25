@@ -305,6 +305,8 @@ tokenmon_enabled: true
 ##
 ## Enable/Disable showing your custom status page link
 ##
+## Update this to your own status page
+##
 ## Accepted values: true, false
 ## Default: false
 ##
@@ -313,7 +315,21 @@ tokenmon_enabled: true
 #custom_statuslink_link: "https://updown.io/cr5y"
 
 ##
+## Enable/Disable showing custom issue ticket page link
+##
+## Update this to your own issue tracker
+##
+## Accepted values: true, false
+## Default: false
+##
+#custom_issuelink_enabled: true
+#custom_issuelink_text: "Issue Tracker"
+#custom_issuelink_link: "https://gitea.catspeed.cc/catspeed-cc/invidious/issues"
+
+##
 ## Enable/Disable showing custom freetube help page link
+##
+## Update this to your own freetube help page (you can copy mine and change it)
 ##
 ## Accepted values: true, false
 ## Default: false
