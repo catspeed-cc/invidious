@@ -113,6 +113,9 @@ class Config
   property custom_statuslink_enabled : Bool = false
   property custom_statuslink_text : String = ""
   property custom_statuslink_link : String = ""
+  property custom_issuelink_enabled : Bool = false
+  property custom_issuelink_text : String = ""
+  property custom_issuelink_link : String = ""
   property custom_ftubelink_enabled : Bool = false
   property custom_ftubelink_text : String = ""
   property custom_ftubelink_link : String = ""
