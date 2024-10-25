@@ -92,6 +92,7 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - enable/disable catspeed donate link (mooleshacat)
 - enable/disable invidious donate link (mooleshacat)
 - custom status page link (mooleshacat)
+- custom issue tracker link (mooleshacat)
 - custom freetube help link (mooleshacat)
 - custom donation link (mooleshacat)
 
@@ -190,6 +191,7 @@ You can change in the config:
 - enable/disable invidious donation link (please ... invidious :3c)
 - enable/disable custom donation link
 - custom donation link text & url
+- custom issue tracker link text & url
 - custom status page link text & url
 - custom freetube help page link text & url
 
