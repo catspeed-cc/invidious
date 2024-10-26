@@ -228,8 +228,6 @@ You may have noticed the repository on GitHub is now a mirror of https://gitea.c
 
 For support, you can not submit any tickets on github as I've closed the issue tickets page. You can however create an account and submit an issue ticket here https://gitea.catspeed.cc/catspeed-cc/invidious/issues
 
-If you wish to fork you can fork on github, but in order to submit any PR to me you would need to fork the repository on https://gitea.catspeed.cc/catspeed-cc/invidious
-
 
 ## upgrading
 
