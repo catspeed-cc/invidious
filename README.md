@@ -89,12 +89,8 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - token monitor patch (mooleshacat)
 - token updater scripts (mooleshacat)
 - enable/disable catspeed branding (mooleshacat)
-- enable/disable catspeed donate link (mooleshacat)
-- enable/disable invidious donate link (mooleshacat)
-- custom status page link (mooleshacat)
-- custom issue tracker link (mooleshacat)
-- custom freetube help link (mooleshacat)
-- custom donation link (mooleshacat)
+- enable/disable catspeed, invidious donate link (mooleshacat)
+- custom status page, issue tracker, freetube help, donation links (mooleshacat)
 
 **User features**
 - Lightweight
