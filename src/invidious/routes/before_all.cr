@@ -42,14 +42,13 @@ module Invidious::Routes::BeforeAll
       schema="https://"
     else
       schema="http://"
-    end
-      
-    theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`
-    
+    end      
+    theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
     domain1 = schema + theDomain
     domain2 = schema + "*." + theDomain
     
-    LOGGER.info("DOMAIN 1: " + domain1 + " DOMAIN 2:" + domain2)
+    LOGGER.info("DOMAIN 1: " + domain1)
+    LOGGER.info(" DOMAIN 2:" + domain2)
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
