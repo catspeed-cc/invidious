@@ -54,22 +54,20 @@ module Invidious::Routes::BeforeAll
     else      
       permitted = "'self'"
     end
-    
-    puts permitted
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
     env.response.headers["Content-Security-Policy"] = {
       "default-src 'none'",
-      "script-src https://catspeed.cc https://*.catspeed.cc",
-      "style-src https://catspeed.cc https://*.catspeed.cc 'unsafe-inline'",
-      "img-src https://catspeed.cc https://*.catspeed.cc data:",
-      "font-src https://catspeed.cc https://*.catspeed.cc data:",
-      "connect-src https://catspeed.cc https://*.catspeed.cc",
-      "manifest-src https://catspeed.cc https://*.catspeed.cc",
-      "media-src https://catspeed.cc https://*.catspeed.cc blob:" + extra_media_csp,
-      "child-src https://catspeed.cc https://*.catspeed.cc blob:",
-      "frame-src https://catspeed.cc https://*.catspeed.cc",
+      "script-src #{permitted}",
+      "style-src #{permitted} 'unsafe-inline'",
+      "img-src #{permitted} data:",
+      "font-src #{permitted} data:",
+      "connect-src #{permitted}",
+      "manifest-src #{permitted}",
+      "media-src #{permitted} blob:" + extra_media_csp,
+      "child-src #{permitted} blob:",
+      "frame-src #{permitted}",
       "frame-ancestors " + frame_ancestors,
     }.join("; ")
 
