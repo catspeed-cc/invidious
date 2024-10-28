@@ -38,17 +38,24 @@ module Invidious::Routes::BeforeAll
     
     # Determine CSP value ('self' or domain.com and *.domain.com)
     # determine if HTTPS is enabled
-    if CONFIG.https_only
-      schema="https://"
-    else
-      schema="http://"
-    end      
-    theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
-    domain1 = schema + theDomain
-    domain2 = schema + "*." + theDomain
+    if CONFIG.csp_hack_enabled
+      if CONFIG.https_only
+        schema="https://"
+      else
+        schema="http://"
+      end
+      theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
+      domain1 = schema + theDomain
+      domain2 = schema + "*." + theDomain    
+      LOGGER.debug("DOMAIN 1: " + domain1)
+      LOGGER.debug("DOMAIN 2:" + domain2)      
+      permitted = domain1 + " " + domain2
+
+    else      
+      permitted = "'self'"
+    end
     
-    LOGGER.info("DOMAIN 1: " + domain1)
-    LOGGER.info(" DOMAIN 2:" + domain2)
+    LOGGER.info("PERMITTED:" + permitted)
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
