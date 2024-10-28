@@ -3,7 +3,7 @@ name: Enhancement
 about: Suggest an enhancement for an existing feature
 title: '[Enhancement] '
 labels: enhancement
-assignees: ''
+assignees: 'mooleshacat'
 
 ---
 
