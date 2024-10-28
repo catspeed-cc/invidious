@@ -46,7 +46,7 @@ module Invidious::Routes::BeforeAll
       
     theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`
     
-    LOGGER.info("DOMAIN IS: " + schema + theDomain)
+    LOGGER.info("DOMAIN IS: " + schema + "*." + theDomain)
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
