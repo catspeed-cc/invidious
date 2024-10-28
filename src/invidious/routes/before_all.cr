@@ -49,7 +49,7 @@ module Invidious::Routes::BeforeAll
       domain2 = schema + "*." + theDomain    
       LOGGER.debug("DOMAIN 1: " + domain1)
       LOGGER.debug("DOMAIN 2:" + domain2)      
-      permitted = (domain1 + " " + domain2)
+      permitted = "" + domain1 + " " + domain2 + ""
 
     else      
       permitted = "'self'"
