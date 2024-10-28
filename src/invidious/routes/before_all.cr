@@ -34,20 +34,31 @@ module Invidious::Routes::BeforeAll
     else
       frame_ancestors = "'none'"
     end
+    
+    # Determine CSP value ('self' or domain.com and *.domain.com)
+    # determine if HTTPS is enabled
+    if CONFIG.https_only
+      schema="https://"
+    else
+      schema="http://"
+    end
+    thedomain=`echo "` + CONFIG.domain.as(String) + `" | awk -F/ '{print $3}'`
+    thedomain=`echo "` + thedomain.as(String) + `" | awk -F. '{print $2"."$3}'`
+    LOGGER.info("DOMAIN IS: " + thedomain.as(String))
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
     env.response.headers["Content-Security-Policy"] = {
       "default-src 'none'",
-      "script-src 'self'",
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data:",
-      "font-src 'self' data:",
-      "connect-src 'self'",
-      "manifest-src 'self'",
-      "media-src 'self' blob:" + extra_media_csp,
-      "child-src 'self' blob:",
-      "frame-src 'self'",
+      "script-src https://catspeed.cc https://*.catspeed.cc",
+      "style-src https://catspeed.cc https://*.catspeed.cc 'unsafe-inline'",
+      "img-src https://catspeed.cc https://*.catspeed.cc data:",
+      "font-src https://catspeed.cc https://*.catspeed.cc data:",
+      "connect-src https://catspeed.cc https://*.catspeed.cc",
+      "manifest-src https://catspeed.cc https://*.catspeed.cc",
+      "media-src https://catspeed.cc https://*.catspeed.cc blob:" + extra_media_csp,
+      "child-src https://catspeed.cc https://*.catspeed.cc blob:",
+      "frame-src https://catspeed.cc https://*.catspeed.cc",
       "frame-ancestors " + frame_ancestors,
     }.join("; ")
 
