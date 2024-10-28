@@ -44,7 +44,7 @@ module Invidious::Routes::BeforeAll
       schema="http://"
     end
       
-    theOutput = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $2'.'$3}'`
+    theOutput = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`
     
     LOGGER.info("DOMAIN IS: " + theOutput)
 
