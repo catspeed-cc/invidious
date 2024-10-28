@@ -44,7 +44,7 @@ module Invidious::Routes::BeforeAll
       schema="http://"
     end
     
-    thecmd="echo \"#{CONFIG.domain}\" | awk -F/ '{print $3}'"    
+    thecmd="/usr/bin/echo \"#{CONFIG.domain}\" | /usr/bin/awk -F/ '{print $3}'"    
     LOGGER.info("CMD IS: " + thecmd.as(String))
       
     stdout = IO::Memory.new
@@ -52,7 +52,7 @@ module Invidious::Routes::BeforeAll
     status = process.wait
     output = stdout.to_s
     
-    LOGGER.info("DOMAIN IS: " + output.as(String))
+    LOGGER.info("DOMAIN IS: " + output)
 
     #thedomain=`echo "#{thedomain}" | awk -F. '{print $2"."$3}'`
     #LOGGER.info("DOMAIN IS: " + output.as(String))
