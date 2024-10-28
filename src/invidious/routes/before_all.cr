@@ -54,15 +54,15 @@ module Invidious::Routes::BeforeAll
     # inline styles (<style> [..] </style>, style=" [..] ")
     env.response.headers["Content-Security-Policy"] = {
       "default-src 'none'",
-      "script-src 'self' #{domain1} #{domain2}",
-      "style-src 'self' #{domain1} #{domain2} 'unsafe-inline'",
-      "img-src 'self' #{domain1} #{domain2} data:",
-      "font-src 'self' #{domain1} #{domain2} data:",
-      "connect-src 'self' #{domain1} #{domain2}",
-      "manifest-src 'self' #{domain1} #{domain2}",
-      "media-src 'self' #{domain1} #{domain2} blob:" + extra_media_csp,
-      "child-src 'self' #{domain1} #{domain2} blob:",
-      "frame-src 'self' #{domain1} #{domain2}",
+      "script-src 'self' "+domain1+" "+domain2+"",
+      "style-src 'self' "+domain1+" "+domain2+" 'unsafe-inline'",
+      "img-src 'self' "+domain1+" "+domain2+" data:",
+      "font-src 'self' "+domain1+" "+domain2+" data:",
+      "connect-src 'self' "+domain1+" "+domain2+"",
+      "manifest-src 'self' "+domain1+" "+domain2+"",
+      "media-src 'self' "+domain1+" "+domain2+" blob:" + extra_media_csp,
+      "child-src 'self' "+domain1+" "+domain2+" blob:",
+      "frame-src 'self' "+domain1+" "+domain2+"",
       "frame-ancestors " + frame_ancestors,
     }.join("; ")
 
