@@ -42,7 +42,7 @@ module Invidious::Routes::BeforeAll
     else
       schema="http://"
     end
-    thedomain=`echo "#{CONFIG.domain}" | awk -F/ '{print $3}'`
+    thedomain=`echo \"#{CONFIG.domain}\" | awk -F/ '{print $3}'`
     #thedomain=`echo "#{thedomain}" | awk -F. '{print $2"."$3}'`
     LOGGER.info("DOMAIN IS: " + thedomain.as(String))
 
