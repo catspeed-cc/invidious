@@ -44,7 +44,7 @@ module Invidious::Routes::BeforeAll
       schema="http://"
     end
     
-    thecmd = "'#{CONFIG.domain}' | /usr/bin/awk -F/ '{print $3}'"    
+    thecmd = "'#{CONFIG.domain}' | /usr/bin/awk -F. '{print $2"."$3}'"    
     LOGGER.info("CMD IS: " + thecmd.as(String))
       
     stdout = IO::Memory.new
