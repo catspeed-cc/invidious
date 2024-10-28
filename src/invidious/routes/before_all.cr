@@ -44,15 +44,17 @@ module Invidious::Routes::BeforeAll
       schema="http://"
     end
     
-    thecmd = "'#{CONFIG.domain}' | /usr/bin/awk -F. '{print $2'.'$3}'"    
-    LOGGER.info("CMD IS: " + thecmd.as(String))
+    #thecmd = "'#{CONFIG.domain}' | /usr/bin/awk -F. '{print $2'.'$3}'"    
+    #LOGGER.info("CMD IS: " + thecmd.as(String))
       
-    stdout = IO::Memory.new
-    process = Process.new("/usr/bin/echo", ["hello world", " | awk '{print $2}'"], output: stdout)
-    status = process.wait
-    output = stdout.to_s
+    theOutput = `echo "hello world" | awk '{print $2}'`      
+      
+    #stdout = IO::Memory.new
+    #process = Process.new("/usr/bin/echo", ["hello world", " | awk '{print $2}'"], output: stdout)
+    #status = process.wait
+    #output = stdout.to_s
     
-    LOGGER.info("DOMAIN IS: " + output)
+    LOGGER.info("DOMAIN IS: " + theOutput)
 
     #thedomain=`echo "#{thedomain}" | awk -F. '{print $2"."$3}'`
     #LOGGER.info("DOMAIN IS: " + output.as(String))
