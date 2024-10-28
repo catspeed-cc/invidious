@@ -42,8 +42,8 @@ module Invidious::Routes::BeforeAll
     else
       schema="http://"
     end
-    thedomain=`echo "#{CONFIG.domain.as(String)}" | awk -F/ '{print $3}'`
-    thedomain=`echo "#{thedomain.as(String)}" | awk -F. '{print $2"."$3}'`
+    thedomain=`echo "#{CONFIG.domain}" | awk -F/ '{print $3}'`
+    thedomain=`echo "#{thedomain}" | awk -F. '{print $2"."$3}'`
     LOGGER.info("DOMAIN IS: " + thedomain.as(String))
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
