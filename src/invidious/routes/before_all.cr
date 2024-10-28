@@ -47,12 +47,7 @@ module Invidious::Routes::BeforeAll
     #thecmd = "'#{CONFIG.domain}' | /usr/bin/awk -F. '{print $2'.'$3}'"    
     #LOGGER.info("CMD IS: " + thecmd.as(String))
       
-    theOutput = `echo "hello world" | awk '{print $2}'`      
-      
-    #stdout = IO::Memory.new
-    #process = Process.new("/usr/bin/echo", ["hello world", " | awk '{print $2}'"], output: stdout)
-    #status = process.wait
-    #output = stdout.to_s
+    theOutput = `echo "#{CONFIG.domain}" | awk -F. '{print $2}'`
     
     LOGGER.info("DOMAIN IS: " + theOutput)
 
