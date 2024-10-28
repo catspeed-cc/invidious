@@ -49,13 +49,13 @@ module Invidious::Routes::BeforeAll
       domain2 = schema + "*." + theDomain    
       LOGGER.debug("DOMAIN 1: " + domain1)
       LOGGER.debug("DOMAIN 2:" + domain2)      
-      permitted = string.Concat(domain1, " ", domain2)
+      permitted = "#{domain1} #{domain2}"
 
     else      
       permitted = "'self'"
     end
     
-    LOGGER.info("PERMITTED: #{permitted}")
+    puts permitted
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
