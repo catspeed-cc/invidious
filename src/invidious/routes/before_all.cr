@@ -1,3 +1,4 @@
+require "process"
 module Invidious::Routes::BeforeAll
   def self.handle(env)
     preferences = Preferences.from_json("{}")
@@ -44,7 +45,9 @@ module Invidious::Routes::BeforeAll
     end
     thecmd="echo \"#{CONFIG.domain}\" | awk -F/ '{print $3}'"
     LOGGER.info("CMD IS: " + thecmd.as(String))
-    thedomain=`#{thecmd}`
+    
+    thedomain=`#{thecmd.as(String)}`
+
     #thedomain=`echo "#{thedomain}" | awk -F. '{print $2"."$3}'`
     LOGGER.info("DOMAIN IS: " + thedomain.as(String))
 
