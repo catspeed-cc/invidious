@@ -45,11 +45,17 @@ module Invidious::Routes::BeforeAll
     end
     
     thecmd="echo \"#{CONFIG.domain}\" | awk -F/ '{print $3}'"    
-    LOGGER.info("CMD IS: " + thecmd.as(String))    
-    thedomain=`` + thecmd.as(String) + ``
+    LOGGER.info("CMD IS: " + thecmd.as(String))
+      
+    stdout = IO::Memory.new
+    process = Process.new(thecmd, [""], output: stdout)
+    status = process.wait
+    output = stdout.to_s
+    
+    LOGGER.info("DOMAIN IS: " + output.as(String))
 
     #thedomain=`echo "#{thedomain}" | awk -F. '{print $2"."$3}'`
-    LOGGER.info("DOMAIN IS: " + thedomain.as(String))
+    #LOGGER.info("DOMAIN IS: " + output.as(String))
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
