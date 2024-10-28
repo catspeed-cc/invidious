@@ -48,7 +48,7 @@ module Invidious::Routes::BeforeAll
     LOGGER.info("CMD IS: " + thecmd.as(String))
       
     stdout = IO::Memory.new
-    process = Process.new("/usr/bin/echo", ["hello world" " | awk '{print $2}'"], output: stdout)
+    process = Process.new("/usr/bin/echo", ["hello world", " | awk '{print $2}'"], output: stdout)
     status = process.wait
     output = stdout.to_s
     
