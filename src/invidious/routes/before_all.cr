@@ -44,11 +44,11 @@ module Invidious::Routes::BeforeAll
       schema="http://"
     end
     
-    thecmd = "/usr/bin/echo '#{CONFIG.domain}' | /usr/bin/awk -F/ '{print $3}'"    
+    thecmd = "'#{CONFIG.domain}' | /usr/bin/awk -F/ '{print $3}'"    
     LOGGER.info("CMD IS: " + thecmd.as(String))
       
     stdout = IO::Memory.new
-    process = Process.new(thecmd, [""], output: stdout)
+    process = Process.new("/usr/bin/echo", [thecmd], output: stdout)
     status = process.wait
     output = stdout.to_s
     
