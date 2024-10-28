@@ -43,10 +43,10 @@ module Invidious::Routes::BeforeAll
     else
       schema="http://"
     end
-    thecmd="echo \"#{CONFIG.domain}\" | awk -F/ '{print $3}'"
-    LOGGER.info("CMD IS: " + thecmd.as(String))
     
-    thedomain=`#{thecmd.as(String)}`
+    thecmd="echo \"#{CONFIG.domain}\" | awk -F/ '{print $3}'"    
+    LOGGER.info("CMD IS: " + thecmd.as(String))    
+    thedomain=`` + thecmd.as(String) + ``
 
     #thedomain=`echo "#{thedomain}" | awk -F. '{print $2"."$3}'`
     LOGGER.info("DOMAIN IS: " + thedomain.as(String))
