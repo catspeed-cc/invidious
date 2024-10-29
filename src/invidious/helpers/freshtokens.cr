@@ -1,19 +1,20 @@
 class Invidious::FreshTokens
   
-    
+  @@freshpot = ""
+  @@freshvdata = ""  
   
-  def self.pot
-    @@pot
+  def self.freshpot
+    @@freshpot
   end
   
-  def self.vdata
-    @@vdata
+  def self.freshvdata
+    @@freshvdata
   end  
   
   def initialize
     
-    @@pot = "error"
-    @@vdata = "error"
+    @@freshpot = "error"
+    @@freshvdata = "error"
     
     get_tokens
     
@@ -25,9 +26,9 @@ class Invidious::FreshTokens
     tokendata = `${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     LOGGER.info("TOKENDATA1: #{tokendata}")
-    @@pot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $4}'`
+    @@freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $4}'`
     LOGGER.info("TOKENDATA2: #{tokendata}")
-    @@vdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
+    @@freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
 
   end
   

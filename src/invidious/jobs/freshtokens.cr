@@ -7,8 +7,8 @@ class Invidious::Jobs::FreshTokensJob < Invidious::Jobs::BaseJob
       
       Invidious::FreshTokens.get_tokens
             
-      LOGGER.info("YOUR POT: #{Invidious::FreshTokens.pot}")
-      LOGGER.info("YOUR VDATA: #{Invidious::FreshTokens.vdata}")
+      LOGGER.info("FRESH POT: #{Invidious::FreshTokens.freshpot}")
+      LOGGER.info("FRESH VDATA: #{Invidious::FreshTokens.freshvdata}")
     
       sleep CONFIG.freshtokens_interval.seconds
     end
