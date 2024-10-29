@@ -222,6 +222,19 @@ http_proxy:
 # visitor_data: ""
 
 ##
+## Enable/Disable freshtoken. 
+##
+## FreshTokens gets you fresh po_token/visitor_data at defined interval
+##
+## Busier instances may need tokens at high intervals (see readme)
+##
+## Accepted values: true, false
+## Default: false
+##
+#freshtokens_enabled: true
+#freshtokens_interval: 2.seconds
+
+##
 ## Monitor config for tokens each 1 minute
 ##
 ## Accepted values: true, false
@@ -267,19 +280,6 @@ tokenmon_enabled: true
 # -----------------------------
 #  Features
 # -----------------------------
-
-##
-## Enable/Disable freshtoken. 
-##
-## CSP-Hack enables CSP for the main domain and all subdomains.
-##
-## Instead of "'self'" it will use "https://mydomain.com and https://*.mydomain.com"
-## Note this is less secure, but can fix CSP problems.
-##
-## Accepted values: true, false
-## Default: false
-##
-#freshtokens_enabled: true
 
 ##
 ## Enable/Disable csp-hack. 
