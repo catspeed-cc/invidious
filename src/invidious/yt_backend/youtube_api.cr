@@ -26,7 +26,7 @@ module YoutubeAPI
   pot = ""
   vdata = ""
   
-  @@tokenData = `/root/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+  @@tokenData : String = `/root/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
 
   # Enumerate used to select one of the clients supported by the API
   enum ClientType
