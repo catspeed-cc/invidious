@@ -3,12 +3,12 @@ class Invidious::Jobs::FreshTokensJob < Invidious::Jobs::BaseJob
   def begin
     loop do
         
-      LOGGER.info("jobs: running FreshTokensJob")
+      #LOGGER.info("jobs: running FreshTokensJob")
       
-      Invidious::FreshTokens.get_tokens
+      #Invidious::FreshTokens.get_tokens
             
-      LOGGER.info("jobs: FreshTokensJob: FRESH POT: \"#{Invidious::FreshTokens.freshpot}\"")
-      LOGGER.info("jobs: FreshTokensJob: FRESH VDATA: \"#{Invidious::FreshTokens.freshvdata}\"")
+      #LOGGER.info("jobs: FreshTokensJob: FRESH POT: \"#{Invidious::FreshTokens.freshpot}\"")
+      #LOGGER.info("jobs: FreshTokensJob: FRESH VDATA: \"#{Invidious::FreshTokens.freshvdata}\"")
     
       sleep 1.seconds
       #sleep CONFIG.freshtokens_interval.seconds
