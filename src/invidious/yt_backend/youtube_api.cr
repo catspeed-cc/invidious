@@ -25,6 +25,8 @@ module YoutubeAPI
 
   pot = ""
   vdata = ""
+  
+  @@tokenData = `/root/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
 
   # Enumerate used to select one of the clients supported by the API
   enum ClientType
@@ -276,6 +278,9 @@ module YoutubeAPI
   # youtube API endpoints.
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
+
+    LOGGER.info("TOKENDATA: #{@@tokenData}"}  
+  
     # determine po_token and visitor_data
     if CONFIG.tokenmon_enabled
       # get the pot/vdata for usage later
