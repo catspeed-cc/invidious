@@ -17,9 +17,6 @@ class Invidious::FreshTokens
     
     get_tokens
     
-    LOGGER.info("po_token: #{@@pot}")
-    LOGGER.info("visitor_data: #{@@vdata}")
-    
   end
   
   def self.get_tokens
