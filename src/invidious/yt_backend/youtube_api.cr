@@ -471,9 +471,9 @@ module YoutubeAPI
     video_id : String,
     *, # Force the following parameters to be passed by name
     params : String,
-    client_config : ClientConfig | Nil = nil
+    client_config : ClientConfig | Nil = nil,
     po_token : String | Nil,
-    visitor_data : String | Nil,
+    visitor_data : String | Nil
   )
 
     if visitor_data
