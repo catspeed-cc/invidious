@@ -232,7 +232,7 @@ http_proxy:
 ## Default: false
 ##
 #freshtokens_enabled: true
-#freshtokens_interval: 2.seconds
+#freshtokens_interval: 2
 
 ##
 ## Monitor config for tokens each 1 minute

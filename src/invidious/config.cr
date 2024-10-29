@@ -83,8 +83,8 @@ class Config
 
   # Enables freshtoken
   property freshtokens_enabled : Bool = false
-  property freshtokens_interval : String = "2.seconds"
-
+  property freshtokens_interval : Int32 = 2
+  
   # Enables CSP hack (permit TLD + subdomains in CSP)
   property csp_hack_enabled : Bool = false
   
