@@ -85,6 +85,7 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - add proxy patch
 - sig helper reconnect patch
 - uptime status (mooleshacat)
+- csp hack patch (mooleshacat)
 - loadavg status (mooleshacat)
 - token monitor patch (mooleshacat)
 - token updater scripts (mooleshacat)
@@ -192,6 +193,11 @@ You can change in the config:
 - custom freetube help page link text & url
 
 _You need to restart the service for these to take effect._
+
+
+## csp hack patch notes
+
+CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". Only enable this if you have CSP errors when you inspect the video watch page.
 
 
 ## tokenmon patch notes (po_token and visitor_data)
