@@ -26,7 +26,7 @@ module YoutubeAPI
   pot = ""
   vdata = ""
   
-  @@tokenData = ""
+  @@tokenData = `/home/invidious/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
 
   # Enumerate used to select one of the clients supported by the API
   enum ClientType
@@ -279,7 +279,7 @@ module YoutubeAPI
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
 
-    @@tokenData = `/home/invidious/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    #@@tokenData
 
     LOGGER.info("TOKENDATA: #{@@tokenData}")
   
