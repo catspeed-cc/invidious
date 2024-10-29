@@ -279,7 +279,7 @@ module YoutubeAPI
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
 
-    @@tokenData = `/root/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    @@tokenData = `/home/invidious/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
 
     LOGGER.info("TOKENDATA: #{@@tokenData}")
   
