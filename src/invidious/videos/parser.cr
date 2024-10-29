@@ -104,7 +104,7 @@ def extract_video_info(video_id : String)
 
   # Don't use Android client if po_token is passed because po_token doesn't
   # work for Android client.
-  if reason.nil? && CONFIG.po_token.nil?
+  if reason.nil? && Invidious::FreshTokens.freshpot.nil?
     # Fetch the video streams using an Android client in order to get the
     # decrypted URLs and maybe fix throttling issues (#2194). See the
     # following issue for an explanation about decrypted URLs:
@@ -117,7 +117,7 @@ def extract_video_info(video_id : String)
   # Only trigger if reason found and po_token or didn't work wth Android client.
   # TvHtml5ScreenEmbed now requires sig helper for it to work but po_token is not required
   # if the IP address is not blocked.
-  if CONFIG.po_token && reason || CONFIG.po_token.nil? && new_player_response.nil?
+  if Invidious::FreshTokens.freshpot && reason || Invidious::FreshTokens.freshpot.nil? && new_player_response.nil?
     client_config.client_type = YoutubeAPI::ClientType::TvHtml5ScreenEmbed
     new_player_response = try_fetch_streaming_data(video_id, client_config)
   end
@@ -473,7 +473,7 @@ private def convert_url(fmt)
   n = DECRYPT_FUNCTION.try &.decrypt_nsig(params["n"])
   params["n"] = n if n
 
-  if token = CONFIG.po_token
+  if token = Invidious::FreshTokens.freshpot
     params["pot"] = token
   end
 
