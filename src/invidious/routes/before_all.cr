@@ -45,14 +45,12 @@ module Invidious::Routes::BeforeAll
         schema="http://"
       end      
       theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
-      domain1 = schema + theDomain
-      domain2 = schema + "*." + theDomain      
-      cspstring="#{domain1.strip} #{domain2.strip}"
+      domain1 = schema + theDomain.strip
+      domain2 = schema + "*." + theDomain.strip      
+      cspstring="#{domain1} #{domain2}"
     else
       cspstring="'self'"    
     end
-
-    LOGGER.debug("cspstring: #{cspstring}")
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
