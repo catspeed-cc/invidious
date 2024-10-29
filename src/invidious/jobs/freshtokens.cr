@@ -4,14 +4,8 @@ class Invidious::Jobs::FreshTokensJob < Invidious::Jobs::BaseJob
     loop do
         
       LOGGER.info("jobs: running MonitorCfgTokensJob job")
-      
-      request = <<-SQL
-        SELECT * FROM users
-      SQL
-      
-      response = PG_DB.query(request, as: User)
-      
-      LOGGER.info("RESPONSE: #{response}")
+            
+      #LOGGER.info("RESPONSE: #{response}")
     
       sleep 1.minutes
     end

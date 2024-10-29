@@ -1,6 +1,4 @@
 class Invidious::TokenMon
-
-  @@instance = new
   
   def self.pot
     @@pot
@@ -31,10 +29,6 @@ class Invidious::TokenMon
     @@pot = config.po_token
     @@vdata = config.visitor_data
 
-  end
-  
-  def self.get_instance
-    return @@instance
   end
   
 end
