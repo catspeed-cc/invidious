@@ -269,6 +269,19 @@ tokenmon_enabled: true
 # -----------------------------
 
 ##
+## Enable/Disable csp-hack. 
+##
+## CSP-Hack enables CSP for the main domain and all subdomains.
+##
+## Instead of "'self'" it will use "https://mydomain.com and https://*.mydomain.com"
+## Note this is less secure, but can fix CSP problems.
+##
+## Accepted values: true, false
+## Default: false
+##
+#csp_hack_enabled: true
+
+##
 ## Enable/Disable catspeed branding.
 ##
 ## Accepted values: true, false

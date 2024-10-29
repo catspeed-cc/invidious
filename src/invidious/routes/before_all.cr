@@ -1,3 +1,4 @@
+require "process"
 module Invidious::Routes::BeforeAll
   def self.handle(env)
     preferences = Preferences.from_json("{}")
@@ -34,20 +35,38 @@ module Invidious::Routes::BeforeAll
     else
       frame_ancestors = "'none'"
     end
+    
+    # Determine CSP value ('self' or domain.com and *.domain.com)
+    if CONFIG.csp_hack_enabled
+      # determine if HTTPS is enabled    
+      if CONFIG.https_only
+        schema="https://"
+      else
+        schema="http://"
+      end      
+      theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
+      domain1 = schema + theDomain
+      domain2 = schema + "*." + theDomain      
+      cspstring="#{domain1.strip} #{domain2.strip}"
+    else
+      cspstring="'self'"    
+    end
+
+    LOGGER.debug("cspstring: #{cspstring}")
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
     env.response.headers["Content-Security-Policy"] = {
       "default-src 'none'",
-      "script-src 'self'",
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data:",
-      "font-src 'self' data:",
-      "connect-src 'self'",
-      "manifest-src 'self'",
-      "media-src 'self' blob:" + extra_media_csp,
-      "child-src 'self' blob:",
-      "frame-src 'self'",
+      "script-src #{cspstring}",
+      "style-src #{cspstring} 'unsafe-inline'",
+      "img-src #{cspstring} data:",
+      "font-src #{cspstring} data:",
+      "connect-src #{cspstring}",
+      "manifest-src #{cspstring}",
+      "media-src #{cspstring} blob:" + extra_media_csp,
+      "child-src #{cspstring} blob:",
+      "frame-src #{cspstring}",
       "frame-ancestors " + frame_ancestors,
     }.join("; ")
 
