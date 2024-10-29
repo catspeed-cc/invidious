@@ -50,7 +50,7 @@ module Invidious::Routes::BeforeAll
       LOGGER.debug("DOMAIN 1: " + domain1)
       LOGGER.debug("DOMAIN 2:" + domain2)
       
-      LOGGER.info("DOMAINs: #{domain1 + " " + domain2}")
+      LOGGER.info("DOMAINs: #{domain1.as(String) + " " + domain2.as(String)}")
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
