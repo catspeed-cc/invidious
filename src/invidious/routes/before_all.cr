@@ -52,7 +52,7 @@ module Invidious::Routes::BeforeAll
       cspstring="'self'"    
     end
 
-    LOGGER.info("cspstring: #{cspstring}")
+    LOGGER.debug("cspstring: #{cspstring}")
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
