@@ -81,6 +81,9 @@ class Config
   # Enables colors in logs. Useful for debugging purposes
   property colorize_logs : Bool = false
 
+  # Enables freshtoken
+  property freshtokens_enabled : Bool = false
+
   # Enables CSP hack (permit TLD + subdomains in CSP)
   property csp_hack_enabled : Bool = false
   
