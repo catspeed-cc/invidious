@@ -39,30 +39,32 @@ module Invidious::Routes::BeforeAll
     # Determine CSP value ('self' or domain.com and *.domain.com)
     # determine if HTTPS is enabled
     
-    if CONFIG.https_only
-      schema="https://"
-    else
-      schema="http://"
-    end
-    theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
-    domain1 = schema + theDomain
-    domain2 = schema + "*." + theDomain    
-    LOGGER.debug("DOMAIN 1: " + domain1)
-    LOGGER.debug("DOMAIN 2:" + domain2)
+      if CONFIG.https_only
+        schema="https://"
+      else
+        schema="http://"
+      end
+      theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
+      domain1 = schema + theDomain
+      domain2 = schema + "*." + theDomain    
+      LOGGER.debug("DOMAIN 1: " + domain1)
+      LOGGER.debug("DOMAIN 2:" + domain2)
+      
+      LOGGER.debug("DOMAINs: #{domain1 + " " + domain2}")
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
     env.response.headers["Content-Security-Policy"] = {
       "default-src 'none'",
-      "script-src 'self' "+domain1+" "+domain2+"",
-      "style-src 'self' "+domain1+" "+domain2+" 'unsafe-inline'",
-      "img-src 'self' "+domain1+" "+domain2+" data:",
-      "font-src 'self' "+domain1+" "+domain2+" data:",
-      "connect-src 'self' "+domain1+" "+domain2+"",
-      "manifest-src 'self' "+domain1+" "+domain2+"",
-      "media-src 'self' "+domain1+" "+domain2+" blob:" + extra_media_csp,
-      "child-src 'self' "+domain1+" "+domain2+" blob:",
-      "frame-src 'self' "+domain1+" "+domain2+"",
+      "script-src https://catspeed.cc https://*.catspeed.cc",
+      "style-src https://catspeed.cc https://*.catspeed.cc 'unsafe-inline'",
+      "img-src https://catspeed.cc https://*.catspeed.cc data:",
+      "font-src https://catspeed.cc https://*.catspeed.cc data:",
+      "connect-src https://catspeed.cc https://*.catspeed.cc",
+      "manifest-src https://catspeed.cc https://*.catspeed.cc",
+      "media-src https://catspeed.cc https://*.catspeed.cc blob:" + extra_media_csp,
+      "child-src https://catspeed.cc https://*.catspeed.cc blob:",
+      "frame-src https://catspeed.cc https://*.catspeed.cc",
       "frame-ancestors " + frame_ancestors,
     }.join("; ")
 
