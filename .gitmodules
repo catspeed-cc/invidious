@@ -1,6 +1,3 @@
 [submodule "mocks"]
 	path = mocks
 	url = ../mocks
-[submodule "youtube-po-token-generator"]
-	path = youtube-po-token-generator
-	url = https://github.com/YunzheZJU/youtube-po-token-generator.git
