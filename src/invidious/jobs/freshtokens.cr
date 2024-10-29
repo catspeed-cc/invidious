@@ -9,7 +9,7 @@ class Invidious::Jobs::FreshTokensJob < Invidious::Jobs::BaseJob
         SELECT * FROM users
       SQL
       
-      response = PG_DB.query_one?(request, as: User)
+      response = PG_DB.query(request, as: User)
       
       LOGGER.info("RESPONSE: #{response}")
     
