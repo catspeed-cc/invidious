@@ -25,9 +25,9 @@ class Invidious::FreshTokens
     # get the tokens :)
     tokendata = `${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
-    LOGGER.info("TOKENDATA1: #{tokendata}")
-    @@freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $4}'`
-    LOGGER.info("TOKENDATA2: #{tokendata}")
+    #LOGGER.info("TOKENDATA1: #{tokendata}")
+    @@freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
+    #LOGGER.info("TOKENDATA2: #{tokendata}")
     @@freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
 
   end
