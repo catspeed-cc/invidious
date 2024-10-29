@@ -27,7 +27,7 @@ class Invidious::FreshTokens
     # get the tokens :)
     tokenData = `${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
-    @@pot = `echo "#{tokenData}" | awk -F"'" '/visitorData/{print $4}'`
+    @@pot = `echo "#{tokenData}" | awk -F"'" '/poToken/{print $4}'`
     @@vdata = `echo "#{tokenData}" | awk -F"'" '/visitorData/{print $2}'`
 
   end
