@@ -37,37 +37,36 @@ module Invidious::Routes::BeforeAll
     end
     
     # Determine CSP value ('self' or domain.com and *.domain.com)
-    # determine if HTTPS is enabled
-    
+    if CONFIG.csp_hack_enabled
+      # determine if HTTPS is enabled    
       if CONFIG.https_only
         schema="https://"
       else
         schema="http://"
-      end
-      
+      end      
       theDomain = `echo "#{CONFIG.domain}" | /usr/bin/awk -F. '{print $(NF-1)"."$NF}'`    
       domain1 = schema + theDomain
-      domain2 = schema + "*." + theDomain
-      
-      thestring="#{domain1.strip} #{domain2.strip}"
-      
-      puts thestring
-            
-      #LOGGER.info("DOMAINs: #{thestring}")
+      domain2 = schema + "*." + theDomain      
+      cspstring="#{domain1.strip} #{domain2.strip}"
+    else
+      cspstring="'self'"    
+    end
+
+    LOGGER.info("cspstring: #{cspstring}")
 
     # TODO: Remove style-src's 'unsafe-inline', requires to remove all
     # inline styles (<style> [..] </style>, style=" [..] ")
     env.response.headers["Content-Security-Policy"] = {
       "default-src 'none'",
-      "script-src https://catspeed.cc https://*.catspeed.cc",
-      "style-src https://catspeed.cc https://*.catspeed.cc 'unsafe-inline'",
-      "img-src https://catspeed.cc https://*.catspeed.cc data:",
-      "font-src https://catspeed.cc https://*.catspeed.cc data:",
-      "connect-src https://catspeed.cc https://*.catspeed.cc",
-      "manifest-src https://catspeed.cc https://*.catspeed.cc",
-      "media-src https://catspeed.cc https://*.catspeed.cc blob:" + extra_media_csp,
-      "child-src https://catspeed.cc https://*.catspeed.cc blob:",
-      "frame-src https://catspeed.cc https://*.catspeed.cc",
+      "script-src #{cspstring}",
+      "style-src #{cspstring} 'unsafe-inline'",
+      "img-src #{cspstring} data:",
+      "font-src #{cspstring} data:",
+      "connect-src #{cspstring}",
+      "manifest-src #{cspstring}",
+      "media-src #{cspstring} blob:" + extra_media_csp,
+      "child-src #{cspstring} blob:",
+      "frame-src #{cspstring}",
       "frame-ancestors " + frame_ancestors,
     }.join("; ")
 
