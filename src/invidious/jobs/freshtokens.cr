@@ -10,7 +10,7 @@ class Invidious::Jobs::FreshTokensJob < Invidious::Jobs::BaseJob
       LOGGER.info("jobs: FreshTokensJob: FRESH POT: \"#{Invidious::FreshTokens.freshpot}\"")
       LOGGER.info("jobs: FreshTokensJob: FRESH VDATA: \"#{Invidious::FreshTokens.freshvdata}\"")
     
-      sleep CONFIG.freshtokens_interval.seconds
+      #sleep CONFIG.freshtokens_interval.seconds
     end
   end
 end
