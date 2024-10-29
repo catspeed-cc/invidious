@@ -197,7 +197,7 @@ _You need to restart the service for these to take effect._
 
 ## csp hack patch notes
 
-CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". Only enable this if you have CSP errors when you inspect the video watch page.
+CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". Only enable this if you have CSP errors when you inspect the video watch page (ctrl + shift + i)
 
 
 ## tokenmon patch notes (po_token and visitor_data)
