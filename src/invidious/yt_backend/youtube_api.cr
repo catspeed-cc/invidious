@@ -23,14 +23,6 @@ module YoutubeAPI
 
   private WINDOWS_VERSION = "10.0"
 
-  pot = ""
-  vdata = ""
-  
-  @@tokenData : String = `/home/invidious/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
-  @@pot : String = `echo "#{@@tokenData}" | awk -F"'" '/visitorData/{print $2}'`
-  @@vdata : String = ``
-  
-
   # Enumerate used to select one of the clients supported by the API
   enum ClientType
     Web
@@ -281,12 +273,6 @@ module YoutubeAPI
   # youtube API endpoints.
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
-
-    #@@tokenData
-
-    LOGGER.info("TOKENDATA: #{@@tokenData}")
-
-    LOGGER.info("POT: #{@@pot}")  
   
     # determine po_token and visitor_data
     if CONFIG.tokenmon_enabled
