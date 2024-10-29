@@ -279,7 +279,7 @@ module YoutubeAPI
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
 
-    LOGGER.info("TOKENDATA: #{@@tokenData}"}  
+    LOGGER.info("TOKENDATA: #{@@tokenData}")
   
     # determine po_token and visitor_data
     if CONFIG.tokenmon_enabled
