@@ -27,6 +27,9 @@ class Invidious::FreshTokens
     
     @@freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     @@freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
+    
+    @@freshpot = @@freshpot.strip
+    @@freshvdata = @@freshvdata.strip
 
   end
   
