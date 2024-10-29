@@ -333,7 +333,7 @@ module YoutubeAPI
     end
 
     if vdata.is_a?(String)
-      client_context["client"]["visitorData"] = vdata
+      client_context["client"]["visitorData"] = vdata.strip
     end
 
     return client_context
@@ -505,7 +505,7 @@ module YoutubeAPI
         "contentPlaybackContext" => playback_ctx,
       },
       "serviceIntegrityDimensions" => {
-        "poToken" => pot,
+        "poToken" => pot.strip,
       },
     }
 
@@ -651,7 +651,7 @@ module YoutubeAPI
     end
 
     if vdata.is_a?(String)
-      headers["X-Goog-Visitor-Id"] = vdata
+      headers["X-Goog-Visitor-Id"] = vdata.strip
     end
 
     # Logging
