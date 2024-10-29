@@ -275,10 +275,10 @@ module YoutubeAPI
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
   
     # determine po_token and visitor_data
-    if CONFIG.tokenmon_enabled
+    if CONFIG.freshtokens_enabled
       # get the pot/vdata for usage later
-      pot = Invidious::TokenMon.pot.as(String)
-      vdata = Invidious::TokenMon.vdata.as(String)
+      pot = Invidious::FreshTokens.freshpot.as(String)
+      vdata = Invidious::FreshTokens.freshvdata.as(String)
     else
       # Use the configured pot
       pot = CONFIG.po_token.as(String)
@@ -482,10 +482,10 @@ module YoutubeAPI
     end
 
     # determine po_token and visitor_data
-    if CONFIG.tokenmon_enabled
+    if CONFIG.freshtokens_enabled
       # get the pot/vdata for usage later
-      pot = Invidious::TokenMon.pot.as(String)
-      vdata = Invidious::TokenMon.vdata.as(String)
+      pot = Invidious::FreshTokens.freshpot.as(String)
+      vdata = Invidious::FreshTokens.freshvdata.as(String)
     else
       # Use the configured pot
       pot = CONFIG.po_token.as(String)
@@ -640,10 +640,10 @@ module YoutubeAPI
     end
 
     # determine po_token and visitor_data
-    if CONFIG.tokenmon_enabled
+    if CONFIG.freshtokens_enabled
       # get the pot/vdata for usage later
-      pot = Invidious::TokenMon.pot.as(String)
-      vdata = Invidious::TokenMon.vdata.as(String)
+      pot = Invidious::FreshTokens.freshpot.as(String)
+      vdata = Invidious::FreshTokens.freshvdata.as(String)
     else
       # Use the configured pot
       pot = CONFIG.po_token.as(String)
