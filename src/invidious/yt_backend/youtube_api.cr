@@ -275,17 +275,6 @@ module YoutubeAPI
   # youtube API endpoints.
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
-  
-    # determine po_token and visitor_data
-    if CONFIG.freshtokens_enabled
-      # get the pot/vdata for usage later
-      pot = Invidious::FreshTokens.freshpot.as(String)
-      vdata = Invidious::FreshTokens.freshvdata.as(String)
-    else
-      # Use the configured pot
-      pot = CONFIG.po_token.as(String)
-      vdata = CONFIG.visitor_data.as(String)       
-    end
 
     # Use the default client config if nil is passed
     client_config ||= DEFAULT_CLIENT_CONFIG
