@@ -5,6 +5,8 @@
 module YoutubeAPI
   extend self
 
+  @@visitor_data : String = ""
+
   # For Android versions, see https://en.wikipedia.org/wiki/Android_version_history
   private ANDROID_APP_VERSION = "19.32.34"
   private ANDROID_VERSION     = "12"
@@ -332,8 +334,10 @@ module YoutubeAPI
       client_context["client"]["platform"] = platform
     end
 
-    if vdata.is_a?(String)
-      client_context["client"]["visitorData"] = vdata.strip
+    if !@@visitor_data.empty?
+      client_context["client"]["visitorData"] = @@visitor_data
+    elsif CONFIG.visitor_data.is_a?(String)
+      client_context["client"]["visitorData"] = CONFIG.visitor_data.as(String)
     end
 
     return client_context
@@ -468,7 +472,14 @@ module YoutubeAPI
     *, # Force the following parameters to be passed by name
     params : String,
     client_config : ClientConfig | Nil = nil
+    po_token : String | Nil,
+    visitor_data : String | Nil,
   )
+
+    if visitor_data
+      @@visitor_data = visitor_data
+    end  
+  
     # Playback context, separate because it can be different between clients
     playback_ctx = {
       "html5Preference" => "HTML5_PREF_WANTS",
@@ -479,17 +490,6 @@ module YoutubeAPI
       if sts = DECRYPT_FUNCTION.try &.get_sts
         playback_ctx["signatureTimestamp"] = sts.to_i64
       end
-    end
-
-    # determine po_token and visitor_data
-    if CONFIG.freshtokens_enabled
-      # get the pot/vdata for usage later
-      pot = Invidious::FreshTokens.freshpot.as(String)
-      vdata = Invidious::FreshTokens.freshvdata.as(String)
-    else
-      # Use the configured pot
-      pot = CONFIG.po_token.as(String)
-      vdata = CONFIG.visitor_data.as(String)       
     end
 
     # JSON Request data, required by the API
@@ -505,7 +505,7 @@ module YoutubeAPI
         "contentPlaybackContext" => playback_ctx,
       },
       "serviceIntegrityDimensions" => {
-        "poToken" => pot.strip,
+        "poToken" => po_token || CONFIG.po_token,
       },
     }
 
@@ -639,19 +639,10 @@ module YoutubeAPI
       headers["User-Agent"] = user_agent
     end
 
-    # determine po_token and visitor_data
-    if CONFIG.freshtokens_enabled
-      # get the pot/vdata for usage later
-      pot = Invidious::FreshTokens.freshpot.as(String)
-      vdata = Invidious::FreshTokens.freshvdata.as(String)
-    else
-      # Use the configured pot
-      pot = CONFIG.po_token.as(String)
-      vdata = CONFIG.visitor_data.as(String)       
-    end
-
-    if vdata.is_a?(String)
-      headers["X-Goog-Visitor-Id"] = vdata.strip
+    if !@@visitor_data.empty?
+      headers["X-Goog-Visitor-Id"] = @@visitor_data
+    elsif CONFIG.visitor_data.is_a?(String)
+      headers["X-Goog-Visitor-Id"] = CONFIG.visitor_data.as(String)
     end
 
     # Logging
