@@ -7,7 +7,6 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]?
     proxy = {"1", "true"}.any? &.== env.params.query["local"]?
 
@@ -28,7 +27,6 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]? || env.params.body["region"]?
 
     if id.nil? || id.size != 11 || !id.matches?(/^[\w-]+$/)
@@ -181,7 +179,6 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]?
 
     begin
@@ -396,7 +393,6 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     clip_id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]?
     proxy = {"1", "true"}.any? &.== env.params.query["local"]?
 
