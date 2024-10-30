@@ -103,7 +103,7 @@ module FreshTokens
     po_token = ""
     visitor_data = ""
     
-    rnd = rand(30)
+    rnd = rand(25)
     redis_instanceid = "ANON-#{CONFIG.freshtokens_instanceid}-#{rnd}"
   
     po_token = REDIS_DB.get("invidious:#{redis_instanceid}:po_token")
