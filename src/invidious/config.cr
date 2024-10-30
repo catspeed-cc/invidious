@@ -83,7 +83,6 @@ class Config
 
   # Enables freshtoken
   property freshtokens_enabled : Bool = false
-  property freshtokens_interval : Int32 = 2
   
   # Enables CSP hack (permit TLD + subdomains in CSP)
   property csp_hack_enabled : Bool = false
@@ -109,7 +108,6 @@ class Config
   property hmac_key : String = ""
   # Domain to be used for links to resources on the site where an absolute URL is required
   property domain : String?
-  property tokenmon_enabled : Bool = true
   # Subscribe to channels using PubSubHubbub (requires domain, hmac_key)
   property use_pubsub_feeds : Bool | Int32 = false
   property catspeed_branding_enabled : Bool = true

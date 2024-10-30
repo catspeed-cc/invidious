@@ -54,10 +54,27 @@ def extract_video_info(video_id : String)
   # Init client config for the API
   client_config = YoutubeAPI::ClientConfig.new
 
-  # Thx Fijxu :3c  
-  # Get tokens
-  unique_po_token, unique_visitor_data = Invidious::FreshTokens.get_tokens
+  # Borrowed code, thx Fijxu :3c
+
+  # get user
+  user = env.get? "user"
+    
+  if user
   
+    # user is a registered user
+    user = user.as(User)
+        
+    # Get tokens
+    unique_po_token, unique_visitor_data = Invidious::FreshTokens.get_user_tokens(user.email)
+    
+  else
+  
+    # user is not a registered user 
+    # Get tokens
+    unique_po_token, unique_visitor_data = Invidious::FreshTokens.get_instance_tokens 
+  
+  end
+
   # Pick either the fresh token or config token
   po_token = (unique_po_token if !unique_po_token.empty?) || CONFIG.po_token
   visitor_data = (unique_visitor_data if !unique_visitor_data.empty?) || CONFIG.visitor_data

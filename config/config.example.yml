@@ -224,23 +224,12 @@ http_proxy:
 ##
 ## Enable/Disable freshtoken. 
 ##
-## FreshTokens gets you fresh po_token/visitor_data at defined interval
-##
-## Busier instances may need tokens at high intervals (see readme)
+## FreshTokens gets users a fresh po_token/visitor_data out of the aether
 ##
 ## Accepted values: true, false
 ## Default: false
 ##
 #freshtokens_enabled: true
-#freshtokens_interval: 2
-
-##
-## Monitor config for tokens each 1 minute
-##
-## Accepted values: true, false
-## Default: true
-##
-tokenmon_enabled: true
 
 # -----------------------------
 #  Logging
