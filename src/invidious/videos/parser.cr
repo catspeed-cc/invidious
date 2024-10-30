@@ -50,16 +50,13 @@ def parse_related_video(related : JSON::Any) : Hash(String, JSON::Any)?
   }
 end
 
-def extract_video_info(video_id : String)
+def extract_video_info(video_id : String, user)
   # Init client config for the API
   client_config = YoutubeAPI::ClientConfig.new
 
   # Borrowed code, thx Fijxu :3c
 
-  # get user
-  user = env.get? "user"
-    
-  if user
+   if user
   
     # user is a registered user
     user = user.as(User)
