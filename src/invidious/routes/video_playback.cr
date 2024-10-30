@@ -267,6 +267,7 @@ module Invidious::Routes::VideoPlayback
 
     region = env.params.query["region"]?
     local = (env.params.query["local"]? == "true")
+    uid = env.params.query["id"]
 
     title = env.params.query["title"]?
 
@@ -275,7 +276,7 @@ module Invidious::Routes::VideoPlayback
     end
 
     begin
-      video = get_video(id, region: region)
+      video = get_video(id, region: region, uniqueid: uid)
     rescue ex : NotFoundException
       return error_template(404, ex)
     rescue ex
