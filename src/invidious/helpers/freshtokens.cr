@@ -122,8 +122,8 @@ module FreshTokens
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} already has tokens")
     end
     
-    LOGGER.info("get_user_tokens: user: #{CONFIG.freshtokens_instanceid}: ANON-#{CONFIG.freshtokens_instanceid} pot: #{po_token}")
-    LOGGER.info("get_user_tokens: user: #{CONFIG.freshtokens_instanceid}: ANON-#{CONFIG.freshtokens_instanceid} vdata: #{visitor_data}")
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} pot: #{po_token}")
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
