@@ -83,6 +83,7 @@ class Config
 
   # Enables freshtoken
   property freshtokens_enabled : Bool = false
+  property freshtokens_instanceid : String = ""
   
   # Enables CSP hack (permit TLD + subdomains in CSP)
   property csp_hack_enabled : Bool = false

@@ -8,28 +8,29 @@ module FreshTokens
   
     po_token = ""
     visitor_data = ""
+    instance_id = CONFIG.freshtokens_instanceid
   
-    po_token = REDIS_DB.get("invidious:po_token")
-    visitor_data = REDIS_DB.get("invidious:visitor_data")
+    po_token = REDIS_DB.get("invidious:inv_instance_#{instance_id}:po_token")
+    visitor_data = REDIS_DB.get("invidious:inv_instance_#{instance_id}:visitor_data")
     
     # check if tokens empty, generate new ones, store in redis
     if (po_token.nil? || visitor_data.nil?)
     
-      LOGGER.info("get_instance_tokens: instance needs new tokens")
+      LOGGER.info("get_instance_tokens: instance #{instance_id} needs new tokens")
       po_token, visitor_data = generate_tokens
       
       # update redis with instance's tokens (1 minute expiry for now)
-      REDIS_DB.set("invidious:po_token", po_token, 15)
-      REDIS_DB.set("invidious:visitor_data", visitor_data, 15)
+      REDIS_DB.set("invidious:inv_instance_#{instance_id}:po_token", po_token, 15)
+      REDIS_DB.set("invidious:inv_instance_#{instance_id}:visitor_data", visitor_data, 15)
       
-      LOGGER.info("get_instance_tokens: instance: stored instance's tokens")
+      LOGGER.info("get_instance_tokens: instance #{instance_id}: stored instance's tokens")
 
     else    
-      LOGGER.info("get_instance_tokens: instance: already has tokens")
+      LOGGER.info("get_instance_tokens: instance #{instance_id}: already has tokens")
     end
     
-    LOGGER.info("get_instance_tokens: instance: pot: #{po_token}")
-    LOGGER.info("get_instance_tokens: instance: vdata: #{visitor_data}")
+    LOGGER.info("get_instance_tokens: instance #{instance_id}: pot: #{po_token}")
+    LOGGER.info("get_instance_tokens: instance #{instance_id}: vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
