@@ -17,7 +17,7 @@ module FreshTokens
     if (po_token.nil? || visitor_data.nil?)
     
       LOGGER.info("get_instance_tokens: instance #{instance_id} needs new tokens")
-      po_token, visitor_data = generate_tokens
+      po_token, visitor_data = generate_tokens_timeout
       
       # update redis with instance's tokens (1 minute expiry for now)
       REDIS_DB.set("invidious:inv_instance_#{instance_id}:po_token", po_token, 60)
@@ -83,6 +83,21 @@ module FreshTokens
 
     # get the tokens :)
     tokendata = `${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    
+    freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
+    freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
+    
+    freshpot = freshpot.strip
+    freshvdata = freshvdata.strip
+    
+    return {freshpot, freshvdata}
+
+  end
+
+  def generate_tokens_timeout
+
+    # get the tokens :)
+    tokendata = `/usr/bin/timeout -k 30 -s KILL 25 ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
