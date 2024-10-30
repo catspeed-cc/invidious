@@ -16,21 +16,21 @@ module FreshTokens
     # check if tokens empty, generate new ones, store in redis
     if (po_token.nil? || visitor_data.nil?)
     
-      LOGGER.info("get_instance_tokens: instance #{instance_id} needs new tokens")
+      LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: needs new tokens")
       po_token, visitor_data = generate_tokens_timeout
       
       # update redis with instance's tokens (1 minute expiry for now)
       REDIS_DB.set("invidious:inv_instance_#{instance_id}:po_token", po_token, 90)
       REDIS_DB.set("invidious:inv_instance_#{instance_id}:visitor_data", visitor_data, 90)
       
-      LOGGER.info("get_instance_tokens: instance #{instance_id}: stored instance's tokens")
+      LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: stored instance's tokens")
 
     else    
-      LOGGER.info("get_instance_tokens: instance #{instance_id}: already has tokens")
+      LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: already has tokens")
     end
     
-    LOGGER.info("get_instance_tokens: instance #{instance_id}: pot: #{po_token}")
-    LOGGER.info("get_instance_tokens: instance #{instance_id}: vdata: #{visitor_data}")
+    LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: pot: #{po_token}")
+    LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
@@ -47,21 +47,21 @@ module FreshTokens
     # check if tokens empty, generate new ones, store in redis
     if (po_token.nil? || visitor_data.nil?)
     
-      LOGGER.info("get_user_tokens: user: #{useremail} needs new tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} needs new tokens")
       po_token, visitor_data = generate_tokens
       
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 300)
       REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 300)
       
-      LOGGER.info("get_user_tokens: user: #{useremail} stored user's tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} stored user's tokens")
 
     else    
-      LOGGER.info("get_user_tokens: user: #{useremail} already has tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} already has tokens")
     end
     
-    LOGGER.info("get_user_tokens: user: #{useremail} pot: #{po_token}")
-    LOGGER.info("get_user_tokens: user: #{useremail} vdata: #{visitor_data}")
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} pot: #{po_token}")
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
@@ -78,35 +78,44 @@ module FreshTokens
     # check if tokens empty, generate new ones, store in redis
     if (po_token.nil? || visitor_data.nil?)
     
-      LOGGER.info("get_user_tokens: user: VID_#{video_id} needs new tokens")
-      po_token, visitor_data = generate_tokens
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: VID_#{video_id} needs new tokens")
+      po_token, visitor_data = generate_tokens_timeout
       
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:VID_#{video_id}:po_token", po_token, 86400)
       REDIS_DB.set("invidious:VID_#{video_id}:visitor_data", visitor_data, 86400)
       
-      LOGGER.info("get_user_tokens: user: VID_#{video_id} stored user's tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: VID_#{video_id} stored user's tokens")
 
     else    
-      LOGGER.info("get_user_tokens: user: VID_#{video_id} already has tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: VID_#{video_id} already has tokens")
     end
     
-    LOGGER.info("get_user_tokens: user: VID_#{video_id} pot: #{po_token}")
-    LOGGER.info("get_user_tokens: user: VID_#{video_id} vdata: #{visitor_data}")
+    LOGGER.info("get_user_tokens: user: #{CONFIG.freshtokens_instanceid}: VID_#{video_id} pot: #{po_token}")
+    LOGGER.info("get_user_tokens: user: #{CONFIG.freshtokens_instanceid}: VID_#{video_id} vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
   end
   
-  def get_anonymous_tokens
+  def get_anon_tokens
   
-    po_token, visitor_data = generate_tokens
+    po_token = ""
+    visitor_data = ""
     
-    LOGGER.info("get_user_tokens: anonymous: anonymous user needs new tokens")
-    LOGGER.info("get_user_tokens: anonymous: pot: #{po_token}")
-    LOGGER.info("get_user_tokens: anonymous: vdata: #{visitor_data}")
-  
-    return {po_token, visitor_data}  
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: anonymous: needs new tokens")
+    po_token, visitor_data = generate_tokens_timeout
+    
+    # update redis with user's tokens (1 hour expiry for now)
+    REDIS_DB.set("invidious:VID_#{video_id}:po_token", po_token, 86400)
+    REDIS_DB.set("invidious:VID_#{video_id}:visitor_data", visitor_data, 86400)
+    
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: anonymous: stored user's tokens")
+    
+    LOGGER.info("get_user_tokens: user: #{CONFIG.freshtokens_instanceid}: anonymous: anon pot: #{po_token}")
+    LOGGER.info("get_user_tokens: user: #{CONFIG.freshtokens_instanceid}: anonymous: anon vdata: #{visitor_data}")
+    
+    return {po_token, visitor_data} 
   
   end
 
