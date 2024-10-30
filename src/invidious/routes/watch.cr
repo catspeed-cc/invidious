@@ -34,6 +34,7 @@ module Invidious::Routes::Watch
     continuation = process_continuation(env.params.query, plid, id)
 
     nojs = env.params.query["nojs"]?
+    uid = env.params.query["id"]
 
     nojs ||= "0"
     nojs = nojs == "1"
@@ -55,7 +56,7 @@ module Invidious::Routes::Watch
     env.params.query.delete_all("listen")
 
     begin
-      video = get_video(id, region: params.region, useremail: useremail)
+      video = get_video(id, region: params.region, useremail: useremail, uniqueid: uid)
     rescue ex : NotFoundException
       LOGGER.error("get_video not found: #{id} : #{ex.message}")
       return error_template(404, ex)
