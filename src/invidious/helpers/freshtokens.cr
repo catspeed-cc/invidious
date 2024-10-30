@@ -51,8 +51,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 1800)
-      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 1800)
+      REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 300)
+      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 300)
       
       LOGGER.info("get_user_tokens: user: #{useremail} stored user's tokens")
 
