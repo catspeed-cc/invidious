@@ -97,7 +97,7 @@ module FreshTokens
   def generate_tokens_timeout
 
     # get the tokens :)
-    tokendata = `/usr/bin/timeout -k 30 -s KILL 25 ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `/usr/bin/timeout -k 15 -s KILL 10 ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
