@@ -108,6 +108,7 @@ module FreshTokens
   
     # locking redis key while fetching new tokens if not locked already
     # this is a way to prevent double requests from same redis_instanceid  
+    LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} get_anon_tokens init")
   
     # get tokens (initial)
     po_token = REDIS_DB.get("invidious:#{redis_instanceid}:po_token")
