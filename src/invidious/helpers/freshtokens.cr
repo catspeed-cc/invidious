@@ -129,6 +129,8 @@ module FreshTokens
     
     end
 
+    LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} redis key unlocked") 
+
     # next we want to generate the tokens if we are no longer waiting on lock
     # then update redis, and return tokens to user    
     
