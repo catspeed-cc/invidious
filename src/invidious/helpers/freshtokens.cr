@@ -65,6 +65,18 @@ module FreshTokens
     return {po_token, visitor_data}
   
   end
+  
+  def get_anonymous_tokens
+  
+    po_token, visitor_data = generate_tokens
+    
+    LOGGER.info("get_user_tokens: anonymous: anonymous user needs new tokens")
+    LOGGER.info("get_user_tokens: anonymous: pot: #{po_token}")
+    LOGGER.info("get_user_tokens: anonymous: vdata: #{visitor_data}")
+  
+    return {po_token, visitor_data}  
+  
+  end
 
   def generate_tokens
 
