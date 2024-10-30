@@ -7,12 +7,11 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]?
     proxy = {"1", "true"}.any? &.== env.params.query["local"]?
 
     begin
-      video = get_video(id, region: region, uniqueid: uid)
+      video = get_video(id, region: region, uniqueid: id)
     rescue ex : NotFoundException
       return error_json(404, ex)
     rescue ex
@@ -28,7 +27,6 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]? || env.params.body["region"]?
 
     if id.nil? || id.size != 11 || !id.matches?(/^[\w-]+$/)
@@ -44,7 +42,7 @@ module Invidious::Routes::API::V1::Videos
     # getting video info.
 
     begin
-      video = get_video(id, region: region, uniqueid: uid)
+      video = get_video(id, region: region, uniqueid: id)
     rescue ex : NotFoundException
       haltf env, 404
     rescue ex
@@ -181,11 +179,10 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]?
 
     begin
-      video = get_video(id, region: region, uniqueid: uid)
+      video = get_video(id, region: region, uniqueid: id)
     rescue ex : NotFoundException
       haltf env, 404
     rescue ex
@@ -396,7 +393,6 @@ module Invidious::Routes::API::V1::Videos
     env.response.content_type = "application/json"
 
     clip_id = env.params.url["id"]
-    uid = env.params.query["id"]
     region = env.params.query["region"]?
     proxy = {"1", "true"}.any? &.== env.params.query["local"]?
 
@@ -415,7 +411,7 @@ module Invidious::Routes::API::V1::Videos
     end
 
     begin
-      video = get_video(video_id, region: region, uniqueid: uid)
+      video = get_video(video_id, region: region, uniqueid: clip_id)
     rescue ex : NotFoundException
       return error_json(404, ex)
     rescue ex
