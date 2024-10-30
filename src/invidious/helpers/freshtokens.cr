@@ -110,7 +110,7 @@ module FreshTokens
     visitor_data = REDIS_DB.get("invidious:#{redis_instanceid}:visitor_data")
     
     # check if tokens empty, generate new ones, store in redis
-    if (po_token.nil? || visitor_data.nil?)
+    if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} needs new tokens")
       po_token, visitor_data = generate_tokens_timeout
