@@ -159,8 +159,8 @@ module FreshTokens
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} vdata: #{visitor_data}")
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:#{redis_instanceid}:po_token", po_token, 300)
-      REDIS_DB.set("invidious:#{redis_instanceid}:visitor_data", visitor_data, 300)
+      REDIS_DB.set("invidious:#{redis_instanceid}:po_token", po_token, 600)
+      REDIS_DB.set("invidious:#{redis_instanceid}:visitor_data", visitor_data, 600)
     
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} unlocking user key")
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} stored user's tokens")
