@@ -48,7 +48,7 @@ module FreshTokens
     if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} needs new tokens")
-      po_token, visitor_data = generate_tokens
+      po_token, visitor_data = generate_tokens_timeout(7, 10)
       
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 300)
