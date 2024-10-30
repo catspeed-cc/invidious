@@ -109,21 +109,21 @@ module FreshTokens
     # check if tokens empty, generate new ones, store in redis
     if (po_token.nil? || visitor_data.nil?)
     
-      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} needs new tokens")
+      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} needs new tokens")
       po_token, visitor_data = generate_tokens_timeout
       
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:ANON-#{CONFIG.freshtokens_instanceid}:po_token", po_token, 600)
       REDIS_DB.set("invidious:ANON-#{CONFIG.freshtokens_instanceid}:visitor_data", visitor_data, 600)
       
-      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} stored user's tokens")
+      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} stored user's tokens")
 
     else    
-      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} already has tokens")
+      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} already has tokens")
     end
     
-    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} pot: #{po_token}")
-    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} vdata: #{visitor_data}")
+    LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} pot: #{po_token}")
+    LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: ANON-#{CONFIG.freshtokens_instanceid} vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
