@@ -34,7 +34,6 @@ module Invidious::Routes::Watch
     continuation = process_continuation(env.params.query, plid, id)
 
     nojs = env.params.query["nojs"]?
-    uid = env.params.url["id"]
 
     nojs ||= "0"
     nojs = nojs == "1"
