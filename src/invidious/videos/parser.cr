@@ -65,7 +65,7 @@ def extract_video_info(video_id : String, useremail : String = "")
   
     # user is not a registered user 
     # Get tokens
-    unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens 
+    unique_po_token, unique_visitor_data = FreshTokens.get_vid_tokens(video_id) 
   
   end
 

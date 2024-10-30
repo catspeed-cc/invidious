@@ -67,6 +67,37 @@ module FreshTokens
   
   end
   
+  def get_vid_tokens(video_id : String)
+  
+    po_token = ""
+    visitor_data = ""
+  
+    po_token = REDIS_DB.get("invidious:VID_#{video_id}:po_token")
+    visitor_data = REDIS_DB.get("invidious:VID_#{video_id}:visitor_data")
+    
+    # check if tokens empty, generate new ones, store in redis
+    if (po_token.nil? || visitor_data.nil?)
+    
+      LOGGER.info("get_user_tokens: user: VID_#{video_id} needs new tokens")
+      po_token, visitor_data = generate_tokens
+      
+      # update redis with user's tokens (1 hour expiry for now)
+      REDIS_DB.set("invidious:VID_#{video_id}:po_token", po_token, 300)
+      REDIS_DB.set("invidious:VID_#{video_id}:visitor_data", visitor_data, 300)
+      
+      LOGGER.info("get_user_tokens: user: VID_#{video_id} stored user's tokens")
+
+    else    
+      LOGGER.info("get_user_tokens: user: VID_#{video_id} already has tokens")
+    end
+    
+    LOGGER.info("get_user_tokens: user: VID_#{video_id} pot: #{po_token}")
+    LOGGER.info("get_user_tokens: user: VID_#{video_id} vdata: #{visitor_data}")
+    
+    return {po_token, visitor_data}
+  
+  end
+  
   def get_anonymous_tokens
   
     po_token, visitor_data = generate_tokens
