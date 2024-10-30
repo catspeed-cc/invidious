@@ -17,7 +17,7 @@ module FreshTokens
     if (po_token.nil? || visitor_data.nil?)
     
       LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: needs new tokens")
-      po_token, visitor_data = generate_tokens_timeout
+      po_token, visitor_data = generate_tokens_timeout(10, 12)
       
       # update redis with instance's tokens (1 minute expiry for now)
       REDIS_DB.set("invidious:inv_instance_#{instance_id}:po_token", po_token, 90)
@@ -51,8 +51,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 900)
-      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 900)
+      REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 300)
+      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 300)
       
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} stored user's tokens")
 
@@ -79,7 +79,7 @@ module FreshTokens
     if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: VID_#{video_id} needs new tokens")
-      po_token, visitor_data = generate_tokens_timeout
+      po_token, visitor_data = generate_tokens_timeout(10, 12)
       
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:VID_#{video_id}:po_token", po_token, 3600)
@@ -147,8 +147,8 @@ module FreshTokens
       REDIS_DB.set("invidious:#{redis_instanceid}:po_token", "LOCK", 25)
       REDIS_DB.set("invidious:#{redis_instanceid}:visitor_data", "LOCK", 25)    
     
-      # generate tokens (should take 5 seconds max ... )
-      po_token, visitor_data = generate_tokens_timeout
+      # generate tokens (should take 5 seconds max ... softkillsecs, hardkillsecs )
+      po_token, visitor_data = generate_tokens_timeout(10, 12)
       
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} pot: #{po_token}")
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} vdata: #{visitor_data}")
@@ -185,10 +185,10 @@ module FreshTokens
 
   end
 
-  def generate_tokens_timeout
+  def generate_tokens_timeout(softkillsecs : Int32 = 10, hardkillsecs : Int32 = 12)
 
     # get the tokens :)
-    tokendata = `/usr/bin/timeout -k 7 -s KILL 5 ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `/usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
