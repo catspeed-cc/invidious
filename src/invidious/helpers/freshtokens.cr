@@ -136,7 +136,7 @@ module FreshTokens
     po_token = REDIS_DB.get("invidious:#{redis_instanceid}:po_token")
     visitor_data = REDIS_DB.get("invidious:#{redis_instanceid}:visitor_data") 
   
-    while ( (!po_token == "LOCK" && !visitor_data == "LOCK") && ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?)) )
+    while ( (po_token != "LOCK" && visitor_data != "LOCK") && ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?)) )
     
       # if po_token and visitor_data are not locked and are empty/unset
     
