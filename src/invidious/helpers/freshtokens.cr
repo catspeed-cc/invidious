@@ -20,8 +20,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens
       
       # update redis with instance's tokens (1 minute expiry for now)
-      REDIS_DB.set("invidious:inv_instance_#{instance_id}:po_token", po_token, 30)
-      REDIS_DB.set("invidious:inv_instance_#{instance_id}:visitor_data", visitor_data, 30)
+      REDIS_DB.set("invidious:inv_instance_#{instance_id}:po_token", po_token, 60)
+      REDIS_DB.set("invidious:inv_instance_#{instance_id}:visitor_data", visitor_data, 60)
       
       LOGGER.info("get_instance_tokens: instance #{instance_id}: stored instance's tokens")
 
