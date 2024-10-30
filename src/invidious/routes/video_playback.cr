@@ -267,7 +267,6 @@ module Invidious::Routes::VideoPlayback
 
     region = env.params.query["region"]?
     local = (env.params.query["local"]? == "true")
-    uid = env.params.query["id"]
 
     title = env.params.query["title"]?
 

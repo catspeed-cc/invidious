@@ -45,7 +45,7 @@ module FreshTokens
     visitor_data = REDIS_DB.get("invidious:#{useremail}:visitor_data")
     
     # check if tokens empty, generate new ones, store in redis
-    if (po_token.nil? || visitor_data.nil?)
+    if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} needs new tokens")
       po_token, visitor_data = generate_tokens
@@ -76,7 +76,7 @@ module FreshTokens
     visitor_data = REDIS_DB.get("invidious:VID_#{video_id}:visitor_data")
     
     # check if tokens empty, generate new ones, store in redis
-    if (po_token.nil? || visitor_data.nil?)
+    if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: VID_#{video_id} needs new tokens")
       po_token, visitor_data = generate_tokens_timeout
