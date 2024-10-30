@@ -103,7 +103,7 @@ module FreshTokens
     po_token = ""
     visitor_data = ""
     
-    rnd = rand(25)
+    rnd = rand(15)
     redis_instanceid = "ANON-#{CONFIG.freshtokens_instanceid}-#{rnd}"
   
     # locking redis key while fetching new tokens if not locked already
