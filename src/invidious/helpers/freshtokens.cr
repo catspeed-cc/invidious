@@ -51,8 +51,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 300)
-      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 300)
+      REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 900)
+      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 900)
       
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} stored user's tokens")
 
@@ -82,8 +82,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens_timeout
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:VID_#{video_id}:po_token", po_token, 1800)
-      REDIS_DB.set("invidious:VID_#{video_id}:visitor_data", visitor_data, 1800)
+      REDIS_DB.set("invidious:VID_#{video_id}:po_token", po_token, 3600)
+      REDIS_DB.set("invidious:VID_#{video_id}:visitor_data", visitor_data, 3600)
       
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: VID_#{video_id} stored user's tokens")
 
@@ -116,8 +116,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens_timeout
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:#{redis_instanceid}:po_token", po_token, 1800)
-      REDIS_DB.set("invidious:#{redis_instanceid}:visitor_data", visitor_data, 1800)
+      REDIS_DB.set("invidious:#{redis_instanceid}:po_token", po_token, 3600)
+      REDIS_DB.set("invidious:#{redis_instanceid}:visitor_data", visitor_data, 3600)
       
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} stored user's tokens")
 
