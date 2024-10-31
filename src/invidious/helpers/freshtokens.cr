@@ -84,8 +84,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens_timeout(7, 10)
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:VID_#{video_uid}:po_token", po_token, 3600)
-      REDIS_DB.set("invidious:VID_#{video_uid}:visitor_data", visitor_data, 3600)
+      REDIS_DB.set("invidious:VID_#{video_uid}:po_token", po_token, 600)
+      REDIS_DB.set("invidious:VID_#{video_uid}:visitor_data", visitor_data, 600)
       
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: VID_#{video_uid} stored user's tokens")
 
