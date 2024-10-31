@@ -158,9 +158,6 @@ module FreshTokens
       # will make token server setup w/ reverse proxy and dedicated token generators
       po_token, visitor_data = generate_tokens_timeout(7, 10)
       
-      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} pot: #{po_token}")
-      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} vdata: #{visitor_data}")
-      
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:#{redis_instanceid}:po_token", po_token, 600)
       REDIS_DB.set("invidious:#{redis_instanceid}:visitor_data", visitor_data, 600)
@@ -169,6 +166,11 @@ module FreshTokens
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} stored user's tokens")  
     
     end
+    
+    # much better to log tokens here instad of inside loop.
+    # now we see tokens whether they were pulled from DB or fresh generated.    
+    LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} pot: #{po_token}")
+    LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
