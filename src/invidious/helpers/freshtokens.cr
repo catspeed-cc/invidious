@@ -175,13 +175,15 @@ module FreshTokens
 
   def generate_tokens
 
-    proxy_str = "#{CONFIG.http_proxy.host}"
+    config_proxy = CONFIG.http_proxy.not_nil!
+
+    proxy_str = "#{config_proxy.host}"
 
     # put together the authentication string
-    if ( !CONFIG.http_proxy.user.empty? && !CONFIG.http_proxy.password.empty? )
+    if ( !config_proxy.user.empty? && !config_proxy.password.empty? )
     
-          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
-          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
+          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{config_proxy.user}:#{config_proxy.password}@,'`
+          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{config_proxy.user}:#{config_proxy.password}@,'`
           proxy_str = proxy_str.strip
     
     end
@@ -206,13 +208,15 @@ module FreshTokens
 
   def generate_tokens_timeout(softkillsecs : Int32 = 10, hardkillsecs : Int32 = 12)
 
-    proxy_str = "#{CONFIG.http_proxy.host}"
+    config_proxy = CONFIG.http_proxy.not_nil!
+
+    proxy_str = "#{config_proxy.host}"
 
     # put together the authentication string
-    if ( !CONFIG.http_proxy.user.empty? && !CONFIG.http_proxy.password.empty? )
+    if ( !config_proxy.user.empty? && !config_proxy.password.empty? )
     
-          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
-          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
+          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{config_proxy.user}:#{config_proxy.password}@,'`
+          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{config_proxy.user}:#{config_proxy.password}@,'`
           proxy_str = proxy_str.strip
     
     end
