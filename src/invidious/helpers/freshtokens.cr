@@ -41,27 +41,27 @@ module FreshTokens
     po_token = ""
     visitor_data = ""
   
-    po_token = REDIS_DB.get("invidious:USER-#{useremail}:po_token")
-    visitor_data = REDIS_DB.get("invidious:USER-#{useremail}:visitor_data")
+    po_token = REDIS_DB.get("invidious:USER-#{CONFIG.freshtokens_instanceid}-#{useremail}:po_token")
+    visitor_data = REDIS_DB.get("invidious:USER-#{CONFIG.freshtokens_instanceid}-#{useremail}:visitor_data")
     
     # check if tokens empty, generate new ones, store in redis
     if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
-      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{useremail} needs new tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{CONFIG.freshtokens_instanceid}-#{useremail} needs new tokens")
       po_token, visitor_data = generate_tokens_timeout(10, 12)
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:USER-#{useremail}:po_token", po_token, 300)
-      REDIS_DB.set("invidious:USER-#{useremail}:visitor_data", visitor_data, 300)
+      REDIS_DB.set("invidious:USER-#{CONFIG.freshtokens_instanceid}-#{useremail}:po_token", po_token, 300)
+      REDIS_DB.set("invidious:USER-#{CONFIG.freshtokens_instanceid}-#{useremail}:visitor_data", visitor_data, 300)
       
-      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{useremail} stored user's tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{CONFIG.freshtokens_instanceid}-#{useremail} stored user's tokens")
 
     else    
-      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{useremail} already has tokens")
+      LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{CONFIG.freshtokens_instanceid}-#{useremail} already has tokens")
     end
     
-    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{useremail} pot: #{po_token}")
-    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{useremail} vdata: #{visitor_data}")
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{CONFIG.freshtokens_instanceid}-#{useremail} pot: #{po_token}")
+    LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: USER-#{CONFIG.freshtokens_instanceid}-#{useremail} vdata: #{visitor_data}")
     
     return {po_token, visitor_data}
   
