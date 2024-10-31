@@ -136,9 +136,6 @@ module FreshTokens
     # next we want to generate the tokens if we are no longer waiting on lock
     # then update redis, and return tokens to user    
     
-    ### replace while with if (recursive loop here bad) only get tokens once ###
-                  ### KEEP DATABASE LOCK LOOP ABOVE ###    
-    
     # get tokens (initial)
     po_token = REDIS_DB.get("invidious:#{redis_instanceid}:po_token")
     visitor_data = REDIS_DB.get("invidious:#{redis_instanceid}:visitor_data") 
