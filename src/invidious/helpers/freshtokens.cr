@@ -10,8 +10,8 @@ module FreshTokens
     visitor_data = ""
     instance_id = CONFIG.freshtokens_instanceid
   
-    po_token = REDIS_DB.get("invidious:inv_instance_#{instance_id}:po_token")
-    visitor_data = REDIS_DB.get("invidious:inv_instance_#{instance_id}:visitor_data")
+    po_token = REDIS_DB.get("invidious:INST-#{instance_id}:po_token")
+    visitor_data = REDIS_DB.get("invidious:INST-#{instance_id}:visitor_data")
     
     # check if tokens empty, generate new ones, store in redis
     if (po_token.nil? || visitor_data.nil?)
@@ -20,8 +20,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens_timeout(7, 10)
       
       # update redis with instance's tokens (1 minute expiry for now)
-      REDIS_DB.set("invidious:inv_instance_#{instance_id}:po_token", po_token, 300)
-      REDIS_DB.set("invidious:inv_instance_#{instance_id}:visitor_data", visitor_data, 300)
+      REDIS_DB.set("invidious:INST-#{instance_id}:po_token", po_token, 300)
+      REDIS_DB.set("invidious:INST-#{instance_id}:visitor_data", visitor_data, 300)
       
       LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: stored instance's tokens")
 
