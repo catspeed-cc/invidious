@@ -175,8 +175,24 @@ module FreshTokens
 
   def generate_tokens
 
+    proxy_str = "#{CONFIG.http_proxy.host}"
+
+    # put together the authentication string
+    if ( !CONFIG.http_proxy.user.empty? && !CONFIG.http_proxy.password.empty? )
+    
+          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
+          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
+          proxy_str = proxy_str.strip
+    
+    end
+    
+    http_proxy_str = "#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ;" 
+    
+    LOGGER.info("generate_tokens_timeout: proxy_str = \"#{proxy_str}\"")  
+    LOGGER.info("generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")  
+
     # get the tokens :)
-    tokendata = `${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `#{http_proxy_str} ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
@@ -190,8 +206,24 @@ module FreshTokens
 
   def generate_tokens_timeout(softkillsecs : Int32 = 10, hardkillsecs : Int32 = 12)
 
+    proxy_str = "#{CONFIG.http_proxy.host}"
+
+    # put together the authentication string
+    if ( !CONFIG.http_proxy.user.empty? && !CONFIG.http_proxy.password.empty? )
+    
+          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
+          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{CONFIG.http_proxy.user}:#{CONFIG.http_proxy.password}@,'`
+          proxy_str = proxy_str.strip
+    
+    end
+    
+    http_proxy_str = "#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ;" 
+    
+    LOGGER.info("generate_tokens_timeout: proxy_str = \"#{proxy_str}\"")  
+    LOGGER.info("generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")  
+
     # get the tokens :)
-    tokendata = `/usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `#{http_proxy_str} /usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
