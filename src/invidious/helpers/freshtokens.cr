@@ -136,11 +136,14 @@ module FreshTokens
     # next we want to generate the tokens if we are no longer waiting on lock
     # then update redis, and return tokens to user    
     
+    ### replace while with if (recursive loop here bad) only get tokens once ###
+                  ### KEEP DATABASE LOCK LOOP ABOVE ###    
+    
     # get tokens (initial)
     po_token = REDIS_DB.get("invidious:#{redis_instanceid}:po_token")
     visitor_data = REDIS_DB.get("invidious:#{redis_instanceid}:visitor_data") 
   
-    while ( (po_token != "LOCK" && visitor_data != "LOCK") && ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?)) )
+    if ( (po_token != "LOCK" && visitor_data != "LOCK") && ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?)) )
     
       # if po_token and visitor_data are not locked and are empty/unset
     
@@ -163,13 +166,9 @@ module FreshTokens
       REDIS_DB.set("invidious:#{redis_instanceid}:visitor_data", visitor_data, 600)
     
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} unlocking user key")
-      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} stored user's tokens")
+      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceid} stored user's tokens")  
     
-      # get ready for next loop iteration (fetch values from redis)
-      po_token = REDIS_DB.get("invidious:#{redis_instanceid}:po_token")
-      visitor_data = REDIS_DB.get("invidious:#{redis_instanceid}:visitor_data")    
-    
-    end # end while
+    end
     
     return {po_token, visitor_data}
   
