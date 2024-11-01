@@ -202,6 +202,11 @@ Invidious::Jobs.register Invidious::Jobs::ClearExpiredItemsJob.new
 
 Invidious::Jobs.register Invidious::Jobs::InstanceListRefreshJob.new
 
+if CONFIG.freshtokens_enabled
+  Invidious::Jobs.register Invidious::Jobs::FreshTokensUserJob.new
+  Invidious::Jobs.register Invidious::Jobs::FreshTokensAnonJob.new
+end
+
 Invidious::Jobs.start_all
 
 def popular_videos
