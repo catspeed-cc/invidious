@@ -59,13 +59,13 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
    if !useremail.empty?
         
     # Get tokens
-    unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
+    unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
     
   else 
   
     # user is not a registered user 
     # Get tokens
-    unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens 
+    unique_po_token, unique_visitor_data = FreshTokens.get_anon_tokens 
   
   end
 
@@ -73,9 +73,9 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
   po_token = (unique_po_token if !unique_po_token == "") || CONFIG.po_token
   visitor_data = (unique_visitor_data if !unique_visitor_data == "") || CONFIG.visitor_data
 
-  #LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
-  #LOGGER.info("FreshTokens: FRESH POT: \"#{po_token}\"")
-  #LOGGER.info("FreshTokens: FRESH VDATA: \"#{visitor_data}\"")
+  LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
+  LOGGER.info("FreshTokens: FRESH POT: \"#{po_token}\"")
+  LOGGER.info("FreshTokens: FRESH VDATA: \"#{visitor_data}\"")
 
   # Fetch data from the player endpoint
   player_response = YoutubeAPI.player(video_id: video_id, params: "2AMB", client_config: client_config, po_token: po_token, visitor_data: visitor_data)
