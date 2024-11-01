@@ -62,6 +62,7 @@ struct HTTPProxyConfig
   property password : String
   property host : String
   property port : Int32
+  property https : Bool
 end
 
 class Config
