@@ -68,23 +68,20 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
     unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
     #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
     
-    LOGGER.info("FreshTokens: User: #{useremail} GENERATED FRESH POT: \"#{unique_po_token}\"")
-    LOGGER.info("FreshTokens: User: #{useremail} GENERATED FRESH VDATA: \"#{unique_visitor_data}\"")
+    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH POT: \"#{unique_po_token}\"")
+    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH VDATA: \"#{unique_visitor_data}\"")
     
   else
   
-    # anon pool
-    rnd = rand(100)
-    
-    # user IS NOT a registered user 
-    useremail = "ANON-#{CONFIG.freshtokens_instanceid}-#{rnd}" 
+    # user IS NOT a registered user   
+    useremail = "Anonymous" 
   
     # Get tokens
-    #unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
-    unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
+    unique_po_token, unique_visitor_data = FreshTokens.get_anon_tokens
+    #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
     
-    LOGGER.info("FreshTokens: User: #{useremail} GENERATED FRESH POT: \"#{unique_po_token}\"")
-    LOGGER.info("FreshTokens: User: #{useremail} GENERATED FRESH VDATA: \"#{unique_visitor_data}\"")
+    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH POT: \"#{unique_po_token}\"")
+    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH VDATA: \"#{unique_visitor_data}\"")
   
   end
 
