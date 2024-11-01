@@ -179,8 +179,6 @@ module FreshTokens
 
     if (config_proxy.https)
     
-      LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
-    
       if (config_proxy.port == 0)
       
         proxy_str = "https://#{config_proxy.host}/"
@@ -192,8 +190,6 @@ module FreshTokens
       end
 
     else
-    
-      LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
 
       if (config_proxy.port == 0)
       
@@ -219,7 +215,6 @@ module FreshTokens
     http_proxy_str = "http_proxy=#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ;" 
     
     LOGGER.info("generate_tokens_timeout: proxy_str = \"#{proxy_str}\"")  
-    LOGGER.info("generate_tokens_timeout: port = \"#{config_proxy.port}\"")  
     LOGGER.info("generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")  
 
     # get the tokens :)
@@ -241,8 +236,6 @@ module FreshTokens
 
     if (config_proxy.https)
     
-      LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
-    
       if (config_proxy.port == 0)
       
         proxy_str = "https://#{config_proxy.host}/"
@@ -254,8 +247,6 @@ module FreshTokens
       end
 
     else
-    
-      LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
 
       if (config_proxy.port == 0)
       
@@ -280,8 +271,7 @@ module FreshTokens
     
     http_proxy_str = "http_proxy=#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ;" 
     
-    LOGGER.info("generate_tokens_timeout: proxy_str = \"#{proxy_str}\"")  
-    LOGGER.info("generate_tokens_timeout: port = \"#{config_proxy.port}\"")  
+    LOGGER.info("generate_tokens_timeout: proxy_str = \"#{proxy_str}\"")
     LOGGER.info("generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")  
 
     # get the tokens :)
