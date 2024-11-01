@@ -178,14 +178,30 @@ module FreshTokens
     config_proxy = CONFIG.http_proxy.not_nil!
 
     if (config_proxy.https)
-
-      proxy_str = "https://#{config_proxy.host}/"
+    
+      if (!config_proxy.port.empty?)
+      
+        proxy_str = "https://#{config_proxy.host}/"
+        
+      else
+      
+        proxy_str = "https://#{config_proxy.host}:config_proxy.port/"        
+        
+      end
 
     else
 
-      proxy_str = "http://#{config_proxy.host}/"
+      if (!config_proxy.port.empty?)
+      
+        proxy_str = "http://#{config_proxy.host}/"
+        
+      else
+      
+        proxy_str = "http://#{config_proxy.host}:config_proxy.port/"        
+        
+      end
     
-    end 
+    end  
 
     # put together the authentication string
     if ( !config_proxy.user.empty? && !config_proxy.password.empty? )
@@ -219,12 +235,28 @@ module FreshTokens
     config_proxy = CONFIG.http_proxy.not_nil!
 
     if (config_proxy.https)
-
-      proxy_str = "https://#{config_proxy.host}/"
+    
+      if (!config_proxy.port.empty?)
+      
+        proxy_str = "https://#{config_proxy.host}/"
+        
+      else
+      
+        proxy_str = "https://#{config_proxy.host}:config_proxy.port/"        
+        
+      end
 
     else
 
-      proxy_str = "http://#{config_proxy.host}/"
+      if (!config_proxy.port.empty?)
+      
+        proxy_str = "http://#{config_proxy.host}/"
+        
+      else
+      
+        proxy_str = "http://#{config_proxy.host}:config_proxy.port/"        
+        
+      end
     
     end    
     
