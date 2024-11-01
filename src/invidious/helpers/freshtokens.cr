@@ -106,7 +106,7 @@ module FreshTokens
     if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: {video_uid} needs new tokens")
-      po_token, visitor_data = generate_tokens_timeout(7, 10)
+      po_token, visitor_data = generate_tokens
       
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:VID_#{video_uid}:po_token", po_token, 600)
@@ -178,7 +178,7 @@ module FreshTokens
     
       # generate tokens (should take 5 seconds max ... softkillsecs, hardkillsecs )
       # will make token server setup w/ reverse proxy and dedicated token generators
-      po_token, visitor_data = generate_tokens_timeout(7, 10)
+      po_token, visitor_data = generate_tokens
       
       # update redis with user's tokens (1 hour expiry for now)
       REDIS_DB.set("invidious:#{redis_instanceid}:po_token", po_token, 600)
