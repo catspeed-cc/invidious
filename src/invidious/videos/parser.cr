@@ -59,7 +59,7 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
    if !useremail.empty?
         
     # Get tokens
-    unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
+    unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
     
   else 
   
