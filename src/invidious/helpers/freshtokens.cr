@@ -179,7 +179,7 @@ module FreshTokens
 
     if (config_proxy.https)
     
-      if (! config_proxy.port > 0)
+      if (config_proxy.port > 0)
       
         proxy_str = "https://#{config_proxy.host}/"
         
@@ -191,7 +191,7 @@ module FreshTokens
 
     else
 
-      if (! config_proxy.port > 0)
+      if (config_proxy.port > 0)
       
         proxy_str = "http://#{config_proxy.host}/"
         
@@ -236,7 +236,7 @@ module FreshTokens
 
     if (config_proxy.https)
     
-      if (! config_proxy.port > 0)
+      if (config_proxy.port > 0)
       
         proxy_str = "https://#{config_proxy.host}/"
         
@@ -248,7 +248,7 @@ module FreshTokens
 
     else
 
-      if (! config_proxy.port > 0)
+      if (config_proxy.port > 0)
       
         proxy_str = "http://#{config_proxy.host}/"
         
