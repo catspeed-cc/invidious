@@ -179,11 +179,11 @@ module FreshTokens
 
     if (config_proxy.https)
 
-      proxy_str = "https://#{config_proxy.host}"
+      proxy_str = "https://#{config_proxy.host}/"
 
     else
 
-      proxy_str = "http://#{config_proxy.host}"
+      proxy_str = "http://#{config_proxy.host}/"
     
     end 
 
@@ -220,11 +220,11 @@ module FreshTokens
 
     if (config_proxy.https)
 
-      proxy_str = "https://#{config_proxy.host}"
+      proxy_str = "https://#{config_proxy.host}/"
 
     else
 
-      proxy_str = "http://#{config_proxy.host}"
+      proxy_str = "http://#{config_proxy.host}/"
     
     end    
     
