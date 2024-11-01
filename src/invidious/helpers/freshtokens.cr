@@ -185,7 +185,7 @@ module FreshTokens
         
       else
       
-        proxy_str = "https://#{config_proxy.host}:config_proxy.port/"        
+        proxy_str = "https://#{config_proxy.host}:#{config_proxy.port}/"        
         
       end
 
@@ -197,7 +197,7 @@ module FreshTokens
         
       else
       
-        proxy_str = "http://#{config_proxy.host}:config_proxy.port/"        
+        proxy_str = "http://#{config_proxy.host}:#{config_proxy.port}/"        
         
       end
     
@@ -242,7 +242,7 @@ module FreshTokens
         
       else
       
-        proxy_str = "https://#{config_proxy.host}:config_proxy.port/"        
+        proxy_str = "https://#{config_proxy.host}:#{config_proxy.port}/"        
         
       end
 
@@ -254,7 +254,7 @@ module FreshTokens
         
       else
       
-        proxy_str = "http://#{config_proxy.host}:config_proxy.port/"        
+        proxy_str = "http://#{config_proxy.host}:#{config_proxy.port}/"        
         
       end
       
