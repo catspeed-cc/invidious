@@ -64,8 +64,8 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
     # Get tokens
     unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
     
-    LOGGER.info("FreshTokens: SELECTED FRESH POT: \"#{unique_po_token}\"")
-    LOGGER.info("FreshTokens: SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
+    LOGGER.info("FreshTokens: GENERATED FRESH POT: \"#{unique_po_token}\"")
+    LOGGER.info("FreshTokens: GENERATED FRESH VDATA: \"#{unique_visitor_data}\"")
     
   else 
   
@@ -73,8 +73,8 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
     # Get tokens
     unique_po_token, unique_visitor_data = FreshTokens.get_anon_tokens 
     
-    LOGGER.info("FreshTokens: SELECTED FRESH POT: \"#{unique_po_token}\"")
-    LOGGER.info("FreshTokens: SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
+    LOGGER.info("FreshTokens: GENERATED FRESH POT: \"#{unique_po_token}\"")
+    LOGGER.info("FreshTokens: GENERATED FRESH VDATA: \"#{unique_visitor_data}\"")
   
   end
 
@@ -82,9 +82,9 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
   po_token = (unique_po_token.as(String) if !unique_po_token.as(String).empty?) || CONFIG.po_token
   visitor_data = (unique_visitor_data.as(String) if !unique_visitor_data.as(String).empty?) || CONFIG.visitor_data
 
-  LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
-  LOGGER.info("FreshTokens: FRESH POT: \"#{po_token}\"")
-  LOGGER.info("FreshTokens: FRESH VDATA: \"#{visitor_data}\"")
+  #LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
+  LOGGER.info("FreshTokens: SELECTED FRESH POT: \"#{po_token}\"")
+  LOGGER.info("FreshTokens: SELECTED FRESH VDATA: \"#{visitor_data}\"")
 
   # Fetch data from the player endpoint
   player_response = YoutubeAPI.player(video_id: video_id, params: "2AMB", client_config: client_config, po_token: po_token, visitor_data: visitor_data)
