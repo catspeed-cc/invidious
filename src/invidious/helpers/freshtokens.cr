@@ -181,7 +181,7 @@ module FreshTokens
     
       LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
     
-      if (config_proxy.port > 0)
+      if (config_proxy.port == 0)
       
         proxy_str = "https://#{config_proxy.host}/"
         
@@ -195,7 +195,7 @@ module FreshTokens
     
       LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
 
-      if (config_proxy.port > 0)
+      if (config_proxy.port == 0)
       
         proxy_str = "http://#{config_proxy.host}/"
         
@@ -243,7 +243,7 @@ module FreshTokens
     
       LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
     
-      if (config_proxy.port > 0)
+      if (config_proxy.port == 0)
       
         proxy_str = "https://#{config_proxy.host}/"
         
@@ -257,7 +257,7 @@ module FreshTokens
     
       LOGGER.info("generate_tokens_timeout: port = #{config_proxy.port}")
 
-      if (config_proxy.port > 0)
+      if (config_proxy.port == 0)
       
         proxy_str = "http://#{config_proxy.host}/"
         
