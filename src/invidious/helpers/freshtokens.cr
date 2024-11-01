@@ -195,7 +195,7 @@ module FreshTokens
             
       LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: done getting tokens")
 
-      sleep 3.seconds
+      sleep 1.seconds
 
       # increase counter
       i += 1    
