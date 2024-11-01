@@ -183,6 +183,8 @@ module FreshTokens
         REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 600)
         REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 600)
         
+        sleep 1.seconds
+        
       else
       
         LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: TOKENS EXIST ALREADY")
@@ -195,7 +197,7 @@ module FreshTokens
             
       LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: done getting tokens")
 
-      sleep 1.seconds
+      # sleep only if tokens were generated (sleep is inside if above)
 
       # increase counter
       i += 1    
