@@ -54,6 +54,9 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
   # Init client config for the API
   client_config = YoutubeAPI::ClientConfig.new
 
+  unique_po_token = ""
+  unique_visitor_data = ""
+
   # Borrowed code, thx Fijxu :3c
 
    if !useremail.empty?
@@ -61,17 +64,23 @@ def extract_video_info(video_id : String, useremail : String = "", uniqueid : St
     # Get tokens
     unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
     
+    LOGGER.info("FreshTokens: SELECTED FRESH POT: \"#{unique_po_token}\"")
+    LOGGER.info("FreshTokens: SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
+    
   else 
   
     # user is not a registered user 
     # Get tokens
-    unique_po_token, unique_visitor_data = FreshTokens.get_anon_tokens 
+    unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens 
+    
+    LOGGER.info("FreshTokens: SELECTED FRESH POT: \"#{unique_po_token}\"")
+    LOGGER.info("FreshTokens: SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
   
   end
 
   # Pick either the fresh token or config token
-  po_token = (unique_po_token if !unique_po_token.empty?) || CONFIG.po_token
-  visitor_data = (unique_visitor_data if !unique_visitor_data.empty?) || CONFIG.visitor_data
+  po_token = (unique_po_token.as(String) if !unique_po_token.as(String).empty?) || CONFIG.po_token
+  visitor_data = (unique_visitor_data.as(String) if !unique_visitor_data.as(String).empty?) || CONFIG.visitor_data
 
   LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
   LOGGER.info("FreshTokens: FRESH POT: \"#{po_token}\"")
