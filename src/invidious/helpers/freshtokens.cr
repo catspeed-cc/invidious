@@ -185,7 +185,7 @@ module FreshTokens
         REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 3600)
         REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 3600)
         
-        sleep 2.seconds
+        sleep 5.seconds
         
       else
       
