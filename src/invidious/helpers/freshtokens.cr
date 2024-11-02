@@ -131,6 +131,8 @@ module FreshTokens
     
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, trying another")
      
+      sleep 1.second     
+     
       # prepare for next iteration...
       rnd = rand(400)
       redis_instanceuserid = "ANON-#{CONFIG.freshtokens_instanceid}-#{rnd}"
@@ -183,7 +185,7 @@ module FreshTokens
         REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 3600)
         REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 3600)
         
-        sleep 1.seconds
+        sleep 2.seconds
         
       else
       
