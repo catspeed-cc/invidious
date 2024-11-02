@@ -177,7 +177,7 @@ module FreshTokens
         LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: GENERATING TOKENS")
 
         # tokens are nil or empty, generate them
-        po_token, visitor_data = generate_tokens
+        po_token, visitor_data = generate_tokens_timeout(10,12)
       
         # update redis with user's tokens (1 hour expiry for now)
         REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 3600)
