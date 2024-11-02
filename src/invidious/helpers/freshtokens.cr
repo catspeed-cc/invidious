@@ -180,8 +180,8 @@ module FreshTokens
         po_token, visitor_data = generate_tokens
       
         # update redis with user's tokens (1 hour expiry for now)
-        REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 900)
-        REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 900)
+        REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 3600)
+        REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 3600)
         
         sleep 1.seconds
         
