@@ -275,7 +275,7 @@ module Invidious::Routes::VideoPlayback
     end
 
     begin
-      video = get_video(id, region: region, uniqueid: "")
+      video = get_video(id, region: region)
     rescue ex : NotFoundException
       return error_template(404, ex)
     rescue ex
