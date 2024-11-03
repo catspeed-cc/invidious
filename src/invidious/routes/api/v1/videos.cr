@@ -11,7 +11,7 @@ module Invidious::Routes::API::V1::Videos
     proxy = {"1", "true"}.any? &.== env.params.query["local"]?
 
     begin
-      video = get_video(id, region: region, uniqueid: id)
+      video = get_video(id, region: region)
     rescue ex : NotFoundException
       return error_json(404, ex)
     rescue ex
@@ -42,7 +42,7 @@ module Invidious::Routes::API::V1::Videos
     # getting video info.
 
     begin
-      video = get_video(id, region: region, uniqueid: id)
+      video = get_video(id, region: region)
     rescue ex : NotFoundException
       haltf env, 404
     rescue ex
@@ -182,7 +182,7 @@ module Invidious::Routes::API::V1::Videos
     region = env.params.query["region"]?
 
     begin
-      video = get_video(id, region: region, uniqueid: id)
+      video = get_video(id, region: region)
     rescue ex : NotFoundException
       haltf env, 404
     rescue ex
@@ -411,7 +411,7 @@ module Invidious::Routes::API::V1::Videos
     end
 
     begin
-      video = get_video(video_id, region: region, uniqueid: clip_id)
+      video = get_video(video_id, region: region)
     rescue ex : NotFoundException
       return error_json(404, ex)
     rescue ex
