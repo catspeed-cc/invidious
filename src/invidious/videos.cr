@@ -304,7 +304,7 @@ def get_video(id, refresh = true, region = nil, force_refresh = false, useremail
        force_refresh ||
        video.schema_version != Video::SCHEMA_VERSION # cache control
       begin
-        video = fetch_video(id, region, useremail, uniqueid)
+        video = fetch_video(id, region, useremail)
         Invidious::Database::Videos.insert(video)
       rescue ex
         Invidious::Database::Videos.delete(id)
@@ -320,7 +320,7 @@ def get_video(id, refresh = true, region = nil, force_refresh = false, useremail
 rescue DB::Error
   # Avoid common `DB::PoolRetryAttemptsExceeded` error and friends
   # Note: All DB errors inherit from `DB::Error`
-  return fetch_video(id, region, useremail, uniqueid)
+  return fetch_video(id, region, useremail)
 end
 
 def fetch_video(id, region, useremail = "")
