@@ -50,7 +50,7 @@ def parse_related_video(related : JSON::Any) : Hash(String, JSON::Any)?
   }
 end
 
-def extract_video_info(video_id : String, useremail : String = "", uniqueid : String = "")
+def extract_video_info(video_id : String, useremail : String = "")
   # Init client config for the API
   client_config = YoutubeAPI::ClientConfig.new
 

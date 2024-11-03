@@ -294,7 +294,7 @@ struct Video
   predicate_bool upcoming, isUpcoming
 end
 
-def get_video(id, refresh = true, region = nil, force_refresh = false, useremail = "", uniqueid = "")
+def get_video(id, refresh = true, region = nil, force_refresh = false, useremail = "")
   if (video = Invidious::Database::Videos.select(id)) && !region
     # If record was last updated over 10 minutes ago, or video has since premiered,
     # refresh (expire param in response lasts for 6 hours)
@@ -323,8 +323,8 @@ rescue DB::Error
   return fetch_video(id, region, useremail, uniqueid)
 end
 
-def fetch_video(id, region, useremail = "", uniqueid = "")
-  info = extract_video_info(video_id: id, useremail: useremail, uniqueid: uniqueid)
+def fetch_video(id, region, useremail = "")
+  info = extract_video_info(video_id: id, useremail: useremail)
 
   if reason = info["reason"]?
     if reason == "Video unavailable"
