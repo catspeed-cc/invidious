@@ -183,9 +183,9 @@ module FreshTokens
         
           # if not nil or empty        
         
-          # update redis with user's tokens (1 hour expiry for now)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 3600)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 3600)
+          # update redis with user's tokens (30min expiry for now)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 1800)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 1800)
         
         end
         
