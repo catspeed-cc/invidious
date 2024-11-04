@@ -178,10 +178,16 @@ module FreshTokens
 
         # tokens are nil or empty, generate them
         po_token, visitor_data = generate_tokens_timeout(10,12)
-      
-        # update redis with user's tokens (1 hour expiry for now)
-        REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 3600)
-        REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 3600)
+        
+        if ( ! (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
+        
+          # if not nil or empty        
+        
+          # update redis with user's tokens (1 hour expiry for now)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 3600)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 3600)
+        
+        end
         
         # sleep
         sleep 5.seconds
