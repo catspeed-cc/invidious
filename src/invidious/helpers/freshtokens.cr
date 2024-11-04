@@ -247,51 +247,24 @@ module FreshTokens
   end
 
   def generate_tokens_timeout(softkillsecs : Int32 = 10, hardkillsecs : Int32 = 12)
-
-    config_proxy = CONFIG.http_proxy.not_nil!
-
-    if (config_proxy.https)
     
-      if (config_proxy.port == 0)
-      
-        proxy_str = "https://#{config_proxy.host}/"
-        
-      else
-      
-        proxy_str = "https://#{config_proxy.host}:#{config_proxy.port}/"        
-        
-      end
-
-    else
-
-      if (config_proxy.port == 0)
-      
-        proxy_str = "http://#{config_proxy.host}/"
-        
-      else
-      
-        proxy_str = "http://#{config_proxy.host}:#{config_proxy.port}/"        
-        
-      end
-      
-    end    
+#    # put together the authentication string
+#    if ( !config_proxy.user.empty? && !config_proxy.password.empty? )
+#    
+#          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{config_proxy.user}:#{config_proxy.password}@,'`
+#          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{config_proxy.user}:#{config_proxy.password}@,'`
+#          proxy_str = proxy_str.strip
+#    
+#    end
     
-    # put together the authentication string
-    if ( !config_proxy.user.empty? && !config_proxy.password.empty? )
-    
-          proxy_str = `echo #{proxy_str} | sed 's,http://,&#{config_proxy.user}:#{config_proxy.password}@,'`
-          proxy_str = `echo #{proxy_str} | sed 's,https://,&#{config_proxy.user}:#{config_proxy.password}@,'`
-          proxy_str = proxy_str.strip
-    
-    end
-    
-    http_proxy_str = "export http_proxy=#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ; " 
+#    http_proxy_str = "export http_proxy=#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ; " 
     
     #LOGGER.info("generate_tokens_timeout: proxy_str = \"#{proxy_str}\"")
     #LOGGER.info("generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")  
 
     # get the tokens :)
-    tokendata = `#{http_proxy_str} /usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    #tokendata = `#{http_proxy_str} /usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `/usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
