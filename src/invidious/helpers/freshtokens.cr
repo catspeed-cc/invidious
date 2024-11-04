@@ -129,9 +129,7 @@ module FreshTokens
     
     while ( (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
     
-      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, trying another")
-     
-      sleep 1.second     
+      LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, trying another")   
      
       # prepare for next iteration...
       rnd = rand(400)
@@ -186,7 +184,7 @@ module FreshTokens
         REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 3600)
         
         # sleep
-        sleep 3.seconds
+        sleep 5.seconds
         
       else
       
