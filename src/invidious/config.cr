@@ -58,11 +58,11 @@ end
 struct HTTPProxyConfig
   include YAML::Serializable
 
-  property user : String
-  property password : String
-  property host : String
-  property port : Int32
-  property https : Bool
+  property user : String = ""
+  property password : String = ""
+  property host : String = ""
+  property port : Int32 = 8080
+  property https : Bool = false
 end
 
 class Config
