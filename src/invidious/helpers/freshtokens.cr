@@ -177,7 +177,7 @@ module FreshTokens
         LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: GENERATING TOKENS")
 
         # tokens are nil or empty, generate them
-        po_token, visitor_data = generate_tokens_timeout(5,7)
+        po_token, visitor_data = generate_tokens
         
         if ( ! (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
         
