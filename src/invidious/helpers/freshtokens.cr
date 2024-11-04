@@ -220,31 +220,7 @@ module FreshTokens
 
     config_proxy = CONFIG.http_proxy.not_nil!
 
-    if (config_proxy.https)
-    
-      if (config_proxy.port == 0)
-      
-        proxy_str = "https://#{config_proxy.host}/"
-        
-      else
-      
-        proxy_str = "https://#{config_proxy.host}:#{config_proxy.port}/"        
-        
-      end
 
-    else
-
-      if (config_proxy.port == 0)
-      
-        proxy_str = "http://#{config_proxy.host}/"
-        
-      else
-      
-        proxy_str = "http://#{config_proxy.host}:#{config_proxy.port}/"        
-        
-      end
-    
-    end  
 
     # put together the authentication string
     if ( !config_proxy.user.empty? && !config_proxy.password.empty? )
