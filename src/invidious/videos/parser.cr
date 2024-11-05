@@ -95,6 +95,10 @@ def extract_video_info(video_id : String, useremail : String = "")
     visitor_data = ""
   end 
   
+  if (po_token.empty? || visitor_data.empty?)
+    LOGGER.info("FreshTokens: parser.cr: [WARN] TOKENS ARE EMPTY!")
+  end 
+  
   # strip tokens just in case whitespace got through
   po_token = po_token.strip
   visitor_data = visitor_data.strip
