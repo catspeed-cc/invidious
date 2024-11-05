@@ -199,7 +199,7 @@ module FreshTokens
         
       else
       
-        LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: TOKENS EXIST ALREADY")
+        LOGGER.debug("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: TOKENS EXIST ALREADY")
       
       end
         
