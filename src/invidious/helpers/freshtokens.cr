@@ -192,7 +192,7 @@ module FreshTokens
         end
         
         # sleep
-        sleep 3.seconds
+        sleep 1.seconds
         
       else
       
