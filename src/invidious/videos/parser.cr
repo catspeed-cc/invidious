@@ -89,6 +89,11 @@ def extract_video_info(video_id : String, useremail : String = "")
   po_token = (unique_po_token.as(String) if !unique_po_token.as(String).empty?) || CONFIG.po_token
   visitor_data = (unique_visitor_data.as(String) if !unique_visitor_data.as(String).empty?) || CONFIG.visitor_data
   
+  if (po_token.nil? || visitor_data.nil?)
+    po_token = ""
+    visitor_data = ""
+  end 
+  
   # strip tokens just in case whitespace got through
   po_token = po_token.strip
   visitor_data = visitor_data.strip
