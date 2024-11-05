@@ -123,7 +123,7 @@ module FreshTokens
     po_token = ""
     visitor_data = ""
     
-    rnd = rand(400)
+    rnd = rand(1000)
     redis_instanceuserid = "ANON-#{CONFIG.freshtokens_instanceid}-#{rnd}" 
     
     # get tokens (initial)
@@ -163,7 +163,7 @@ module FreshTokens
     # called by Invidious::Jobs::FreshTokensAnonJob  
     
     # define the anon user pool
-    rnd = 400
+    rnd = 1000
    
     i = 0    
     while i <= rnd
