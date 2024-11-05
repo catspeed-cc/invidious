@@ -44,8 +44,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens
       
       # update redis with instance's tokens (1 minute expiry for now)
-      REDIS_DB.set("invidious:INST-#{instance_id}:po_token", po_token, 900)
-      REDIS_DB.set("invidious:INST-#{instance_id}:visitor_data", visitor_data, 900)
+      REDIS_DB.set("invidious:INST-#{instance_id}:po_token", po_token.strip, 900)
+      REDIS_DB.set("invidious:INST-#{instance_id}:visitor_data", visitor_data.strip, 900)
       
       LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: user: INST-#{instance_id} unlocking user key")
       LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: user: INST-#{instance_id} stored instance's tokens")
@@ -57,7 +57,7 @@ module FreshTokens
     LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: user: INST-#{instance_id} pot: #{po_token}")
     LOGGER.info("get_instance_tokens: #{CONFIG.freshtokens_instanceid}: user: INST-#{instance_id} vdata: #{visitor_data}")
     
-    return {po_token, visitor_data}
+    return {po_token.strip, visitor_data.strip}
   
   end
   
@@ -99,8 +99,8 @@ module FreshTokens
       po_token, visitor_data = generate_tokens
       
       # update redis with user's tokens (1 hour expiry for now)
-      REDIS_DB.set("invidious:#{useremail}:po_token", po_token, 300)
-      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data, 300)
+      REDIS_DB.set("invidious:#{useremail}:po_token", po_token.strip, 300)
+      REDIS_DB.set("invidious:#{useremail}:visitor_data", visitor_data.strip, 300)
       
       LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} stored user's tokens")
 
@@ -111,7 +111,7 @@ module FreshTokens
     LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} pot: #{po_token}")
     LOGGER.info("get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} vdata: #{visitor_data}")
     
-    return {po_token, visitor_data}
+    return {po_token.strip, visitor_data.strip}
   
   end
   
@@ -144,7 +144,7 @@ module FreshTokens
     LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} pot: #{po_token}")
     LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} vdata: #{visitor_data}")
     
-    return {po_token, visitor_data}
+    return {po_token.strip, visitor_data.strip}
   
   end
 
@@ -184,8 +184,8 @@ module FreshTokens
           # if not nil or empty        
         
           # update redis with user's tokens (30min expiry for now)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token, 1800)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data, 1800)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token.strip, 1800)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data.strip, 1800)
         
         end
         
@@ -239,10 +239,7 @@ module FreshTokens
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
     
-    freshpot = freshpot.strip
-    freshvdata = freshvdata.strip
-    
-    return {freshpot, freshvdata}
+    return {freshpot.strip, freshvdata.strip}
 
   end
 
@@ -269,10 +266,7 @@ module FreshTokens
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
     
-    freshpot = freshpot.strip
-    freshvdata = freshvdata.strip
-    
-    return {freshpot, freshvdata}
+    return {freshpot.strip, freshvdata.strip}
 
   end
   
