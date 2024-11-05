@@ -134,7 +134,8 @@ module FreshTokens
     
       LOGGER.info("get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, trying another")   
      
-      sleep 250.milliseconds     
+      # sleep
+      sleep 250.milliseconds    
      
       # prepare for next iteration...
       rnd = rand(400)
@@ -196,6 +197,8 @@ module FreshTokens
         
       else
       
+        # sleep
+        sleep 250.milliseconds
         LOGGER.debug("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: TOKENS EXIST ALREADY")
       
       end
@@ -204,9 +207,7 @@ module FreshTokens
       LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: pot: #{po_token}")
       LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: vdata: #{visitor_data}")
             
-      LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: done getting tokens")
-
-      # sleep only if tokens were generated (sleep is inside if above)      
+      LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: done getting tokens")   
 
       # increase counter
       i += 1    
