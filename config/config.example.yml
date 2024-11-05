@@ -224,15 +224,28 @@ http_proxy:
 ##
 ## Enable/Disable freshtoken. 
 ##
-## FreshTokens gets users a fresh po_token/visitor_data out of the aether
+## FreshTokens pulls a fresh po_token/visitor_data out of the aether
 ##
-## freshtokens_instanceid is a unique identifier for this instance to keep tokens separate
+## freshtokens_enabled - Enable / Disable freshtokens (use config tokens or freshtokens)
+## freshtokens_show_ic_enabled - Enable / Disable showing identity / generation stats to users
 ##
 ## Accepted values: true, false
 ## Default: false
 ##
+## freshtokens_instanceid - A unique identifier for this instance to keep tokens separate
+##
+## Accepted values: String (letters & numbers)
+## Default: "instance1"
+##
+## freshtokens_anonpool_size - Number of identities (to generate) in the anon pool
+##
+## Accepted values: Integers (numbers)
+## Default: 500
+##
 #freshtokens_enabled: true
+#freshtokens_show_ic_enabled: true
 #freshtokens_instanceid: "instance1"
+#freshtokens_anonpool_size: 500
 
 # -----------------------------
 #  Logging
