@@ -68,8 +68,9 @@ def extract_video_info(video_id : String, useremail : String = "")
     unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
     #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
     
-    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH POT: \"#{unique_po_token}\"")
-    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH VDATA: \"#{unique_visitor_data}\"")
+  LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{unique_po_token}\"")
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\""))
     
   else
   
@@ -80,8 +81,9 @@ def extract_video_info(video_id : String, useremail : String = "")
     unique_po_token, unique_visitor_data = FreshTokens.get_anon_tokens
     #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
     
-    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH POT: \"#{unique_po_token}\"")
-    LOGGER.info("FreshTokens: User: #{useremail} GOT FRESH VDATA: \"#{unique_visitor_data}\"")
+  LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{unique_po_token}\"")
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\""))
   
   end
 
@@ -102,10 +104,8 @@ def extract_video_info(video_id : String, useremail : String = "")
   # strip tokens just in case whitespace got through
   po_token = po_token.strip
   visitor_data = visitor_data.strip
-
-  #LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
-  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{po_token}\"")
-  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{visitor_data}\"")
+  
+  # continue on unmodified code
 
   # Fetch data from the player endpoint
   player_response = YoutubeAPI.player(video_id: video_id, params: "2AMB", client_config: client_config, po_token: po_token, visitor_data: visitor_data)
