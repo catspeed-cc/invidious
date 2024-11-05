@@ -206,6 +206,9 @@ Invidious::Jobs.register Invidious::Jobs::InstanceListRefreshJob.new
 if CONFIG.freshtokens_enabled
   Invidious::Jobs.register Invidious::Jobs::FreshTokensUserJob.new
   Invidious::Jobs.register Invidious::Jobs::FreshTokensAnonJob.new
+  if CONFIG.freshtokens_show_ic_enabled
+    Invidious::Jobs.register Invidious::Jobs::FreshTokensStatsJob.new
+  end
 end
 
 Invidious::Jobs.start_all
