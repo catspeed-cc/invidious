@@ -88,6 +88,10 @@ def extract_video_info(video_id : String, useremail : String = "")
   # Pick either the fresh token or config token
   po_token = (unique_po_token.as(String) if !unique_po_token.as(String).empty?) || CONFIG.po_token
   visitor_data = (unique_visitor_data.as(String) if !unique_visitor_data.as(String).empty?) || CONFIG.visitor_data
+  
+  # strip tokens just in case whitespace got through
+  po_token = po_token.strip
+  visitor_data = visitor_data.strip
 
   #LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
   LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{po_token}\"")
