@@ -70,7 +70,7 @@ def extract_video_info(video_id : String, useremail : String = "")
     
   LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
   LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{unique_po_token}\"")
-  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\""))
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
     
   else
   
@@ -83,7 +83,7 @@ def extract_video_info(video_id : String, useremail : String = "")
     
   LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
   LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{unique_po_token}\"")
-  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\""))
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
   
   end
 
