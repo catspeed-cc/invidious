@@ -198,7 +198,7 @@ module FreshTokens
       else
       
         # sleep
-        sleep 500.milliseconds
+        sleep 250.milliseconds
         LOGGER.debug("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: TOKENS EXIST ALREADY")
       
       end
