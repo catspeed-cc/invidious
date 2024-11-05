@@ -90,6 +90,7 @@ def extract_video_info(video_id : String, useremail : String = "")
   visitor_data = (unique_visitor_data.as(String) if !unique_visitor_data.as(String).empty?) || CONFIG.visitor_data
   
   if (po_token.nil? || visitor_data.nil?)
+    LOGGER.info("FreshTokens: parser.cr: [WARN] TOKENS ARE NIL!")
     po_token = ""
     visitor_data = ""
   end 
