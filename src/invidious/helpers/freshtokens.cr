@@ -238,8 +238,8 @@ module FreshTokens
     #LOGGER.info("generate_tokens: http_proxy_str = \"#{http_proxy_str}\"")  
 
     # get the tokens :)
-#    tokendata = `#{http_proxy_str} /usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
-    tokendata = `/usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+#    tokendata = `#{http_proxy_str} /usr/bin/cpulimit -f -l 30 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `/usr/bin/cpulimit -f -l 30 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
@@ -265,8 +265,8 @@ module FreshTokens
     #LOGGER.info("generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")  
 
     # get the tokens :)
-    #tokendata = `#{http_proxy_str} /usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} /usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
-    tokendata = `/usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} /usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    #tokendata = `#{http_proxy_str} /usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} /usr/bin/cpulimit -f -l 30 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `/usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} /usr/bin/cpulimit -f -l 30 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
