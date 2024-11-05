@@ -61,6 +61,9 @@ module FreshTokens
   
   end
   
+  
+  
+  
   def get_user_tokens(useremail : String)
   
     po_token = ""
@@ -186,13 +189,13 @@ module FreshTokens
           # if not nil or empty        
         
           # update redis with user's tokens (30min expiry for now)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token.strip, 1800)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data.strip, 1800)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token.strip, 3600)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data.strip, 3600)
         
         end
         
         # sleep
-        sleep 1.seconds
+        #sleep 1.seconds
         
       else
       
