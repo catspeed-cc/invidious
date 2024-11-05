@@ -90,13 +90,13 @@ def extract_video_info(video_id : String, useremail : String = "")
   visitor_data = (unique_visitor_data.as(String) if !unique_visitor_data.as(String).empty?) || CONFIG.visitor_data
   
   if (po_token.nil? || visitor_data.nil?)
-    LOGGER.info("FreshTokens: parser.cr: [WARN] TOKENS ARE NIL!")
+    LOGGER.warn("FreshTokens: parser.cr: TOKENS ARE NIL!")
     po_token = ""
     visitor_data = ""
   end 
   
   if (po_token.empty? || visitor_data.empty?)
-    LOGGER.info("FreshTokens: parser.cr: [WARN] TOKENS ARE EMPTY!")
+    LOGGER.warn("FreshTokens: parser.cr: TOKENS ARE EMPTY!")
   end 
   
   # strip tokens just in case whitespace got through
