@@ -172,7 +172,7 @@ module FreshTokens
       # define the instance/user id    
       redis_instanceuserid = "ANON-#{CONFIG.freshtokens_instanceid}-#{i}"
 
-      LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: getting tokens")     
+      LOGGER.debug("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: getting tokens")     
       
       # get tokens (initial)
       po_token = REDIS_DB.get("invidious:#{redis_instanceuserid}:po_token")
@@ -207,7 +207,7 @@ module FreshTokens
       LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: pot: #{po_token}")
       LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: vdata: #{visitor_data}")
             
-      LOGGER.info("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: done getting tokens")   
+      LOGGER.debug("generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: done getting tokens")   
 
       # increase counter
       i += 1    
