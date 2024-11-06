@@ -55,7 +55,7 @@ module FreshTokens
       
     else
     
-      LOGGER.warn("FreshTokens: update_stats: #{CONFIG.freshtokens_instanceid}: user: INST-#{instance_id} waiting on redis key lock")
+      LOGGER.warn("FreshTokens: update_stats: #{CONFIG.freshtokens_instanceid}: user: INST-#{instanceid} waiting on redis key lock")
     
     end
   
