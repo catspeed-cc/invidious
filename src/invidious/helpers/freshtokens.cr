@@ -26,14 +26,12 @@ module FreshTokens
   
   def update_stats
   
-    instanceid = CONFIG.freshtokens_instanceid  
-  
-    redis_cli = `which redis-cli`  
+    instanceid = CONFIG.freshtokens_instanceid
     
     if ( !redis_cli.nil? && !redis_cli.empty? )
 
       # get first count
-      count1 = `#{redis_cli.strip} eval "return #redis.call('keys', 'invidious:ANON-#{instanceid}*:po_token')" 0 | awk 'IFS=" " {print $1}'`
+      count1 = `#{REDIS_CLI} eval "return #redis.call('keys', 'invidious:ANON-#{instanceid}*:po_token')" 0 | awk 'IFS=" " {print $1}'`
   
       # set the count
       @@tcount = (count1.to_i - 1)
@@ -42,7 +40,7 @@ module FreshTokens
       sleep 15.seconds
       
       # get second count
-      count2 = `#{redis_cli.strip} eval "return #redis.call('keys', 'invidious:ANON-#{instanceid}*:po_token')" 0 | awk 'IFS=" " {print $1}'`
+      count2 = `#{REDIS_CLI} eval "return #redis.call('keys', 'invidious:ANON-#{instanceid}*:po_token')" 0 | awk 'IFS=" " {print $1}'`
       
       # get the difference between first and second count
       difference = count2.to_i - count1.to_i
@@ -304,8 +302,8 @@ module FreshTokens
     #LOGGER.info("FreshTokens: generate_tokens: http_proxy_str = \"#{http_proxy_str}\"")  
 
     # get the tokens :)
-#    tokendata = `#{http_proxy_str} /usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
-    tokendata = `/usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+#    tokendata = `#{http_proxy_str} #{CPULIMIT} -f -l 50 -- #{NODE} submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `#{CPULIMIT} -f -l 50 -- #{NODE} submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
@@ -331,8 +329,8 @@ module FreshTokens
     #LOGGER.info("FreshTokens: generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")  
 
     # get the tokens :)
-    #tokendata = `#{http_proxy_str} /usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} /usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
-    tokendata = `/usr/bin/timeout -k #{hardkillsecs} -s KILL #{softkillsecs} /usr/bin/cpulimit -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
+    #tokendata = `#{http_proxy_str} #{TIMEOUT} -k #{hardkillsecs} -s KILL #{softkillsecs} #{CPULIMIT} -f -l 50 -- #{NODE} submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `#{TIMEOUT} -k #{hardkillsecs} -s KILL #{softkillsecs} #{CPULIMIT} -f -l 50 -- #{NODE} submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
