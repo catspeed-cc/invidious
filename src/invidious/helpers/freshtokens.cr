@@ -27,8 +27,8 @@ module FreshTokens
     if (!NODE.empty?)
       @@node = NODE
     else    
-      @@node = `runuser -u invidious -- which node`
-      @@node = node.strip
+      @@node = `su - invidious -c "which node"`
+      @@node = @@node.strip
     end
   end
   
