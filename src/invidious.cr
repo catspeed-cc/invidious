@@ -102,10 +102,10 @@ SOFTWARE = {
 YT_POOL = YoutubeConnectionPool.new(YT_URL, capacity: CONFIG.pool_size)
 
 # mooleshacat (begin)
-REDIS_CLI = Process.find_executable("redis-cli").not_nil! || ""
-NODE = Process.find_executable("node").not_nil! || ""
-TIMEOUT = Process.find_executable("timeout").not_nil! || ""
-CPULIMIT = Process.find_executable("cpulimit").not_nil! || ""
+REDIS_CLI = (Process.find_executable("redis-cli") if !Process.find_executable("redis-cli").nil?) || ""
+NODE = (Process.find_executable("node") if !Process.find_executable("node").nil?) || ""
+TIMEOUT = (Process.find_executable("timeout") if !Process.find_executable("timeout").nil?) || ""
+CPULIMIT = (Process.find_executable("cpulimit") if !Process.find_executable("cpulimit").nil?) || ""
 # mooleshacat (end)
 
 # CLI
