@@ -29,10 +29,13 @@ module FreshTokens
     instanceid = CONFIG.freshtokens_instanceid  
   
     redis_cli = `which redis-cli`  
-    
-    # first get the tps
-  
+
     count1 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
+
+    # first set the count
+    @@tcount = count1.to_i
+    
+    # next get the tps    
     sleep 1.minutes
     count2 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
     
@@ -40,7 +43,7 @@ module FreshTokens
     
     @@tpm = difference
     
-    # next set the count
+    # may as well update count again
     @@tcount = count2.to_i
   
   end
