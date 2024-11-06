@@ -45,6 +45,10 @@ apt install -y libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev pos
 apt install -y htop git wget curl cpulimit
 
 echo ""
+echo "installing crystal"
+curl -fsSL https://crystal-lang.org/install.sh | sudo bash
+
+echo ""
 echo "installing nvm under invidious user"
 su - invidious -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash"
 
