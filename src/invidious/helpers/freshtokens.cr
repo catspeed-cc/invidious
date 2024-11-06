@@ -27,7 +27,7 @@ module FreshTokens
     if (!NODE.empty?)
       @@node = NODE
     else    
-      @@node = `which node`
+      @@node = Process.find_executable("node", path = ENV["path"]?, pwd = "/home/invidious/.nvm/")
       @@node = @@node.strip
     end
   end
