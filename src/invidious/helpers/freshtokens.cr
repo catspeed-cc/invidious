@@ -179,6 +179,7 @@ module FreshTokens
     visitor_data = ""
     
     rnd = rand(CONFIG.freshtokens_anonpool_size)
+    
     redis_instanceuserid = "ANON-#{CONFIG.freshtokens_instanceid}-#{rnd}" 
     
     # get tokens (initial)
@@ -193,7 +194,7 @@ module FreshTokens
       sleep 500.milliseconds
      
       # prepare for next iteration...
-      rnd = rand(400)
+      rnd = rand(CONFIG.freshtokens_anonpool_size)
       redis_instanceuserid = "ANON-#{CONFIG.freshtokens_instanceid}-#{rnd}"
       
       # prepare for next iteration...
