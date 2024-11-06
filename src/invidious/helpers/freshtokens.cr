@@ -27,7 +27,7 @@ module FreshTokens
     if (!NODE.empty?)
       @@node = NODE
     else    
-      @@node = `su - invidious -c "export NVM_DIR=\"$([ -z \"${XDG_CONFIG_HOME-}\" ] && printf %s \"${HOME}/.nvm\" || printf %s \"${XDG_CONFIG_HOME}/nvm\")\" ; [ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" ; which node ;"`
+      @@node = `su - invidious -c 'export NVM_DIR="$HOME/.nvm" ; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" ; which node'`
       @@node = @@node.strip
     end
   end
@@ -208,7 +208,7 @@ module FreshTokens
         REDIS_DB.del("invidious:#{redis_instanceuserid}:visitor_data")
       end    
     
-      LOGGER.info("FreshTokens: get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, deleting & trying another")   
+      LOGGER.debug("FreshTokens: get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, deleting & trying another")   
      
       # sleep
       sleep 500.milliseconds
@@ -258,7 +258,7 @@ module FreshTokens
       
       if ( (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
       
-        LOGGER.info("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: GENERATING TOKENS")
+        LOGGER.debug("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: GENERATING TOKENS")
 
         # tokens are nil or empty, generate them
         po_token, visitor_data = generate_tokens
@@ -268,8 +268,12 @@ module FreshTokens
           # if not nil or empty        
         
           # update redis with user's tokens (30min expiry for now)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token.strip, 10800)
-          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data.strip, 10800)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token.strip, 21600)
+          REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data.strip, 21600)
+          
+        else
+        
+          LOGGER.warn("FreshTokens: generate_anon_tokens: GENERATED TOKENS ARE EMPTY")
         
         end
         
@@ -282,8 +286,8 @@ module FreshTokens
       end
         
       # tokens are NOT nil or empty, log & skip them.
-      LOGGER.info("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: pot: #{po_token}")
-      LOGGER.info("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: vdata: #{visitor_data}")
+      LOGGER.debug("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: pot: #{po_token}")
+      LOGGER.debug("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: vdata: #{visitor_data}")
             
       LOGGER.debug("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: done getting tokens")   
 
