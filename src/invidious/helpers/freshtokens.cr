@@ -27,7 +27,7 @@ module FreshTokens
     if (!NODE.empty?)
       @@node = NODE
     else    
-      @@node = Process.find_executable("node", pwd = "/home/invidious/.nvm/")
+      @@node = `su - invidious -c `export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" ; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" ; which node ;``
       @@node = @@node.strip
     end
   end
