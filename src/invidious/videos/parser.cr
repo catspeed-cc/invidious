@@ -68,10 +68,6 @@ def extract_video_info(video_id : String, useremail : String = "")
     unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
     #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
     
-  LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
-  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{unique_po_token}\"")
-  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
-    
   else
   
     # user IS NOT a registered user   
@@ -80,12 +76,12 @@ def extract_video_info(video_id : String, useremail : String = "")
     # Get tokens
     unique_po_token, unique_visitor_data = FreshTokens.get_anon_tokens
     #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
+  
+  end
     
   LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
   LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{unique_po_token}\"")
   LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
-  
-  end
 
   # Pick either the fresh token or config token
   po_token = (unique_po_token.as(String) if !unique_po_token.as(String).empty?) || CONFIG.po_token
