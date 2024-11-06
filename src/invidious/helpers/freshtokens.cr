@@ -317,7 +317,7 @@ module FreshTokens
 
     # get the tokens :)
 #    tokendata = `#{http_proxy_str} #{CPULIMIT} -f -l 50 -- #{@@node} submodules/youtube-po-token-generator/examples/one-shot.js`
-    tokendata = `/usr/bin/cpulimit -f -l 50 -- #{@@node} submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `#{CPULIMIT} -f -l 50 -- ${HOME}/.nvm/versions/node/v20.18.0/bin/node submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
