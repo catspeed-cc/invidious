@@ -101,6 +101,12 @@ SOFTWARE = {
 
 YT_POOL = YoutubeConnectionPool.new(YT_URL, capacity: CONFIG.pool_size)
 
+# mooleshacat (begin)
+REDIS_CLI = `which redis-cli`
+TIMEOUT = `which timeout`
+CPULIMIT = `which cpulimit`
+# mooleshacat (end)
+
 # CLI
 Kemal.config.extra_options do |parser|
   parser.banner = "Usage: invidious [arguments]"
