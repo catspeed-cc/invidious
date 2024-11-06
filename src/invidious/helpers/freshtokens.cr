@@ -34,7 +34,7 @@ module FreshTokens
     count1 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
 
     # set the count
-    @@tcount = count1.to_i - 1
+    @@tcount = (count1.to_i - 1)
     
     # next get the tpm    
     sleep 15.seconds
@@ -46,10 +46,10 @@ module FreshTokens
     difference = count2.to_i - count1.to_i
     
     # Multiply by 4 to get minutely number
-    @@tpm = difference * 4
+    @@tpm = (difference * 4)
     
     # may as well update count again
-    @@tcount = count2.to_i -1
+    @@tcount = (count2.to_i - 1)
   
   end
   
