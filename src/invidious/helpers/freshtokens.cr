@@ -28,7 +28,7 @@ module FreshTokens
   
     instanceid = CONFIG.freshtokens_instanceid
     
-    if ( !redis_cli.nil? && !redis_cli.empty? )
+    if ( !REDIS_CLI.nil? && !REDIS_CLI.empty? )
 
       # get first count
       count1 = `#{REDIS_CLI} eval "return #redis.call('keys', 'invidious:ANON-#{instanceid}*:po_token')" 0 | awk 'IFS=" " {print $1}'`
