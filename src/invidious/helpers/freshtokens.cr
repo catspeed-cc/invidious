@@ -31,7 +31,7 @@ module FreshTokens
     redis_cli = `which redis-cli`  
 
     # get first count
-    count1 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
+    count1 = `#{redis_cli.strip} eval "return #redis.call('keys', 'invidious:ANON-#{instanceid}*:po_token')" 0 | awk 'IFS=" " {print $1}'`
 
     # set the count
     @@tcount = (count1.to_i - 1)
@@ -40,7 +40,7 @@ module FreshTokens
     sleep 15.seconds
     
     # get second count
-    count2 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
+    count2 = `#{redis_cli.strip} eval "return #redis.call('keys', 'invidious:ANON-#{instanceid}*:po_token')" 0 | awk 'IFS=" " {print $1}'`
     
     # get the difference between first and second count
     difference = count2.to_i - count1.to_i
