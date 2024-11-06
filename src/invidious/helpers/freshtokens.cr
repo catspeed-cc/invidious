@@ -30,18 +30,23 @@ module FreshTokens
   
     redis_cli = `which redis-cli`  
 
+    # get first count
     count1 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
 
-    # first set the count
+    # set the count
     @@tcount = count1.to_i
     
-    # next get the tps    
-    sleep 1.minutes
+    # next get the tpm    
+    sleep 15.seconds
+    
+    # get second count
     count2 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
     
+    # get the difference between first and second count
     difference = count2.to_i - count1.to_i
     
-    @@tpm = difference
+    # Multiply by 4 to get minutely number
+    @@tpm = difference * 4
     
     # may as well update count again
     @@tcount = count2.to_i
