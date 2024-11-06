@@ -254,7 +254,7 @@ module FreshTokens
         # tokens are nil or empty, generate them
         po_token, visitor_data = generate_tokens
         
-        if ( ! (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
+        if ( ! (po_token.nil? || visitor_data.nil?) && ! (po_token.empty? || visitor_data.empty?) )
         
           # if not nil or empty        
         
