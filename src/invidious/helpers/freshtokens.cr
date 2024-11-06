@@ -194,7 +194,12 @@ module FreshTokens
     
     while ( (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
     
-      LOGGER.info("FreshTokens: get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, trying another")   
+      if (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?)
+        REDIS_DB.del("invidious:#{redis_instanceuserid}:po_token")
+        REDIS_DB.del("invidious:#{redis_instanceuserid}:visitor_data")
+      end    
+    
+      LOGGER.info("FreshTokens: get_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid} tokens are empty, deleting & trying another")   
      
       # sleep
       sleep 500.milliseconds
