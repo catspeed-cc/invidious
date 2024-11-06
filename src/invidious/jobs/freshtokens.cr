@@ -50,6 +50,11 @@ class Invidious::Jobs::FreshTokensStatsJob < Invidious::Jobs::BaseJob
       # job start
       LOGGER.info("FreshTokens: jobs: running FreshTokensStats job")
       
+      LOGGER.info("FreshTokens: TEST: \"#{CPULIMIT}\"")
+      LOGGER.info("FreshTokens: TEST: \"#{NODE}\"")
+      LOGGER.info("FreshTokens: TEST: \"#{TIMEOUT}\"")
+      LOGGER.info("FreshTokens: TEST: \"#{REDIS_CLI}\"")
+      
       FreshTokens.update_stats
 
       # job done
