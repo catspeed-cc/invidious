@@ -9,6 +9,8 @@ module FreshTokens
   @@po_token : String = ""
   @@visitor_data : String = ""
   
+  @@node : String = ""
+  
   def get_working
     return @@working
   end  
@@ -21,7 +23,14 @@ module FreshTokens
     return @@tcount
   end
   
-  
+  def initialize
+    if (!NODE.empty?)
+      @@node = NODE
+    else    
+      @@node = `which node`
+      @@node = node.strip
+    end
+  end
   
   
   def update_stats
@@ -304,18 +313,11 @@ module FreshTokens
 #    http_proxy_str = "export http_proxy=#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ; " 
     
     #LOGGER.info("FreshTokens: generate_tokens: proxy_str = \"#{proxy_str}\"")  
-    #LOGGER.info("FreshTokens: generate_tokens: http_proxy_str = \"#{http_proxy_str}\"")  
-    
-    if (!NODE.empty?)
-      node = NODE
-    else    
-      node = `which node`
-      node = node.strip
-    end
+    #LOGGER.info("FreshTokens: generate_tokens: http_proxy_str = \"#{http_proxy_str}\"")
 
     # get the tokens :)
-#    tokendata = `#{http_proxy_str} #{CPULIMIT} -f -l 50 -- #{node} submodules/youtube-po-token-generator/examples/one-shot.js`
-    tokendata = `#{CPULIMIT} -f -l 50 -- #{node} submodules/youtube-po-token-generator/examples/one-shot.js`
+#    tokendata = `#{http_proxy_str} #{CPULIMIT} -f -l 50 -- #{@@node} submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `#{CPULIMIT} -f -l 50 -- #{@@node} submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
@@ -338,18 +340,11 @@ module FreshTokens
 #    http_proxy_str = "export http_proxy=#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ; " 
     
     #LOGGER.info("FreshTokens: generate_tokens_timeout: proxy_str = \"#{proxy_str}\"")
-    #LOGGER.info("FreshTokens: generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"") 
-    
-    if (!NODE.empty?)
-      node = NODE
-    else    
-      node = `which node`
-      node = node.strip
-    end 
+    #LOGGER.info("FreshTokens: generate_tokens_timeout: http_proxy_str = \"#{http_proxy_str}\"")
 
     # get the tokens :)
-    #tokendata = `#{http_proxy_str} #{TIMEOUT} -k #{hardkillsecs} -s KILL #{softkillsecs} #{CPULIMIT} -f -l 50 -- #{node} submodules/youtube-po-token-generator/examples/one-shot.js`
-    tokendata = `#{TIMEOUT} -k #{hardkillsecs} -s KILL #{softkillsecs} #{CPULIMIT} -f -l 50 -- #{node} submodules/youtube-po-token-generator/examples/one-shot.js`
+    #tokendata = `#{http_proxy_str} #{TIMEOUT} -k #{hardkillsecs} -s KILL #{softkillsecs} #{CPULIMIT} -f -l 50 -- #{@@node} submodules/youtube-po-token-generator/examples/one-shot.js`
+    tokendata = `#{TIMEOUT} -k #{hardkillsecs} -s KILL #{softkillsecs} #{CPULIMIT} -f -l 50 -- #{@@node} submodules/youtube-po-token-generator/examples/one-shot.js`
     
     freshpot = `echo "#{tokendata.strip}" | awk -F"'" '/poToken/{print $2}'`
     freshvdata = `echo "#{tokendata.strip}" | awk -F"'" '/visitorData/{print $2}'`
