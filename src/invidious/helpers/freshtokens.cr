@@ -3,7 +3,7 @@ module FreshTokens
 
   @@working : Bool = false
 
-  @@tps : Int32 = 0
+  @@tpm : Int32 = 0
   @@tcount : Int32 = 0
   
   @@po_token : String = ""
@@ -13,8 +13,8 @@ module FreshTokens
     return @@working
   end  
   
-  def get_tps
-    return @@tps
+  def get_tpm
+    return @@tpm
   end
   
   def get_tcount
@@ -33,12 +33,12 @@ module FreshTokens
     # first get the tps
   
     count1 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
-    sleep 1.seconds
+    sleep 1.minutes
     count2 = `#{redis_cli.strip} KEYS invidious:ANON-#{instanceid}-*:po_token | wc -l`
     
     difference = count2.to_i - count1.to_i
     
-    @@tps = difference
+    @@tpm = difference
     
     # next set the count
     @@tcount = count2.to_i

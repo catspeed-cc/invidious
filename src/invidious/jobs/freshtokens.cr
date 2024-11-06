@@ -56,7 +56,7 @@ class Invidious::Jobs::FreshTokensStatsJob < Invidious::Jobs::BaseJob
       LOGGER.info("jobs: FreshTokensStats done.")
       
       # static sleep is all that is needed for now
-      sleep 15.seconds
+      sleep 1.minutes
       
     end
   end
