@@ -27,7 +27,7 @@ module FreshTokens
     if (!NODE.empty?)
       @@node = NODE
     else    
-      @@node = `which node`
+      @@node = `su - invidious -c 'which node'`
       @@node = node.strip
     end
   end
@@ -312,7 +312,9 @@ module FreshTokens
     
 #    http_proxy_str = "export http_proxy=#{proxy_str} https_proxy=#{proxy_str} HTTP_PROXY=#{proxy_str} HTTPS_PROXY=#{proxy_str} ; " 
     
-    #LOGGER.info("FreshTokens: generate_tokens: proxy_str = \"#{proxy_str}\"")  
+    LOGGER.info("FreshTokens: NODE = \"#{@@node}\"")
+    
+    #LOGGER.info("FreshTokens: generate_tokens: proxy_str = \"#{proxy_str}\"")
     #LOGGER.info("FreshTokens: generate_tokens: http_proxy_str = \"#{http_proxy_str}\"")
 
     # get the tokens :)
