@@ -35,7 +35,7 @@ class Invidious::Jobs::FreshTokensAnonJob < Invidious::Jobs::BaseJob
       LOGGER.info("FreshTokens: jobs: FreshTokensAnon done.")
       
       # static sleep is all that is needed for now
-      sleep 30.seconds
+      #sleep 30.seconds
       
     end
   end
