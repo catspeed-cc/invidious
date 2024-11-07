@@ -42,7 +42,7 @@ echo "updating apt sources & installing dependencies"
 # just added in case the user took a tar.gz or zip
 apt update
 apt install -y libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev postgresql librsvg2-bin libsqlite3-dev zlib1g-dev libpcre3-dev libevent-dev fonts-open-sans
-apt install -y htop git wget curl cpulimit
+apt install -y htop git wget curl cpulimit redis-server
 
 echo ""
 echo "installing crystal"
