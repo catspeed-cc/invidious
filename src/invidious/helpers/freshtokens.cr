@@ -159,7 +159,7 @@ module FreshTokens
     # check if tokens empty, generate new ones, store in redis
     if ((po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?))
     
-      LOGGER.debug("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} needs new tokens")    
+      LOGGER.info("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} needs new tokens")    
       LOGGER.debug("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} locking user key")    
     
       # lock redis key for 60 seconds (wait for processes to finish and do not open another process)
@@ -178,8 +178,8 @@ module FreshTokens
       LOGGER.debug("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} already has tokens")
     end
     
-    LOGGER.debug("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} pot: #{po_token}")
-    LOGGER.debug("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} vdata: #{visitor_data}")
+    LOGGER.info("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} pot: #{po_token}")
+    LOGGER.info("FreshTokens: get_user_tokens: #{CONFIG.freshtokens_instanceid}: user: #{useremail} vdata: #{visitor_data}")
     
     return {po_token.strip, visitor_data.strip}
   
