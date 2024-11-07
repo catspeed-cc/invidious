@@ -194,7 +194,7 @@ Once installed, you will be able to control freshtokens with config variables. C
 - freshtokens_enabled - true/false - enables and disables freshtokens.
 - freshtokens_show_ic_enabled - true/false - enables showing identity stats
 - freshtokens_identserver_enabled - false/true - enables identity server (does nothing yet ...)
- -freshtokens_identserver_address - "https://my.ident.server.com/ident/" - URL of identity server (does nothing yet ...)
+- freshtokens_identserver_address - "https://my.ident.server.com/ident/" - URL of identity server (does nothing yet ...)
 - freshtokens_instanceid - "instance1" - a unique identifier for the instance
 - freshtokens_user_expiry - 3600 - How often to expire/generate user identity
 - freshtokens_anonpool_expiry: 21600 - How often to expire/generate anon identity
