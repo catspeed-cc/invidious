@@ -180,21 +180,6 @@ I'll just leave this here https://pr.tn/ref/04PN5S3WMGBG
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
 
 
-## branding, status link, freetube help link & donation link notes
-
-You can change in the config:
-- enable/disable catspeed branding
-- enable/disable catspeed donation link (please think of cat :3c)
-- enable/disable invidious donation link (please ... invidious :3c)
-- enable/disable custom donation link
-- custom donation link text & url
-- custom issue tracker link text & url
-- custom status page link text & url
-- custom freetube help page link text & url
-
-_You need to restart the service for these to take effect._
-
-
 ## csp hack patch notes
 
 CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". Only enable this if you have CSP errors when you inspect the video watch page (ctrl + shift + i)
@@ -227,6 +212,21 @@ Eventually I will make an "identity server" which can be set up on another serve
 **For private instance owners:** If you only have yourself and/or a few friends on your instance, you could probably get away with an identity pool of 500, expiring every 3 hours. I would set the user expiry to 900 seconds for privacy.
 
 This patch is a temporary workaround until inv_sig_helper itself can get the tokens for us. unixfox (invidious dev) raised this idea to techmetx11 (inv_sig_helper dev) and they are working on an implementation that will eventually make this patch useless. This is OK, as it is only a patch and that setup would be better performance wise than my current implementations. You can read about it here https://github.com/iv-org/inv_sig_helper/issues/10
+
+
+## branding, status link, freetube help link & donation link notes
+
+You can change in the config:
+- enable/disable catspeed branding
+- enable/disable catspeed donation link (please think of cat :3c)
+- enable/disable invidious donation link (please ... invidious :3c)
+- enable/disable custom donation link
+- custom donation link text & url
+- custom issue tracker link text & url
+- custom status page link text & url
+- custom freetube help page link text & url
+
+_You need to restart the service for these to take effect._
 
 
 ## gitea.catspeed.cc
