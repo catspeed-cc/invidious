@@ -243,8 +243,9 @@ module FreshTokens
     rnd = CONFIG.freshtokens_anonpool_size
    
     @@working = true
-   
-    i = 0    
+     
+    # use random starting point
+    i = rand(CONFIG.freshtokens_anonpool_size)   
     while i <= rnd
 
       # define the instance/user id    
