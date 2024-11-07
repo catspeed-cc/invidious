@@ -255,9 +255,11 @@ module FreshTokens
       
       # get tokens (initial)
       po_token = REDIS_DB.get("invidious:#{redis_instanceuserid}:po_token")
-      visitor_data = REDIS_DB.get("invidious:#{redis_instanceuserid}:visitor_data")
+      visitor_data = "unchecked"
+      #visitor_data = REDIS_DB.get("invidious:#{redis_instanceuserid}:visitor_data")
       
-      if ( (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
+      if ( po_token.nil? || po_token.empty? )
+      #if ( (po_token.nil? || visitor_data.nil?) || (po_token.empty? || visitor_data.empty?) )
       
         LOGGER.debug("FreshTokens: generate_anon_tokens: #{CONFIG.freshtokens_instanceid}: user: #{redis_instanceuserid}: GENERATING TOKENS")
 
@@ -268,7 +270,7 @@ module FreshTokens
         
           # if not nil or empty        
         
-          # update redis with user's tokens (30min expiry for now)
+          # update redis with user's tokens
           REDIS_DB.set("invidious:#{redis_instanceuserid}:po_token", po_token.strip, CONFIG.freshtokens_anonpool_expiry)
           REDIS_DB.set("invidious:#{redis_instanceuserid}:visitor_data", visitor_data.strip, CONFIG.freshtokens_anonpool_expiry)
           
