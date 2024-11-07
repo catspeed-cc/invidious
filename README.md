@@ -204,7 +204,7 @@ Once installed, you will be able to control freshtokens with config variables. C
 
 If you experience 403 session expired or other errors, try increasing the identity pool. If you can't generate enough identities within the expiry window, then try increasing the expiry window.
 
-Once you finally reach the maximum identities, I would recommend switching VPN IP's because you will have accumulated enough errors to have gotten the IP temporarily banned. This typically is indicated by many "this helps protect our community" errors. A few of these is normal, but having every single user over 5 minutes getting this message signals you should try to change the VPN ip.
+Once you finally reach the maximum identities, I would recommend switching VPN IP's because you will have accumulated enough errors to have gotten the IP temporarily banned. This typically is indicated by many "this helps protect our community" errors. A few of these is normal, but having every single user over 5 minutes getting this message signals you should either restart sig-helper, and/or try to change the VPN ip.
 
 **For public instances:** If you are as busy as catspeed is blessed to be, you will need a identity pool of at least 2500 and I would even try for higher. I would start with an anon identity expiry of 6 hours, and depending on whether you can get up to the max identities, you can increase or decrease the identity pool and expiry. You can also adjust the expiry of identities of signed in users. I typically have a longer expiry for anon users, and a shorter expiry for signed in users.
 
