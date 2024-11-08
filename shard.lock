@@ -2,11 +2,11 @@ version: 2.0
 shards:
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.6.1
+    version: 1.6.3
 
   athena-negotiation:
     git: https://github.com/athena-framework/negotiation.git
-    version: 0.1.1
+    version: 0.1.5
 
   backtracer:
     git: https://github.com/sija/backtracer.cr.git
@@ -36,6 +36,10 @@ shards:
     git: https://github.com/will/crystal-pg.git
     version: 0.24.0
     
+  pool:
+    git: https://github.com/ysbaddaden/pool.git
+    version: 0.2.4
+
   pool:
     git: https://github.com/ysbaddaden/pool.git
     version: 0.2.4
