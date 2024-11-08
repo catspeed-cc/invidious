@@ -109,8 +109,6 @@ def make_configured_http_proxy_client
     username: config_proxy.user,
     password: config_proxy.password,
   )
-<<<<<<< HEAD
-=======
 end
 
 # Fetches a HTTP pool for the specified subdomain of ytimg.com
@@ -126,5 +124,4 @@ def get_ytimg_pool(subdomain)
 
     return pool
   end
->>>>>>> upstream/master
 end
