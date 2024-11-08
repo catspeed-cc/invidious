@@ -2,11 +2,11 @@ version: 2.0
 shards:
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.6.1
+    version: 1.6.3
 
   athena-negotiation:
     git: https://github.com/athena-framework/negotiation.git
-    version: 0.1.1
+    version: 0.1.5
 
   backtracer:
     git: https://github.com/sija/backtracer.cr.git
@@ -14,7 +14,7 @@ shards:
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.10.1
+    version: 0.13.1
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
@@ -34,11 +34,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.24.0
-    
-  pool:
-    git: https://github.com/ysbaddaden/pool.git
-    version: 0.2.4
+    version: 0.28.0
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
@@ -62,5 +58,5 @@ shards:
 
   sqlite3:
     git: https://github.com/crystal-lang/crystal-sqlite3.git
-    version: 0.18.0
+    version: 0.21.0
 
