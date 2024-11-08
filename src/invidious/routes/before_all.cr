@@ -68,6 +68,7 @@ module Invidious::Routes::BeforeAll
       "frame-ancestors " + frame_ancestors,
     }.join("; ")
 
+
     env.response.headers["Referrer-Policy"] = "same-origin"
 
     # Ask the chrom*-based browsers to disable FLoC

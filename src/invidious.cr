@@ -101,6 +101,13 @@ SOFTWARE = {
 
 YT_POOL = YoutubeConnectionPool.new(YT_URL, capacity: CONFIG.pool_size)
 
+# mooleshacat (begin)
+REDIS_CLI = (Process.find_executable("redis-cli") if !Process.find_executable("redis-cli").nil?) || ""
+NODE = (Process.find_executable("node") if !Process.find_executable("node").nil?) || ""
+TIMEOUT = (Process.find_executable("timeout") if !Process.find_executable("timeout").nil?) || ""
+CPULIMIT = (Process.find_executable("cpulimit") if !Process.find_executable("cpulimit").nil?) || ""
+# mooleshacat (end)
+
 # CLI
 Kemal.config.extra_options do |parser|
   parser.banner = "Usage: invidious [arguments]"
@@ -201,11 +208,15 @@ Invidious::Jobs.register Invidious::Jobs::NotificationJob.new(CONNECTION_CHANNEL
 
 Invidious::Jobs.register Invidious::Jobs::ClearExpiredItemsJob.new
 
-if CONFIG.tokenmon_enabled
-  Invidious::Jobs.register Invidious::Jobs::MonitorCfgTokensJob.new()
-end
-
 Invidious::Jobs.register Invidious::Jobs::InstanceListRefreshJob.new
+
+if CONFIG.freshtokens_enabled
+  Invidious::Jobs.register Invidious::Jobs::FreshTokensUserJob.new
+  Invidious::Jobs.register Invidious::Jobs::FreshTokensAnonJob.new
+  if CONFIG.freshtokens_show_ic_enabled
+    Invidious::Jobs.register Invidious::Jobs::FreshTokensStatsJob.new
+  end
+end
 
 Invidious::Jobs.start_all
 

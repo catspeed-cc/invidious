@@ -84,11 +84,10 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - add redis patch
 - add proxy patch
 - sig helper reconnect patch
-- uptime status (mooleshacat)
+- freshtokens (mooleshacat)
 - csp hack patch (mooleshacat)
+- uptime status (mooleshacat)
 - loadavg status (mooleshacat)
-- token monitor patch (mooleshacat)
-- token updater scripts (mooleshacat)
 - enable/disable catspeed branding (mooleshacat)
 - enable/disable catspeed, invidious donate link (mooleshacat)
 - custom status page, issue tracker, freetube help, donation links (mooleshacat)
@@ -180,6 +179,42 @@ I'll just leave this here https://pr.tn/ref/04PN5S3WMGBG
 This branch has the uptime & loadavg patch from myself (mooleshacat) which if enabled in the config, will show the uptime and/or loadavg on the page. Please note, if everyone can see your uptime or loadavg, so could a theoretical attacker. This may or may not be a good idea, you be the judge.
 
 
+## csp hack patch notes
+
+CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". Only enable this if you have CSP errors when you inspect the video watch page (ctrl + shift + i)
+
+
+## freshtokens patch notes
+
+This branch has the freshtokens patch from myself (mooleshacat) which if not disabled in config file will automatically generate identities for logged in users, as well as anonymous users. The challenge with anonymous users is having some kind of unique identifier to assign a user an identity. How this is currently implemented is there is an identity pool from which identities are picked. Provided the pool is large enough there should not be many identity collisions. Logged in users are assigned their own identities for each instance and will experience less problems. Busy instances will need larger pools, whereas private instances should be fine with smaller pools.
+
+Most important step when upgrading is installing dependencies. For this you can run ```scripts/install-catspeed-deps.sh``` as root, and it will set up the user account ```invidious```, as well as install the required dependencies. These dependencies include but are not limited to: git, curl, wget, crystal, nvm, node, and all dependencies required to make (compile) the project. It also performs the critical step of initializing the submodules for freshtokens to be able to work.
+
+Once installed, you will be able to control freshtokens with config variables. Currently they include:
+- freshtokens_enabled - true/false - enables and disables freshtokens.
+- freshtokens_show_ic_enabled - true/false - enables showing identity stats
+- freshtokens_identserver_enabled - false/true - enables identity server (does nothing yet ...)
+- freshtokens_identserver_address - "https://my.ident.server.com/ident/" - URL of identity server (does nothing yet ...)
+- freshtokens_instanceid - "instance1" - a unique identifier for the instance
+- freshtokens_user_expiry - 3600 - How often to expire/generate user identity
+- freshtokens_anonpool_expiry: 21600 - How often to expire/generate anon identity
+- freshtokens_anonpool_size: 500 - How many identities to generate
+
+**General notes:** Identities will take time to generate. If you change the pool size higher, it may take time to generate the identities. If you ask too many identities of your server, it may not have the power to generate them. The user however will not see much effect from this. Hopefully you'd have enough identities for the users you have. In the stats, "igr" refers to the identity generation rate. The igr is a rate of change, which can be positive or negative. Positive means it is adding identities, while negative means identities are expiring. igr of 0/min simply means you are adding as many identities as are expiring. Currently catspeed is set to generate 2500 identities, with a 12 hour expiry (subject to change) - for reference, catspeed is a 4-core server with 4gb memory, which runs two invidious instances.
+
+If you experience 403 session expired or other errors, try increasing the identity pool. If you can't generate enough identities within the expiry window, then try increasing the expiry window.
+
+Once you finally reach the maximum identities, I would recommend switching VPN IP's because you will have accumulated enough errors to have gotten the IP temporarily banned. This typically is indicated by many "this helps protect our community" errors. A few of these is normal, but having every single user over 5 minutes getting this message signals you should either restart sig-helper, and/or try to change the VPN ip.
+
+**For public instances:** If you are as busy as catspeed is blessed to be, you will need a identity pool of at least 2500 and I would even try for higher. I would start with an anon identity expiry of 6 hours, and depending on whether you can get up to the max identities, you can increase or decrease the identity pool and expiry. You can also adjust the expiry of identities of signed in users. I typically have a longer expiry for anon users, and a shorter expiry for signed in users.
+
+Eventually I will make an "identity server" which can be set up on another server, specifically for generating identities. This will allow you to have a reverse proxy to a theoretically infinite number of identity servers. 
+
+**For private instance owners:** If you only have yourself and/or a few friends on your instance, you could probably get away with an identity pool of 500, expiring every 3 hours. I would set the user expiry to 900 seconds for privacy.
+
+This patch is a temporary workaround until inv_sig_helper itself can get the tokens for us. unixfox (invidious dev) raised this idea to techmetx11 (inv_sig_helper dev) and they are working on an implementation that will eventually make this patch useless. This is OK, as it is only a patch and that setup would be better performance wise than my current implementations. You can read about it here https://github.com/iv-org/inv_sig_helper/issues/10
+
+
 ## branding, status link, freetube help link & donation link notes
 
 You can change in the config:
@@ -193,35 +228,6 @@ You can change in the config:
 - custom freetube help page link text & url
 
 _You need to restart the service for these to take effect._
-
-
-## csp hack patch notes
-
-CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". Only enable this if you have CSP errors when you inspect the video watch page (ctrl + shift + i)
-
-
-## tokenmon patch notes (po_token and visitor_data)
-
-This branch has the token monitor patch from myself (mooleshacat) which if not disabled in config file will check every 1 minute your config file for updated tokens. Now all you have to do is make a bash script that updates the tokens in the config file and a cronjob to execute it at the desired interval. No longer do you have to restart invidious service for the tokens to update.
-
-This patch is a temporary workaround until inv_sig_helper itself can get the tokens for us. unixfox (invidious dev) raised this idea to techmetx11 (inv_sig_helper dev) and they are working on an implementation that will eventually make this patch useless. This is OK, as it is only a patch and that setup would be better performance wise than my current implementations. You can read about it here https://github.com/iv-org/inv_sig_helper/issues/10
-
-
-## token updater script notes (po_token and visitor_data)
-
-This branch now has the token updater script from myself (mooleshacat). You can install it by:
-- ```cd scripts```
-- Install dependencies ```./install-update-tokens-cron-deps.sh``` (git, wget, curl, nvm)
-- Test run ```./update-tokens-cron.sh "/path/to/invidious/config.yml" "" ""```
-- Test run with restart service ```./update-tokens-cron.sh "/path/to/invidious/config.yml" "invidious-service-1" ""```
-- Test run with proxy ```./update-tokens-cron.sh "/path/to/invidious/config.yml" "" "http://127.0.0.1:8001"```
-- Set up crontab entries for each config file you wish to update:
-  ```
-  # If you are using catspeed fork with tokenmon enabled, leave service name blank.
-  # Enter your path to config.yml and proxy information (or leave proxy blank). Set desired interval.
-  #
-  */5 * * * * /path/to/invidious/scripts/update-tokens-cron.sh "/path/to/invidious/config/config.yml" "" "http://127.0.0.1:8001"
-  ```
 
 
 ## gitea.catspeed.cc
