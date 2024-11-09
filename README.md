@@ -188,7 +188,7 @@ CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydo
 
 This branch has the freshtokens patch from myself (mooleshacat) which if not disabled in config file will automatically generate identities for logged in users, as well as anonymous users. The challenge with anonymous users is having some kind of unique identifier to assign a user an identity. How this is currently implemented is there is an identity pool from which identities are picked. Provided the pool is large enough there should not be many identity collisions. Logged in users are assigned their own identities for each instance and will experience less problems. Busy instances will need larger pools, whereas private instances should be fine with smaller pools.
 
-For now, the Docker image will not have these steps, I will have to add them in separately.
+For now, the Docker image will not have these steps, I will have to add them in separately. If using docker, stay on master branch for now. If using manual install, you can try the development branch.
 
 **Manual dependency installation:**
 Most important step when upgrading is installing dependencies. Currently the dependency installer script is not working, so you have to manually install dependencies:
