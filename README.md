@@ -1,8 +1,8 @@
 # Notice
 
-You are currently on the development branch. This branch is unstable, and at times, may not compile.
+You are currently on the master branch. This branch is relatively stable.
 
-To switch to more stable master branch, ```git checkout master``` and ```git pull```
+To try out the development branch, ```git checkout development``` and ```git pull```
 
 ------
 <div align="center">
