@@ -58,10 +58,11 @@ end
 struct HTTPProxyConfig
   include YAML::Serializable
 
-  property user : String
-  property password : String
-  property host : String
-  property port : Int32
+  property user : String = ""
+  property password : String = ""
+  property host : String = ""
+  property port : Int32 = 8080
+  property https : Bool = false
 end
 
 class Config
@@ -80,6 +81,20 @@ class Config
   property log_level : LogLevel = LogLevel::Info
   # Enables colors in logs. Useful for debugging purposes
   property colorize_logs : Bool = false
+
+  # Enables freshtoken
+  property freshtokens_enabled : Bool = false
+  property freshtokens_show_ic_enabled : Bool = false
+  property freshtokens_identserver_enabled : Bool = false
+  property freshtokens_identserver_address : String = ""
+  property freshtokens_instanceid : String = "instance1"
+  property freshtokens_user_expiry : Int32 = 3600
+  property freshtokens_anonpool_expiry : Int32 = 21600
+  property freshtokens_anonpool_size : Int32 = 500
+  
+  # Enables CSP hack (permit TLD + subdomains in CSP)
+  property csp_hack_enabled : Bool = false
+  
   # Database configuration with separate parameters (username, hostname, etc)
   property db : DBConfig? = nil
 
@@ -101,7 +116,6 @@ class Config
   property hmac_key : String = ""
   # Domain to be used for links to resources on the site where an absolute URL is required
   property domain : String?
-  property tokenmon_enabled : Bool = true
   # Subscribe to channels using PubSubHubbub (requires domain, hmac_key)
   property use_pubsub_feeds : Bool | Int32 = false
   property catspeed_branding_enabled : Bool = true

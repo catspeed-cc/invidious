@@ -1,10 +1,9 @@
 ---
-name: Bug report
-about: Create a bug report to help us improve Invidious
-title: '[Bug] '
-labels: bug
+name: Outage report
+about: Create an outage report to help us improve catspeed.cc
+title: '[Outage] '
+labels: Catspeed Outage
 assignees: 'mooleshacat'
-
 ---
 
 <!--
@@ -16,13 +15,11 @@ assignees: 'mooleshacat'
   If you want to repot a bug please use "Bug report" instead
   If you want to suggest a new feature please use "Feature request" instead
   If you want to suggest an enhancement to an existing feature please use "Enhancement" instead
-  
-  If you want to report an outage please use "Catspeed outage" instead
 -->
 
 
-**Describe the bug**
-<!-- A clear and concise description of what the bug is. -->
+**Describe the outage**
+<!-- A clear and concise description of what the outage is and any errors received. -->
 
 **Steps to Reproduce**
 <!-- Steps to reproduce the behavior:

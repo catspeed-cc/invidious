@@ -50,12 +50,61 @@ def parse_related_video(related : JSON::Any) : Hash(String, JSON::Any)?
   }
 end
 
-def extract_video_info(video_id : String)
+def extract_video_info(video_id : String, useremail : String = "")
   # Init client config for the API
   client_config = YoutubeAPI::ClientConfig.new
 
+  unique_po_token = ""
+  unique_visitor_data = ""
+
+  # Borrowed code, thx Fijxu :3c
+
+   if !useremail.empty?
+      
+    # user IS a registered user   
+    useremail = "USER-#{CONFIG.freshtokens_instanceid}-#{useremail}"       
+        
+    # Get tokens
+    unique_po_token, unique_visitor_data = FreshTokens.get_user_tokens(useremail)
+    #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
+    
+  else
+  
+    # user IS NOT a registered user   
+    useremail = "Anonymous" 
+  
+    # Get tokens
+    unique_po_token, unique_visitor_data = FreshTokens.get_anon_tokens
+    #unique_po_token, unique_visitor_data = FreshTokens.get_instance_tokens
+  
+  end
+    
+  LOGGER.info("FreshTokens: Grabbed FreshTokens (tm)")
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH POT: \"#{unique_po_token}\"")
+  LOGGER.info("FreshTokens: User: #{useremail} SELECTED FRESH VDATA: \"#{unique_visitor_data}\"")
+
+  # Pick either the fresh token or config token
+  po_token = (unique_po_token.as(String) if !unique_po_token.as(String).empty?) || CONFIG.po_token
+  visitor_data = (unique_visitor_data.as(String) if !unique_visitor_data.as(String).empty?) || CONFIG.visitor_data
+  
+  if (po_token.nil? || visitor_data.nil?)
+    LOGGER.warn("FreshTokens: parser.cr: TOKENS ARE NIL!")
+    po_token = ""
+    visitor_data = ""
+  end 
+  
+  if (po_token.empty? || visitor_data.empty?)
+    LOGGER.warn("FreshTokens: parser.cr: TOKENS ARE EMPTY!")
+  end 
+  
+  # strip tokens just in case whitespace got through
+  po_token = po_token.strip
+  visitor_data = visitor_data.strip
+  
+  # continue on unmodified code
+
   # Fetch data from the player endpoint
-  player_response = YoutubeAPI.player(video_id: video_id, params: "2AMB", client_config: client_config)
+  player_response = YoutubeAPI.player(video_id: video_id, params: "2AMB", client_config: client_config, po_token: po_token, visitor_data: visitor_data)
 
   playability_status = player_response.dig?("playabilityStatus", "status").try &.as_s
 
@@ -104,22 +153,22 @@ def extract_video_info(video_id : String)
 
   # Don't use Android client if po_token is passed because po_token doesn't
   # work for Android client.
-  if reason.nil? && CONFIG.po_token.nil?
+  if reason.nil? && po_token.nil?
     # Fetch the video streams using an Android client in order to get the
     # decrypted URLs and maybe fix throttling issues (#2194). See the
     # following issue for an explanation about decrypted URLs:
     # https://github.com/TeamNewPipe/NewPipeExtractor/issues/562
     client_config.client_type = YoutubeAPI::ClientType::AndroidTestSuite
-    new_player_response = try_fetch_streaming_data(video_id, client_config)
+    new_player_response = try_fetch_streaming_data(video_id, client_config, po_token, visitor_data)
   end
 
   # Last hope
   # Only trigger if reason found and po_token or didn't work wth Android client.
   # TvHtml5ScreenEmbed now requires sig helper for it to work but po_token is not required
   # if the IP address is not blocked.
-  if CONFIG.po_token && reason || CONFIG.po_token.nil? && new_player_response.nil?
+  if po_token.nil? && reason || po_token.nil? && new_player_response.nil?
     client_config.client_type = YoutubeAPI::ClientType::TvHtml5ScreenEmbed
-    new_player_response = try_fetch_streaming_data(video_id, client_config)
+    new_player_response = try_fetch_streaming_data(video_id, client_config, po_token, visitor_data)
   end
 
   # Replace player response and reset reason
@@ -140,7 +189,7 @@ def extract_video_info(video_id : String)
   if streaming_data = player_response["streamingData"]?
     %w[formats adaptiveFormats].each do |key|
       streaming_data.as_h[key]?.try &.as_a.each do |format|
-        format.as_h["url"] = JSON::Any.new(convert_url(format))
+        format.as_h["url"] = JSON::Any.new(convert_url(format, po_token))
       end
     end
 
@@ -153,9 +202,9 @@ def extract_video_info(video_id : String)
   return params
 end
 
-def try_fetch_streaming_data(id : String, client_config : YoutubeAPI::ClientConfig) : Hash(String, JSON::Any)?
+def try_fetch_streaming_data(id : String, client_config : YoutubeAPI::ClientConfig, po_token, visitor_data) : Hash(String, JSON::Any)?
   LOGGER.debug("try_fetch_streaming_data: [#{id}] Using #{client_config.client_type} client.")
-  response = YoutubeAPI.player(video_id: id, params: "2AMB", client_config: client_config)
+  response = YoutubeAPI.player(video_id: id, params: "2AMB", client_config: client_config, po_token: po_token, visitor_data: visitor_data)
 
   playability_status = response["playabilityStatus"]["status"]
   LOGGER.debug("try_fetch_streaming_data: [#{id}] Got playabilityStatus == #{playability_status}.")
@@ -455,7 +504,7 @@ def parse_video_info(video_id : String, player_response : Hash(String, JSON::Any
   return params
 end
 
-private def convert_url(fmt)
+private def convert_url(fmt, po_token)
   if cfr = fmt["signatureCipher"]?.try { |json| HTTP::Params.parse(json.as_s) }
     sp = cfr["sp"]
     url = URI.parse(cfr["url"])
@@ -473,7 +522,9 @@ private def convert_url(fmt)
   n = DECRYPT_FUNCTION.try &.decrypt_nsig(params["n"])
   params["n"] = n if n
 
-  if token = CONFIG.po_token
+  if !po_token.nil?
+    params["pot"] = po_token
+  elsif token = CONFIG.po_token 
     params["pot"] = token
   end
 

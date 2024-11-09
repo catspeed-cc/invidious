@@ -222,12 +222,38 @@ http_proxy:
 # visitor_data: ""
 
 ##
-## Monitor config for tokens each 1 minute
+## Enable/Disable freshtoken. 
+##
+## FreshTokens pulls a fresh po_token/visitor_data out of the aether
+##
+## freshtokens_enabled - Enable / Disable freshtokens (use config tokens or freshtokens)
+## freshtokens_show_ic_enabled - Enable / Disable showing identity / generation stats to users
+## freshtokens_identserver_enabled - Enable / Disable identity server (not yet implemented)
 ##
 ## Accepted values: true, false
-## Default: true
+## Default: false
 ##
-tokenmon_enabled: true
+## freshtokens_identserver_address - URL to freshtokens identity server (not yet implemented)
+## freshtokens_instanceid - A unique identifier for this instance to keep identities separate
+##
+## Accepted values: String (letters & numbers)
+## Default: "instance1"
+##
+## freshtokens_user_expiry - How long should user identities be valid for
+## freshtokens_anonpool_expiry - How long should anon identities be valid for
+## freshtokens_anonpool_size - Number of identities (to generate) in the anon pool
+##
+## Accepted values: Integers (numbers)
+## Default: 500
+##
+#freshtokens_enabled: true
+#freshtokens_show_ic_enabled: true
+#freshtokens_identserver_enabled: false
+#freshtokens_identserver_address: "https://my.ident.server.com/ident/"
+#freshtokens_instanceid: "instance1"
+#freshtokens_user_expiry: 3600
+#freshtokens_anonpool_expiry: 21600
+#freshtokens_anonpool_size: 500
 
 # -----------------------------
 #  Logging
@@ -267,6 +293,19 @@ tokenmon_enabled: true
 # -----------------------------
 #  Features
 # -----------------------------
+
+##
+## Enable/Disable csp-hack. 
+##
+## CSP-Hack enables CSP for the main domain and all subdomains.
+##
+## Instead of "'self'" it will use "https://mydomain.com and https://*.mydomain.com"
+## Note this is less secure, but can fix CSP problems.
+##
+## Accepted values: true, false
+## Default: false
+##
+#csp_hack_enabled: true
 
 ##
 ## Enable/Disable catspeed branding.

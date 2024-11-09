@@ -5,6 +5,8 @@
 module YoutubeAPI
   extend self
 
+  @@visitor_data : String = ""
+
   # For Android versions, see https://en.wikipedia.org/wiki/Android_version_history
   private ANDROID_APP_VERSION = "19.32.34"
   private ANDROID_VERSION     = "12"
@@ -22,9 +24,6 @@ module YoutubeAPI
   private IOS_VERSION     = "17.6.1.21G93" # Major.Minor.Patch.Build
 
   private WINDOWS_VERSION = "10.0"
-
-  pot = ""
-  vdata = ""
 
   # Enumerate used to select one of the clients supported by the API
   enum ClientType
@@ -276,16 +275,6 @@ module YoutubeAPI
   # youtube API endpoints.
   #
   private def make_context(client_config : ClientConfig | Nil, video_id = "dQw4w9WgXcQ") : Hash
-    # determine po_token and visitor_data
-    if CONFIG.tokenmon_enabled
-      # get the pot/vdata for usage later
-      pot = Invidious::TokenMon.pot.as(String)
-      vdata = Invidious::TokenMon.vdata.as(String)
-    else
-      # Use the configured pot
-      pot = CONFIG.po_token.as(String)
-      vdata = CONFIG.visitor_data.as(String)       
-    end
 
     # Use the default client config if nil is passed
     client_config ||= DEFAULT_CLIENT_CONFIG
@@ -334,8 +323,10 @@ module YoutubeAPI
       client_context["client"]["platform"] = platform
     end
 
-    if vdata.is_a?(String)
-      client_context["client"]["visitorData"] = vdata
+    if !@@visitor_data.empty?
+      client_context["client"]["visitorData"] = @@visitor_data
+    elsif CONFIG.visitor_data.is_a?(String)
+      client_context["client"]["visitorData"] = CONFIG.visitor_data.as(String)
     end
 
     return client_context
@@ -469,8 +460,15 @@ module YoutubeAPI
     video_id : String,
     *, # Force the following parameters to be passed by name
     params : String,
-    client_config : ClientConfig | Nil = nil
+    client_config : ClientConfig | Nil = nil,
+    po_token : String | Nil,
+    visitor_data : String | Nil
   )
+
+    if visitor_data
+      @@visitor_data = visitor_data
+    end  
+  
     # Playback context, separate because it can be different between clients
     playback_ctx = {
       "html5Preference" => "HTML5_PREF_WANTS",
@@ -481,17 +479,6 @@ module YoutubeAPI
       if sts = DECRYPT_FUNCTION.try &.get_sts
         playback_ctx["signatureTimestamp"] = sts.to_i64
       end
-    end
-
-    # determine po_token and visitor_data
-    if CONFIG.tokenmon_enabled
-      # get the pot/vdata for usage later
-      pot = Invidious::TokenMon.pot.as(String)
-      vdata = Invidious::TokenMon.vdata.as(String)
-    else
-      # Use the configured pot
-      pot = CONFIG.po_token.as(String)
-      vdata = CONFIG.visitor_data.as(String)       
     end
 
     # JSON Request data, required by the API
@@ -507,7 +494,7 @@ module YoutubeAPI
         "contentPlaybackContext" => playback_ctx,
       },
       "serviceIntegrityDimensions" => {
-        "poToken" => pot,
+        "poToken" => po_token || CONFIG.po_token,
       },
     }
 
@@ -641,19 +628,10 @@ module YoutubeAPI
       headers["User-Agent"] = user_agent
     end
 
-    # determine po_token and visitor_data
-    if CONFIG.tokenmon_enabled
-      # get the pot/vdata for usage later
-      pot = Invidious::TokenMon.pot.as(String)
-      vdata = Invidious::TokenMon.vdata.as(String)
-    else
-      # Use the configured pot
-      pot = CONFIG.po_token.as(String)
-      vdata = CONFIG.visitor_data.as(String)       
-    end
-
-    if vdata.is_a?(String)
-      headers["X-Goog-Visitor-Id"] = vdata
+    if !@@visitor_data.empty?
+      headers["X-Goog-Visitor-Id"] = @@visitor_data
+    elsif CONFIG.visitor_data.is_a?(String)
+      headers["X-Goog-Visitor-Id"] = CONFIG.visitor_data.as(String)
     end
 
     # Logging
@@ -664,6 +642,11 @@ module YoutubeAPI
     # Send the POST request
     body = YT_POOL.client() do |client|
       client.post(url, headers: headers, body: data.to_json) do |response|
+        if response.status_code != 200
+          raise InfoException.new("Error: non 200 status code. Youtube API returned \
+            status code #{response.status_code}. See <a href=\"https://docs.invidious.io/youtube-errors-explained/\"> \
+            https://docs.invidious.io/youtube-errors-explained/</a> for troubleshooting.")
+        end
         self._decompress(response.body_io, response.headers["Content-Encoding"]?)
       end
     end

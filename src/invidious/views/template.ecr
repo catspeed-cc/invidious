@@ -44,6 +44,9 @@
                         <% if CONFIG.loadavg_enabled %>                        
                         <tr><td style="text-align: center; vertical-align: middle;"><font style="font-size: 10px;color:#c3c3c3;">server load <%= Invidious::Loadavg.get_loadavg %></font></td></tr>
                         <% end %>
+                        <% if CONFIG.freshtokens_show_ic_enabled %>                        
+                        <tr><td style="text-align: center; vertical-align: middle;"><font style="font-size: 10px;color:#c3c3c3;">identities: <%= FreshTokens.get_tcount %>/<%= CONFIG.freshtokens_anonpool_size %><% if FreshTokens.get_working %> generating... igr: <%= FreshTokens.get_tpm %>/min<% else %> not generating<% end %></font></td></tr>
+                        <% end %>
                         </table>
                     </div>
                     <div class="pure-u-1 pure-u-md-12-24 searchbar">
@@ -163,7 +166,7 @@
                         <% if CONFIG.custom_statuslink_enabled %>
                         <span>
                             <i class="icon ion-ios-paper"></i>
-                            <a href="<%= CONFIG.custom_statuslink_link %>" target='_blank'><%= CONFIG.custom_statuslink_text %></a>
+                            <a href="<%= CONFIG.custom_statuslink_link %>" target='_blank'><%= CONFIG.custom_statuslink_text %></a> / ID: <%= CONFIG.freshtokens_instanceid %>
                         </span>
                         <% end %>
                     </div>
