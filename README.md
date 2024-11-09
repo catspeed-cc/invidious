@@ -130,10 +130,14 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 
 **Hosting invidious:**
 
-- You will need a default redis install ```apt install -y redis-server```
+Note: You still require postgresql as only some things are using redis. You should notice an increase in speed when loading pages/feeds/videos. You should also notice a decrease in disk usage.
+
+- Install redis-server & enable ```apt install -y redis-server ; systemctl enable redis-server ;```
+  - Compile and start Invidious
+  - Check logs for ```Oct 13 20:20:11 catspeed invidious[1110061]: Connected to redis```
+  - check connections ```netstat -tlnpa | grep :6379``` for established connections to :6379
 - You still need postgresql
 - You still need sighelper
-- You still need to figure out how to update the tokens in config file (with bash script or otherwise)
 - Invidious will automatically reload the tokens from the config file every 1 minute
 - [Follow the installation instructions](https://docs.invidious.io/installation/)
 
