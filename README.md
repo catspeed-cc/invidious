@@ -138,7 +138,6 @@ Note: You still require postgresql as only some things are using redis. You shou
   - check connections ```netstat -tlnpa | grep :6379``` for established connections to :6379
 - You still need postgresql
 - You still need sighelper
-- You still need to figure out how to update the tokens in config file (with bash script or otherwise)
 - Invidious will automatically reload the tokens from the config file every 1 minute
 - [Follow the installation instructions](https://docs.invidious.io/installation/)
 
