@@ -195,7 +195,8 @@ Most important step when upgrading is installing dependencies. Currently the dep
 sudo -i -u postgres
 psql -c "CREATE USER kemal WITH PASSWORD 'kemal';" # Change 'kemal' here to a stronger password, and update `password` in config/config.yml
 createdb -O kemal invidious
-exit```
+exit
+```
 - ```curl -fsSL https://crystal-lang.org/install.sh | sudo bash```
 - ```adduser --system --shell /bin/bash --gecos 'User for installing and running invidious' --group --disabled-password --home /home/invidious invidious```
 - ```su - invidious```
