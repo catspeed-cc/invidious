@@ -140,7 +140,6 @@ Note: You still require postgresql as only some things are using redis. You shou
 - You still need sighelper
 - You still need to figure out how to update the tokens in config file (with bash script or otherwise)
 - Invidious will automatically reload the tokens from the config file every 1 minute
->>>>>>> 5c1cb287c7d0635cdfce0e428ad1c0d90407db50
 - [Follow the installation instructions](https://docs.invidious.io/installation/)
 
 **Notice to instance owners:**
