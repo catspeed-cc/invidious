@@ -45,6 +45,9 @@ module Invidious::Routes::Watch
       subscriptions = user.subscriptions
       watched = user.watched
       notifications = user.notifications
+      useremail = user.email
+    else
+      useremail = ""
     end
     subscriptions ||= [] of String
 
@@ -52,7 +55,7 @@ module Invidious::Routes::Watch
     env.params.query.delete_all("listen")
 
     begin
-      video = get_video(id, region: params.region)
+      video = get_video(id, region: params.region, useremail: useremail)
     rescue ex : NotFoundException
       LOGGER.error("get_video not found: #{id} : #{ex.message}")
       return error_template(404, ex)

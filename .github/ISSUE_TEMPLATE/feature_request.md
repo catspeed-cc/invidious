@@ -3,18 +3,27 @@ name: Feature request
 about: Suggest an idea for this project
 title: '[Feature request] '
 labels: feature-request
-assignees: ''
+assignees: 'mooleshacat'
 
 ---
 
-<!-- Please use the search function to check if the desired function has already been requested by someone else -->
-<!-- If you want to suggest an enhancement to an existing feature please use "Enhancement" instead -->
-<!-- If you want to report a bug, please use "Bug report" instead -->
+<!--
+  BEFORE TRYING TO REPORT AN OUTAGE:
+ 
+  * Read the FAQ!
+  * Use the search function to check if there is already an issue open for your problem!
+
+  If you want to repot a bug please use "Bug report" instead
+  If you want to suggest a new feature please use "Feature request" instead
+  If you want to suggest an enhancement to an existing feature please use "Enhancement" instead
+  
+  If you want to report an outage please use "Catspeed outage" instead
+-->
 
 **Is your feature request related to a problem? Please describe.**
-<!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
+<!-- A clear and concise description of what the problem is. Ex. As a user, I'm always frustrated when [...] -->
 
-**Describe the solution you'd like**
+**Describe the feature/solution you'd like**
 <!-- A clear and concise description of what you want to happen. -->
 
 **Describe alternatives you've considered**
