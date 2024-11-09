@@ -182,7 +182,7 @@ This branch has the uptime & loadavg patch from myself (mooleshacat) which if en
 
 ## csp hack patch notes
 
-CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". Only enable this if you have CSP errors when you inspect the video watch page (ctrl + shift + i)
+CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydomain.com https://*.mydomain.com". If you get CSP errors, first thing is to make sure ```https_only``` is set correctly in invidious config. Only enable this if you have CSP errors when you inspect the video watch page (ctrl + shift + i) and https_only doesn't fix it.
 
 
 ## freshtokens patch notes
