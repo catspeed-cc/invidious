@@ -1,3 +1,12 @@
+# NOTICE:
+FreshTokens (tm) is finally complete. 
+
+**If you somehow got docker working,** stay on Master until I can change the Dockerfile to have the dependencies installed.
+
+**For those who are using a manual install,** you can go into invidious directory and run ```git checkout development``` - be sure to follow the instructions to install dependencies. If it does not work, create an issue ticket https://gitea.catspeed.cc/catspeed-cc/invidious/issues and ```git checkout master``` until I can fix it.
+
+----
+
 <div align="center">
   <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
   <h1>Invidious</h1>
