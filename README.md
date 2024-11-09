@@ -85,7 +85,7 @@ To switch to more stable master branch, ```git checkout master``` and ```git pul
 - add proxy patch
 - sig helper reconnect patch
 - freshtokens (mooleshacat)
-- csp hack patch (mooleshacat)
+- csp hack (mooleshacat)
 - uptime status (mooleshacat)
 - loadavg status (mooleshacat)
 - enable/disable catspeed branding (mooleshacat)
