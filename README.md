@@ -189,6 +189,8 @@ CSP hack changes the *c*ontent *s*ecurity *p*olicy from "'self'" to "http://mydo
 
 This branch has the freshtokens patch from myself (mooleshacat) which if not disabled in config file will automatically generate identities for logged in users, as well as anonymous users. The challenge with anonymous users is having some kind of unique identifier to assign a user an identity. How this is currently implemented is there is an identity pool from which identities are picked. Provided the pool is large enough there should not be many identity collisions. Logged in users are assigned their own identities for each instance and will experience less problems. Busy instances will need larger pools, whereas private instances should be fine with smaller pools.
 
+For now, the Docker image will not have these steps, I will have to add them in separately.
+
 **Manual dependency installation:**
 Most important step when upgrading is installing dependencies. Currently the dependency installer script is not working, so you have to manually install dependencies:
 - ```apt install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev postgresql librsvg2-bin libsqlite3-dev zlib1g-dev libpcre3-dev libevent-dev fonts-open-sans```
@@ -211,6 +213,8 @@ Most important step when upgrading is installing dependencies. Currently the dep
 - ```cd submodules/youtube-po-token-generator```
 - ```node examples/one-shot.js```
 - If all goes well, you should see the mysterious tokens
+- ```cd ../../``` go back to invidious dir and make
+- ```make -j1``` if you have more cores, change 1 to number of cores - 1 or for a server that is in use, just use -j1 to prevent high load.
 
 **Configuration:**
 Once installed, you will be able to control freshtokens with config variables. Currently they include:
