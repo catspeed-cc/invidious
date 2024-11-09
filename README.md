@@ -1,9 +1,13 @@
 # NOTICE:
-FreshTokens (tm) is finally complete. 
+FreshTokens (tm) is finally complete.
 
-**If you somehow got docker working,** stay on Master until I can change the Dockerfile to have the dependencies installed.
+I accidentally merged into master. If you use a docker image, you probably should use the official iv-org docker image as catspeed currently does not work on docker. There is work to do to get it working with docker. It is on the backburner for now.
 
-**For those who are using a manual install,** you can go into invidious directory and run ```git checkout development``` - be sure to follow the instructions to install dependencies. If it does not work, create an issue ticket https://gitea.catspeed.cc/catspeed-cc/invidious/issues and ```git checkout master``` until I can fix it.
+Most people will be fine using catspeed-cc/invidious master branch. Only use development if you want to test new features, and do not expect support for the development branch. If you have troubles, switch back to master.
+
+Currently this repository is only for people who do a manual compile and install (without docker, not recommended)
+
+You can check out the less stable development branch, ```git checkout development``` and ```git pull```
 
 ----
 
