@@ -136,6 +136,11 @@ Note: You still require postgresql as only some things are using redis. You shou
   - Compile and start Invidious
   - Check logs for ```Oct 13 20:20:11 catspeed invidious[1110061]: Connected to redis```
   - check connections ```netstat -tlnpa | grep :6379``` for established connections to :6379
+- You still need postgresql
+- You still need sighelper
+- You still need to figure out how to update the tokens in config file (with bash script or otherwise)
+- Invidious will automatically reload the tokens from the config file every 1 minute
+>>>>>>> 5c1cb287c7d0635cdfce0e428ad1c0d90407db50
 - [Follow the installation instructions](https://docs.invidious.io/installation/)
 
 **Notice to instance owners:**

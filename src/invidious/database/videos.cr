@@ -58,6 +58,5 @@ module Invidious::Database::Videos
     else
       return nil
     end
-
   end
 end

@@ -48,6 +48,10 @@ shards:
     git: https://github.com/ysbaddaden/pool.git
     version: 0.2.4
 
+  pool:
+    git: https://github.com/ysbaddaden/pool.git
+    version: 0.2.4
+
   protodec:
     git: https://github.com/iv-org/protodec.git
     version: 0.1.5
