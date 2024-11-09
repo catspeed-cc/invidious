@@ -62,7 +62,6 @@ alias IV = Invidious
 CONFIG   = Config.load
 HMAC_KEY = CONFIG.hmac_key
 
-
 PG_DB    = DB.open CONFIG.database_url
 REDIS_DB = Redis::PooledClient.new(unixsocket: CONFIG.redis_socket || nil, url: CONFIG.redis_url || nil)
 
