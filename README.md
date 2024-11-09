@@ -192,12 +192,11 @@ This branch has the freshtokens patch from myself (mooleshacat) which if not dis
 Most important step when upgrading is installing dependencies. Currently the dependency installer script is not working, so you have to manually install dependencies:
 - ```apt install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev postgresql librsvg2-bin libsqlite3-dev zlib1g-dev libpcre3-dev libevent-dev fonts-open-sans```
 - ```apt install htop git wget curl cpulimit redis-server```
-- ```systemctl enable --now postgresql
-sudo -i -u postgres
-psql -c "CREATE USER kemal WITH PASSWORD 'kemal';" # Change 'kemal' here to a stronger password, and update `password` in config/config.yml
-createdb -O kemal invidious
-exit
-```
+- ```systemctl enable --now postgresql```
+- ```sudo -i -u postgres```
+- ```psql -c "CREATE USER kemal WITH PASSWORD 'kemal';" # Change 'kemal' here to a stronger password, and update `password` in config/config.yml```
+- ```createdb -O kemal invidious```
+- ```exit```
 - ```curl -fsSL https://crystal-lang.org/install.sh | sudo bash```
 - ```adduser --system --shell /bin/bash --gecos 'User for installing and running invidious' --group --disabled-password --home /home/invidious invidious```
 - ```su - invidious```
