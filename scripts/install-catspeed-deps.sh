@@ -24,14 +24,7 @@ chmod -R 770 ${SCRIPT_PATH}/../
 echo ""
 echo "adding invidious user"
 
-adduser \
-  --system \
-  --shell /bin/bash \
-  --gecos 'User for installing and running invidious' \
-  --group \
-  --disabled-password \
-  --home /home/invidious \
-  invidious
+adduser --system --shell /bin/bash --gecos 'User for installing and running invidious' --group --disabled-password --home /home/invidious invidious
 
 #. ${SCRIPT_PATH}/config.cfg
 
