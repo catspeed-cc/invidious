@@ -1,3 +1,15 @@
+# WARNING: CATSPEED FORK IS CURRENTLY BROKEN.
+
+If you've somehow got a working version, do NOT update until this message is gone.
+
+If you were just about to clone, apologies, but you will have to wait for now.
+
+Suggested forks:
+- https://github.com/iv-org/invidious (main repository)
+- https://git.nadeko.net/Fijxu/invidious/ (inv.nadeko.net repository)
+
+I must pull out some code that broke it, and recode some stuff.
+
 # NOTICE:
 
 I accidentally merged into master. If you use a docker image, you probably should use the official iv-org docker image as catspeed currently does not work on docker. There is work to do to get it working with docker. It is on the backburner for now.
