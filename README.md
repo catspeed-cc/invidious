@@ -10,6 +10,8 @@ Suggested forks:
 
 I must pull out some code that broke it, and recode some stuff.
 
+This depends on https://github.com/catspeed-cc/tokenserver-debian being finished.
+
 # Notice
 
 You are currently on the development branch. This branch is unstable, and at times, may not compile.
