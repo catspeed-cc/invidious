@@ -10,6 +10,8 @@ Suggested forks:
 
 I must pull out some code that broke it, and recode some stuff.
 
+This depends on https://github.com/catspeed-cc/tokenserver-debian being finished.
+
 # NOTICE:
 
 I accidentally merged into master. If you use a docker image, you probably should use the official iv-org docker image as catspeed currently does not work on docker. There is work to do to get it working with docker. It is on the backburner for now.
