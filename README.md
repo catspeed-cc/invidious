@@ -12,13 +12,15 @@ I must pull out some code that broke it, and recode some stuff.
 
 This depends on https://github.com/catspeed-cc/tokenserver-debian being finished.
 
-# NOTICE:
+# Github notice:
 
-I accidentally merged into master. If you use a docker image, you probably should use the official iv-org docker image as catspeed currently does not work on docker. There is work to do to get it working with docker. It is on the backburner for now.
+My github account https://github.com/mooleshacat is flagged and I can't do anything with my organization https://github.com/catspeed-cc/ either. This is affecting my ability to create forks and update code on github. I am still able to work on my Gitea, but github will not allow me to do anything until my account is unflagged. I am in contact with GitHub regarding this issue, but they have not yet responded 48 hours later. Unfortunately it may take a month for a response.
+
+# NOTICE:
 
 Most people will be fine using catspeed-cc/invidious master branch. Only use development if you want to test new features, and do not expect support for the development branch. If you have troubles, switch back to master.
 
-Currently this repository is only for people who do a manual compile and install (without docker, not recommended)
+Currently this repository is only for people who do a manual compile and install (without docker, not recommended) docker coming soon
 
 You can check out the less stable development branch, ```git checkout development``` and ```git pull```
 
