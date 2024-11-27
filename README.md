@@ -14,7 +14,7 @@ This depends on https://github.com/catspeed-cc/tokenserver-debian being finished
 
 # Github note:
 
-My github account https://github.com/mooleshacat is flagged and I can't do anything with my organization https://github.com/catspeed-cc/ either. This is affecting my ability to create forks and update code on github. I am still able to work on my Gitea, but github will not allow me to do anything until my account is unflagged. I am in contact with GitHub regarding this issue, but they have not yet responded 48 hours later. Unfortunately it may take a month for a response.
+My github account https://github.com/mooleshacat/ is flagged and I can't do anything with my organization https://github.com/catspeed-cc/ either. This is affecting my ability to create forks and update code on github. I am still able to work on my Gitea, but github will not allow me to do anything until my account is unflagged. I am in contact with GitHub regarding this issue, but they have not yet responded 48 hours later. Unfortunately it may take a month for a response.
 
 # Note:
 
